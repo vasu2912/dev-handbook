@@ -1,0 +1,31 @@
+# Build output and generated Astro state
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables. Keep documented templates trackable.
+.env
+.env.*
+!.env.example
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.venv/
+
+# Editor and OS files
+.idea/
+*.swp
+*.swo
+*~
+
+.DS_Store

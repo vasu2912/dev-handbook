@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Cache in front of a worker pool and database</title>
+  <desc id="desc">A client sends a request to a dispatcher. The dispatcher checks a cache, returns a hit, or sends a miss to one of several workers backed by durable storage.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--blue)"/></marker>
+    <marker id="arrow-muted" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--muted-line)"/></marker>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue-bg:#dbeafe;--disp-bg:#eff6ff;--cache-bg:#e0f2fe;--cache-stroke:#0284c7;--pool-bg:#ffffff;--pool-border:#94a3b8;--db-fill:#f1f5f9;--muted-line:#64748b}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--blue:#60a5fa;--blue-bg:#1e3a5f;--disp-bg:#172554;--cache-bg:#164e63;--cache-stroke:#38bdf8;--pool-bg:#1e293b;--pool-border:#334155;--db-fill:#334155;--muted-line:#94a3b8}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}</style>
+  </defs>
+  <rect x="12" y="12" width="876" height="336" rx="16" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="50" y="50" font-size="18" font-weight="700">Request path</text>
+  <rect x="48" y="140" width="130" height="58" rx="29" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/><text x="113" y="175" text-anchor="middle" font-size="16" font-weight="650">Client</text>
+  <rect x="232" y="132" width="148" height="74" rx="10" fill="var(--disp-bg)" stroke="var(--blue)" stroke-width="2"/><text x="306" y="164" text-anchor="middle" font-size="15" font-weight="650">Dispatcher</text><text x="306" y="185" text-anchor="middle" font-size="12" fill="var(--muted)">route the request</text>
+  <rect x="232" y="250" width="148" height="56" rx="10" fill="var(--cache-bg)" stroke="var(--cache-stroke)" stroke-width="2"/><text x="306" y="284" text-anchor="middle" font-size="15" font-weight="650">Cache</text>
+  <rect x="454" y="76" width="384" height="240" rx="14" fill="var(--pool-bg)" stroke="var(--pool-border)" stroke-dasharray="8 6"/><text x="478" y="106" font-size="14" font-weight="700">Worker pool</text>
+  <g fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"><rect x="478" y="126" width="124" height="50" rx="9"/><rect x="478" y="194" width="124" height="50" rx="9"/><rect x="478" y="262" width="124" height="50" rx="9"/></g>
+  <g font-size="13" text-anchor="middle"><text x="540" y="156">Worker 1</text><text x="540" y="224">Worker 2</text><text x="540" y="292">Worker n</text></g>
+  <g fill="var(--db-fill)" stroke="var(--muted-line)" stroke-width="2"><path d="M680 137a28 9 0 0 1 56 0v28a28 9 0 0 1-56 0z"/><ellipse cx="708" cy="137" rx="28" ry="9"/><path d="M680 205a28 9 0 0 1 56 0v28a28 9 0 0 1-56 0z"/><ellipse cx="708" cy="205" rx="28" ry="9"/><path d="M680 273a28 9 0 0 1 56 0v28a28 9 0 0 1-56 0z"/><ellipse cx="708" cy="273" rx="28" ry="9"/></g>
+  <g fill="none" stroke="var(--blue)" stroke-width="2" marker-end="url(#arrow)"><path d="M178 169h48"/><path d="M380 166h78"/><path d="M380 270h-78"/><path d="M602 151h78"/><path d="M602 219h78"/><path d="M602 287h78"/></g>
+  <g fill="none" stroke="var(--muted-line)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-muted)"><path d="M458 182 380 270"/><path d="M680 165H620"/><path d="M680 233H620"/><path d="M680 301H620"/></g>
+  <g font-size="12" fill="var(--muted)"><text x="188" y="157">request</text><text x="390" y="155">cache miss</text><text x="384" y="260">cache hit</text><text x="622" y="144">read</text><text x="624" y="212">read</text><text x="624" y="280">read</text></g>
+</svg>

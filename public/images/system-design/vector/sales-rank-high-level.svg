@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Sales-rank service, high-level design</title><desc id="desc">A client reaches a web server, which routes sales and read requests. A sales-rank service reads SQL data and an object store.</desc>
+  <style>:root{color-scheme:light dark;--bg:#f8fafc;--ink:#172033;--line:#53657d;--client:#d9f99d;--api:#dbeafe;--data:#bfdbfe}@media(prefers-color-scheme:dark){:root{--bg:#111827;--ink:#e5edf8;--line:#9fb3cc;--client:#365314;--api:#1e3a5f;--data:#1e4b73}}text{font:18px system-ui,sans-serif;fill:var(--ink)}.box{stroke:var(--line);stroke-width:2;rx:10}.flow{fill:none;stroke:var(--line);stroke-width:2.5;marker-end:url(#a)}</style><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="var(--line)"/></marker></defs>
+  <rect width="960" height="540" fill="var(--bg)"/><g text-anchor="middle">
+    <rect class="box" x="380" y="24" width="200" height="56" fill="var(--client)"/><text x="480" y="59">Client</text><rect class="box" x="380" y="126" width="200" height="56" fill="var(--api)"/><text x="480" y="161">Web server</text><path class="flow" d="M480 80v46"/>
+    <rect class="box" x="100" y="270" width="200" height="62" fill="var(--api)"/><text x="200" y="307">Sales API</text><rect class="box" x="380" y="270" width="200" height="62" fill="var(--api)"/><text x="480" y="307">Read API</text><rect class="box" x="660" y="270" width="200" height="62" fill="var(--api)"/><text x="760" y="307">Sales-rank service</text>
+    <path class="flow" d="M480 182V230H200v40"/><path class="flow" d="M480 182v88"/><path class="flow" d="M480 182V230h280v40"/>
+    <rect class="box" x="200" y="420" width="220" height="62" fill="var(--data)"/><text x="310" y="457">SQL database</text><rect class="box" x="540" y="420" width="220" height="62" fill="var(--data)"/><text x="650" y="457">Object store</text>
+    <path class="flow" d="M200 332v44h110v44"/><path class="flow" d="M760 332v44H650v44"/><path class="flow" d="M480 332v44H310v44"/>
+  </g><text x="24" y="520" font-size="15" fill="var(--ink)">Batch aggregation reads raw sales logs and publishes hourly category rankings.</text>
+</svg>

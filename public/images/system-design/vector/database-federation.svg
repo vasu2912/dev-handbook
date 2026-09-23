@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 360" role="img" aria-labelledby="title desc">
+  <title id="title">Federated databases by function</title>
+  <desc id="desc">An application routes requests to separate databases for forums, users, and products. Each database has its own primary and read replicas.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--blue)"/></marker>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--card:#ffffff;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue-bg:#dbeafe;--replica-bg:#e0f2fe;--replica-stroke:#0284c7;--muted-line:#64748b}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--blue:#60a5fa;--blue-bg:#1e3a5f;--replica-bg:#164e63;--replica-stroke:#38bdf8;--muted-line:#94a3b8}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}</style>
+  </defs>
+  <rect x="12" y="12" width="836" height="336" rx="16" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="36" y="46" font-size="18" font-weight="700">Federation by function</text>
+  <rect x="48" y="128" width="160" height="72" rx="12" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+  <text x="128" y="160" text-anchor="middle" font-size="16" font-weight="650">Application</text>
+  <text x="128" y="181" text-anchor="middle" font-size="12" fill="var(--muted)">route by function</text>
+  <g fill="var(--card)" stroke="var(--blue)" stroke-width="2"><rect x="338" y="80" width="210" height="64" rx="10"/><rect x="338" y="160" width="210" height="64" rx="10"/><rect x="338" y="240" width="210" height="64" rx="10"/></g>
+  <g font-size="15" text-anchor="middle"><text x="443" y="118">Forums database</text><text x="443" y="198">Users database</text><text x="443" y="278">Products database</text></g>
+  <g fill="none" stroke="var(--blue)" stroke-width="2" marker-end="url(#a)"><path d="M208 146h80"/><path d="M208 164h58v28h72"/><path d="M208 182h58v90h72"/></g>
+  <g fill="var(--replica-bg)" stroke="var(--replica-stroke)" stroke-width="1"><rect x="630" y="80" width="92" height="64" rx="9"/><rect x="630" y="160" width="92" height="64" rx="9"/><rect x="630" y="240" width="92" height="64" rx="9"/></g>
+  <g font-size="12" text-anchor="middle"><text x="676" y="108">primary</text><text x="676" y="128">+ replicas</text><text x="676" y="188">primary</text><text x="676" y="208">+ replicas</text><text x="676" y="268">primary</text><text x="676" y="288">+ replicas</text></g>
+  <g fill="none" stroke="var(--muted-line)" stroke-width="2" marker-end="url(#a)"><path d="M548 112h82"/><path d="M548 192h82"/><path d="M548 272h82"/></g>
+</svg>

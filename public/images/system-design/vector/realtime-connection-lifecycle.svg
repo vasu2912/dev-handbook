@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 430" role="img" aria-labelledby="title desc">
+  <title id="title">A real-time connection resumes from the last applied event</title>
+  <desc id="desc">The client applies events 41 and 42, loses the connection before event 43 arrives, reconnects with cursor 42, and receives event 43 from the event service. The event log retains event 43 throughout the gap.</desc>
+  <defs>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue-bg:#dbeafe;--yellow:#d97706;--yellow-bg:#fef3c7;--green:#16a34a;--green-bg:#dcfce7;--red:#dc2626;--red-bg:#fee2e2;--purple:#7c3aed;--purple-bg:#ede9fe}@media(prefers-color-scheme:dark){:root{--bg:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--blue:#60a5fa;--blue-bg:#1e3a5f;--yellow:#fbbf24;--yellow-bg:#713f12;--green:#4ade80;--green-bg:#14532d;--red:#f87171;--red-bg:#7f1d1d;--purple:#a78bfa;--purple-bg:#3b0764}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}.label{font-size:15px;font-weight:700}.small{font-size:12px;fill:var(--muted)}.lane{font-size:11px;font-weight:700;letter-spacing:.08em;fill:var(--muted)}.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px}</style>
+    <marker id="blue-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--blue)"/></marker>
+    <marker id="green-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--green)"/></marker>
+    <marker id="red-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--red)"/></marker>
+  </defs>
+  <rect width="1100" height="430" rx="18" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="550" y="32" text-anchor="middle" class="label">Resume from the last event the client applied</text>
+  <g text-anchor="middle" class="small">
+    <text x="180" y="62">1. Open</text><text x="430" y="62">2. Apply 41 and 42</text><text x="680" y="62">3. Connection gap</text><text x="930" y="62">4. Replay 43</text>
+  </g>
+  <g class="lane" text-anchor="end"><text x="76" y="108">CLIENT</text><text x="76" y="208">SERVICE</text><text x="76" y="308">EVENT LOG</text></g>
+  <g stroke-width="2">
+    <rect x="80" y="80" width="200" height="74" rx="10" fill="var(--blue-bg)" stroke="var(--blue)"/>
+    <rect x="330" y="80" width="200" height="74" rx="10" fill="var(--blue-bg)" stroke="var(--blue)"/>
+    <rect x="580" y="80" width="200" height="74" rx="10" fill="var(--red-bg)" stroke="var(--red)"/>
+    <rect x="830" y="80" width="200" height="74" rx="10" fill="var(--green-bg)" stroke="var(--green)"/>
+    <rect x="80" y="180" width="200" height="74" rx="10" fill="var(--purple-bg)" stroke="var(--purple)"/>
+    <rect x="330" y="180" width="200" height="74" rx="10" fill="var(--purple-bg)" stroke="var(--purple)"/>
+    <rect x="580" y="180" width="200" height="74" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+    <rect x="830" y="180" width="200" height="74" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+    <rect x="80" y="280" width="200" height="74" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+    <rect x="330" y="280" width="200" height="74" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+    <rect x="580" y="280" width="200" height="74" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+    <rect x="830" y="280" width="200" height="74" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="180" y="111" class="label">GET snapshot</text><text x="180" y="134" class="small">initial state</text>
+    <text x="430" y="111" class="label">Apply 41, 42</text><text x="430" y="134" class="small">last ID: 42</text>
+    <text x="680" y="106" class="label">Connection drops</text><text x="680" y="127" class="small">last ID: 42</text><text x="680" y="147" class="small">then reconnect</text>
+    <text x="930" y="111" class="label">Apply 43</text><text x="930" y="134" class="small">cursor advances</text>
+    <text x="180" y="211" class="label">Snapshot service</text><text x="180" y="234" class="small">opens stream</text>
+    <text x="430" y="211" class="label">Sends 41, 42</text><text x="430" y="234" class="small">ordered events</text>
+    <text x="680" y="211" class="label">Keeps 43</text><text x="680" y="234" class="small">available for replay</text>
+    <text x="930" y="211" class="label">Replays 43</text><text x="930" y="234" class="small">after cursor 42</text>
+    <text x="180" y="311" class="label">cursor 40</text><text x="180" y="334" class="small">snapshot boundary</text>
+    <text x="430" y="311" class="label">41, 42</text><text x="430" y="334" class="small">already applied</text>
+    <text x="680" y="311" class="label">43 retained</text><text x="680" y="334" class="small">during the gap</text>
+    <text x="930" y="311" class="label">43 delivered</text><text x="930" y="334" class="small">replay window</text>
+  </g>
+  <g fill="none" stroke-width="2" marker-end="url(#blue-arrow)">
+    <path d="M180 180V154" stroke="var(--blue)"/>
+    <path d="M430 180V154" stroke="var(--green)"/>
+  </g>
+  <g text-anchor="middle" class="small"><text x="205" y="170">snapshot</text><text x="462" y="170">41, 42</text></g>
+  <path d="M780 80V48H1020V80" fill="none" stroke="var(--red)" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#red-arrow)"/>
+  <path d="M930 180V154" fill="none" stroke="var(--green)" stroke-width="2" marker-end="url(#green-arrow)"/>
+  <text x="974" y="170" text-anchor="middle" class="small">event 43</text>
+  <text x="550" y="400" text-anchor="middle" class="mono">snapshot boundary + retained events + cursor = recoverable connection gaps</text>
+</svg>

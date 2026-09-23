@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-labelledby="title desc">
+  <title id="title">TCP reliable ordered byte stream</title>
+  <desc id="desc">A TCP client and server complete a three-way handshake, exchange numbered data segments, acknowledge received bytes, and retransmit a segment that is lost.</desc>
+  <defs>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--timeline:#64748b;--accent:#2563eb;--red-stroke:#dc2626;--red-text:#b91c1c;--green:#15803d}@media(prefers-color-scheme:dark){:root{--bg:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--timeline:#94a3b8;--accent:#60a5fa;--red-stroke:#f87171;--red-text:#fca5a5;--green:#4ade80}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}.label{font-size:17px;font-weight:700}.small{font-size:13px;fill:var(--muted)}.red-txt{fill:var(--red-text)}.green-txt{fill:var(--green)}</style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--accent)"/></marker>
+    <marker id="red" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--red-stroke)"/></marker>
+    <marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--green)"/></marker>
+  </defs>
+  <rect width="1000" height="360" rx="18" fill="var(--bg)" stroke="var(--border)"/><text x="500" y="34" text-anchor="middle" class="label">TCP establishes a connection and repairs loss</text>
+  <line x1="190" y1="72" x2="190" y2="305" stroke="var(--timeline)" stroke-width="2"/><line x1="810" y1="72" x2="810" y2="305" stroke="var(--timeline)" stroke-width="2"/><text x="190" y="60" text-anchor="middle" class="label">Client</text><text x="810" y="60" text-anchor="middle" class="label">Server</text>
+  <g fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"><path d="M205 95H795"/><path d="M795 130H205"/><path d="M205 165H795"/><path d="M205 220H795"/><path d="M795 255H205"/></g>
+  <g text-anchor="middle" class="small"><text x="500" y="88">SYN</text><text x="500" y="123">SYN-ACK</text><text x="500" y="158">ACK</text><text x="500" y="213">data seq=1</text><text x="500" y="248">ACK 2</text></g>
+  <path d="M205 290H530" stroke="var(--red-stroke)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/><path d="M530 290h100" stroke="var(--red-stroke)" stroke-width="2" stroke-dasharray="3 5"/><text x="500" y="278" text-anchor="middle" class="small red-txt">lost segment</text><path d="M205 325H795" stroke="var(--green)" stroke-width="2" marker-end="url(#green)"/><text x="500" y="315" text-anchor="middle" class="small green-txt">retransmit after timeout</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img" aria-labelledby="title desc">
+  <title id="title">Publish and subscribe fan-out through real-time instances</title>
+  <desc id="desc">Browser A sends a write to instance one. Instance one publishes a board event to a broker. The broker delivers the event to subscribed instances, and each instance writes only to its own local browser sockets. An optional durable event log receives the committed event through an outbox or change-data-capture path.</desc>
+  <defs>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue-bg:#dbeafe;--yellow:#d97706;--yellow-bg:#fef3c7;--green:#16a34a;--green-bg:#dcfce7;--purple:#7c3aed;--purple-bg:#ede9fe;--gray:#64748b;--gray-bg:#f1f5f9}@media(prefers-color-scheme:dark){:root{--bg:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--blue:#60a5fa;--blue-bg:#1e3a5f;--yellow:#fbbf24;--yellow-bg:#713f12;--green:#4ade80;--green-bg:#14532d;--purple:#a78bfa;--purple-bg:#3b0764;--gray:#94a3b8;--gray-bg:#334155}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}.label{font-size:15px;font-weight:700}.small{font-size:12px;fill:var(--muted)}.lane{font-size:11px;font-weight:700;letter-spacing:.08em;fill:var(--muted)}</style>
+    <marker id="blue-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--blue)"/></marker>
+    <marker id="purple-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--purple)"/></marker>
+    <marker id="green-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--green)"/></marker>
+    <marker id="gray-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--gray)"/></marker>
+  </defs>
+  <rect width="1100" height="500" rx="18" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="550" y="32" text-anchor="middle" class="label">The broker reaches instances. Instances reach their local sockets.</text>
+  <line x1="500" y1="58" x2="500" y2="420" stroke="var(--border)" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="500" y="450" text-anchor="middle" class="small">process boundary</text>
+  <g class="lane"><text x="28" y="94">CLIENTS</text><text x="252" y="94">REAL-TIME INSTANCES</text><text x="540" y="94">BROKER</text><text x="820" y="94">CONNECTED CLIENTS</text></g>
+  <ellipse cx="90" cy="178" rx="62" ry="35" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"/>
+  <text x="90" y="174" text-anchor="middle" class="label">Browser A</text><text x="90" y="194" text-anchor="middle" class="small">moves task</text>
+  <rect x="250" y="110" width="210" height="116" rx="12" fill="var(--yellow-bg)" stroke="var(--yellow)" stroke-width="2"/>
+  <text x="355" y="143" text-anchor="middle" class="label">Instance 1</text><text x="355" y="166" text-anchor="middle" class="small">validates + commits</text><text x="355" y="190" text-anchor="middle" class="small">owns socket C</text>
+  <rect x="250" y="282" width="210" height="116" rx="12" fill="var(--yellow-bg)" stroke="var(--yellow)" stroke-width="2"/>
+  <text x="355" y="315" text-anchor="middle" class="label">Instance 2</text><text x="355" y="338" text-anchor="middle" class="small">subscribed to board-412</text><text x="355" y="362" text-anchor="middle" class="small">owns socket B</text>
+  <rect x="540" y="145" width="190" height="130" rx="12" fill="var(--purple-bg)" stroke="var(--purple)" stroke-width="2"/>
+  <text x="635" y="180" text-anchor="middle" class="label">Pub/sub broker</text><text x="635" y="205" text-anchor="middle" class="small">topic: board-412</text><text x="635" y="229" text-anchor="middle" class="small">delivers to instances</text>
+  <ellipse cx="900" cy="145" rx="62" ry="35" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+  <text x="900" y="141" text-anchor="middle" class="label">Browser C</text><text x="900" y="161" text-anchor="middle" class="small">local socket</text>
+  <ellipse cx="900" cy="335" rx="62" ry="35" fill="var(--green-bg)" stroke="var(--green)" stroke-width="2"/>
+  <text x="900" y="331" text-anchor="middle" class="label">Browser B</text><text x="900" y="351" text-anchor="middle" class="small">local socket</text>
+  <rect x="540" y="350" width="190" height="70" rx="12" fill="var(--gray-bg)" stroke="var(--gray)" stroke-width="2"/>
+  <text x="635" y="380" text-anchor="middle" class="label">Durable event log</text><text x="635" y="401" text-anchor="middle" class="small">optional replay source</text>
+  <g fill="none" stroke="var(--blue)" stroke-width="2" marker-end="url(#blue-arrow)"><path d="M152 178H250"/></g>
+  <text x="201" y="168" text-anchor="middle" class="small">HTTP write</text>
+  <g fill="none" stroke="var(--purple)" stroke-width="2" marker-end="url(#purple-arrow)">
+    <path d="M460 150H540"/>
+    <path d="M540 190H475V200H460"/>
+    <path d="M540 240H475V340H460"/>
+  </g>
+  <text x="500" y="140" text-anchor="middle" class="small">publish</text><text x="490" y="181" text-anchor="middle" class="small">deliver</text><text x="490" y="270" text-anchor="middle" class="small">deliver</text>
+  <g fill="none" stroke="var(--green)" stroke-width="2" marker-end="url(#green-arrow)"><path d="M460 125H780V145H838"/><path d="M460 330H760V335H838"/></g>
+  <text x="680" y="108" text-anchor="middle" class="small">write to local socket</text><text x="680" y="316" text-anchor="middle" class="small">write to local socket</text>
+  <path d="M460 190H500V385H540" fill="none" stroke="var(--gray)" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#gray-arrow)"/>
+  <text x="470" y="420" text-anchor="end" class="small">outbox or CDC append</text>
+  <text x="550" y="475" text-anchor="middle" class="small">The broker does not write directly to Browser B or Browser C. Each instance enforces its own subscription and authorization.</text>
+</svg>

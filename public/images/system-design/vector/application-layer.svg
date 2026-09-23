@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 390" role="img" aria-labelledby="title desc">
+  <title id="title">Independent application and platform layers</title>
+  <desc id="desc">A request passes through a load balancer to several web servers, then several platform servers, and finally a replicated database. Each tier can scale independently.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--blue)"/></marker>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue-light:#dbeafe;--blue-fill:#bfdbfe;--blue-tier:#eff6ff;--green:#16a34a;--green-tier:#f0fdf4;--yellow:#d97706;--yellow-bg:#fef3c7}@media(prefers-color-scheme:dark){:root{--bg:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--blue:#60a5fa;--blue-light:#1e3a5f;--blue-fill:#1e4b73;--blue-tier:#172554;--green:#4ade80;--green-tier:#14532d;--yellow:#fbbf24;--yellow-bg:#713f12}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}.label{font-size:16px;font-weight:700}.small{font-size:13px;fill:var(--muted)}.box{stroke:var(--blue);stroke-width:2}</style>
+  </defs>
+  <rect width="1100" height="390" rx="18" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="550" y="34" text-anchor="middle" class="label">Request path with independently scaled tiers</text>
+  <g fill="none" stroke="var(--blue)" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M150 195H214"/><path d="M300 195H344"/><path d="M520 195H564"/><path d="M740 195H784"/>
+  </g>
+  <g class="box">
+    <ellipse cx="82" cy="195" rx="64" ry="34" fill="var(--blue-light)"/>
+    <rect x="214" y="140" width="86" height="110" rx="10" fill="var(--blue-fill)"/>
+    <rect x="344" y="82" width="176" height="226" rx="14" fill="var(--blue-tier)"/>
+    <rect x="564" y="82" width="176" height="226" rx="14" fill="var(--green-tier)" stroke="var(--green)"/>
+    <rect x="784" y="110" width="136" height="70" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+    <rect x="784" y="210" width="136" height="70" rx="10" fill="var(--yellow-bg)" stroke="var(--yellow)"/>
+  </g>
+  <text x="82" y="201" text-anchor="middle" class="label">Request</text>
+  <text x="257" y="184" text-anchor="middle" class="label">Load</text><text x="257" y="205" text-anchor="middle" class="label">balancer</text>
+  <text x="432" y="113" text-anchor="middle" class="label">Web tier</text>
+  <text x="652" y="113" text-anchor="middle" class="label">Platform tier</text>
+  <g fill="var(--blue-fill)" stroke="var(--blue)" stroke-width="2"><rect x="370" y="140" width="124" height="38" rx="8"/><rect x="370" y="190" width="124" height="38" rx="8"/><rect x="370" y="240" width="124" height="38" rx="8"/><rect x="590" y="140" width="124" height="38" rx="8"/><rect x="590" y="190" width="124" height="38" rx="8"/><rect x="590" y="240" width="124" height="38" rx="8"/></g>
+  <g text-anchor="middle" class="small"><text x="432" y="164">Web server</text><text x="432" y="214">Web server</text><text x="432" y="264">Web server</text><text x="652" y="164">App worker</text><text x="652" y="214">App worker</text><text x="652" y="264">App worker</text></g>
+  <g text-anchor="middle"><text x="852" y="151" class="label">Database</text><text x="852" y="251" class="label">Database</text></g>
+  <path d="M344 330H520" stroke="var(--blue)" stroke-width="2"/><path d="M564 330H740" stroke="var(--green)" stroke-width="2"/>
+  <text x="432" y="354" text-anchor="middle" class="small">scale web capacity here</text><text x="652" y="354" text-anchor="middle" class="small">scale business work here</text>
+</svg>

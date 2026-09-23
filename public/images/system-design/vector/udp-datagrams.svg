@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-labelledby="title desc">
+  <title id="title">UDP connectionless datagrams</title>
+  <desc id="desc">A UDP client sends datagrams directly to a server without a handshake. One datagram is lost, and the application decides whether to recover it.</desc>
+  <defs>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--timeline:#64748b;--accent:#2563eb;--red-bg:#fee2e2;--red-stroke:#dc2626;--yellow-bg:#fef3c7;--yellow-stroke:#d97706}@media(prefers-color-scheme:dark){:root{--bg:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--timeline:#94a3b8;--accent:#60a5fa;--red-bg:#7f1d1d;--red-stroke:#f87171;--yellow-bg:#713f12;--yellow-stroke:#fbbf24}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}.label{font-size:17px;font-weight:700}.small{font-size:13px;fill:var(--muted)}</style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="var(--accent)"/></marker>
+  </defs>
+  <rect width="1000" height="360" rx="18" fill="var(--bg)" stroke="var(--border)"/><text x="500" y="34" text-anchor="middle" class="label">UDP sends independent datagrams with no delivery promise</text>
+  <line x1="190" y1="72" x2="190" y2="305" stroke="var(--timeline)" stroke-width="2"/><line x1="810" y1="72" x2="810" y2="305" stroke="var(--timeline)" stroke-width="2"/><text x="190" y="60" text-anchor="middle" class="label">Client</text><text x="810" y="60" text-anchor="middle" class="label">Server</text>
+  <g fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"><path d="M205 105H795"/><path d="M205 175H795"/><path d="M205 245H795"/></g>
+  <g text-anchor="middle" class="small"><text x="500" y="98">datagram 1 arrives</text><text x="500" y="168">datagram 2 is lost</text><text x="500" y="238">datagram 3 arrives</text></g>
+  <circle cx="510" cy="175" r="16" fill="var(--red-bg)" stroke="var(--red-stroke)" stroke-width="2"/><path d="M502 167 518 183M518 167 502 183" stroke="var(--red-stroke)" stroke-width="2"/>
+  <rect x="300" y="292" width="400" height="34" rx="17" fill="var(--yellow-bg)" stroke="var(--yellow-stroke)"/><text x="500" y="314" text-anchor="middle" class="small">No handshake, ordering, retransmission, or congestion control</text>
+</svg>

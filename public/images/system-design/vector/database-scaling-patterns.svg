@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Database scaling patterns</title>
+  <desc id="desc">A web tier sends reads to read replicas and writes to one write primary. A shared cache reduces repeated reads.</desc>
+  <defs>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--accent:#2563eb;--web-bg:#dbeafe;--cache-bg:#e0f2fe;--cache-stroke:#0284c7;--db-bg:#fff;--teal:#0f766e}@media(prefers-color-scheme:dark){:root{--bg:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--accent:#60a5fa;--web-bg:#1e3a5f;--cache-bg:#164e63;--cache-stroke:#38bdf8;--db-bg:#1e293b;--teal:#2dd4bf}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}.muted{fill:var(--muted)}</style>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--accent)"/></marker>
+    <marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--teal)"/></marker>
+  </defs>
+  <g><rect x="12" y="12" width="876" height="336" rx="16" fill="var(--bg)" stroke="var(--border)"/><text x="36" y="46" font-size="18" font-weight="700">Read replicas and a write primary</text>
+    <rect x="48" y="106" width="170" height="96" rx="12" fill="var(--web-bg)" stroke="var(--accent)" stroke-width="2"/><text x="133" y="147" text-anchor="middle" font-size="16" font-weight="650">Web instances</text><text x="133" y="171" text-anchor="middle" font-size="12" class="muted">stateless fleet</text>
+    <rect x="304" y="106" width="140" height="96" rx="12" fill="var(--cache-bg)" stroke="var(--cache-stroke)" stroke-width="2"/><text x="374" y="147" text-anchor="middle" font-size="16" font-weight="650">Cache</text><text x="374" y="171" text-anchor="middle" font-size="12" class="muted">hot reads</text>
+    <g fill="var(--db-bg)" stroke="var(--accent)" stroke-width="2"><path d="M580 100a70 15 0 0 1 140 0v70a70 15 0 0 1-140 0z"/><ellipse cx="650" cy="100" rx="70" ry="15"/><path d="M580 232a70 15 0 0 1 140 0v70a70 15 0 0 1-140 0z"/><ellipse cx="650" cy="232" rx="70" ry="15"/></g><g font-size="15" text-anchor="middle"><text x="650" y="140">Write primary</text><text x="650" y="272">Read replica</text></g>
+    <g fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#a)"><path d="M218 132h86"/><path d="M218 176h362"/><path d="M444 132h136"/><path d="M650 170v48"/></g><path d="M580 247H444V176" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#g)"/><g font-size="12" class="muted"><text x="232" y="124">read</text><text x="458" y="124">write</text><text x="236" y="168">read</text><text x="661" y="197">replicate</text><text x="458" y="239">replica reads</text></g>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Social feed, high-level design</title>
+  <desc id="desc">A client reaches a web server and read, write, and search APIs. Timeline, fan-out, user graph, search, notification, cache, SQL, and object storage modules follow.</desc>
+  <style>
+    :root { color-scheme: light dark; --bg:#f8fafc; --ink:#172033; --line:#53657d; --client:#d9f99d; --api:#dbeafe; --svc:#bfdbfe; --cache:#bae6fd; --store:#c7d2fe; }
+    @media(prefers-color-scheme:dark){:root{--bg:#111827;--ink:#e5edf8;--line:#9fb3cc;--client:#365314;--api:#1e3a5f;--svc:#1e4b73;--cache:#164e63;--store:#312e81}}
+    text{font:16px system-ui,sans-serif;fill:var(--ink)} .box{stroke:var(--line);stroke-width:2;rx:10}.flow{fill:none;stroke:var(--line);stroke-width:2;marker-end:url(#a)}
+  </style><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="var(--line)"/></marker></defs>
+  <rect width="960" height="540" fill="var(--bg)"/>
+  <g text-anchor="middle">
+    <rect class="box" x="395" y="18" width="170" height="48" fill="var(--client)"/><text x="480" y="49">Client</text>
+    <rect class="box" x="395" y="92" width="170" height="48" fill="var(--api)"/><text x="480" y="123">Web server</text><path class="flow" d="M480 66v26"/>
+    <rect class="box" x="55" y="198" width="170" height="52" fill="var(--api)"/><text x="140" y="230">Read API</text>
+    <rect class="box" x="285" y="198" width="170" height="52" fill="var(--api)"/><text x="370" y="230">Write API</text>
+    <rect class="box" x="515" y="198" width="170" height="52" fill="var(--api)"/><text x="600" y="230">Search API</text>
+    <path class="flow" d="M480 140V168H140v30"/><path class="flow" d="M480 140v58"/><path class="flow" d="M480 140V168h120v30"/>
+    <rect class="box" x="42" y="310" width="150" height="48" fill="var(--svc)"/><text x="117" y="340">Tweet info</text>
+    <rect class="box" x="210" y="310" width="150" height="48" fill="var(--svc)"/><text x="285" y="340">Timeline</text>
+    <rect class="box" x="378" y="310" width="150" height="48" fill="var(--svc)"/><text x="453" y="340">Fan-out</text>
+    <rect class="box" x="546" y="310" width="150" height="48" fill="var(--svc)"/><text x="621" y="340">User graph</text>
+    <rect class="box" x="714" y="310" width="150" height="48" fill="var(--svc)"/><text x="789" y="340">Search</text>
+    <path class="flow" d="M140 250v60"/><path class="flow" d="M140 250v34h145v26"/><path class="flow" d="M370 250v60"/><path class="flow" d="M600 250V284H621v26"/><path class="flow" d="M600 250V284H789v26"/>
+    <rect class="box" x="126" y="430" width="170" height="52" fill="var(--cache)"/><text x="211" y="462">Memory cache</text>
+    <rect class="box" x="396" y="430" width="170" height="52" fill="var(--store)"/><text x="481" y="462">SQL database</text>
+    <rect class="box" x="666" y="430" width="170" height="52" fill="var(--store)"/><text x="751" y="462">Object store</text>
+    <path class="flow" d="M285 358v45H211v27"/><path class="flow" d="M453 358v72"/><path class="flow" d="M453 358v45h298v27"/><path class="flow" d="M117 358v45h364v27"/>
+  </g><text x="24" y="518" font-size="14" fill="var(--ink)">Write fan-out populates timelines; reads join cached IDs with tweet and user data.</text>
+</svg>

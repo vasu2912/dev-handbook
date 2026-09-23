@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-labelledby="title desc">
+  <title id="title">Master-replica database replication</title>
+  <desc id="desc">Clients send reads and writes to a primary database. The primary replicates changes to two read replicas, which serve reads.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--blue)"/></marker>
+    <marker id="m" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m0 0 8 4-8 4z" fill="var(--teal)"/></marker>
+    <style>:root{color-scheme:light dark;--bg:#f8fafc;--card:#ffffff;--border:#cbd5e1;--ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue-bg:#dbeafe;--teal:#0f766e;--muted-line:#64748b}@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--border:#475569;--ink:#e2e8f0;--muted:#94a3b8;--blue:#60a5fa;--blue-bg:#1e3a5f;--teal:#5eead4;--muted-line:#94a3b8}}text{font-family:'Inter',system-ui,sans-serif;fill:var(--ink)}</style>
+  </defs>
+  <rect x="12" y="12" width="776" height="296" rx="16" fill="var(--bg)" stroke="var(--border)"/>
+  <text x="36" y="46" font-size="18" font-weight="700">Primary with read replicas</text>
+  <g fill="var(--card)" stroke="var(--muted-line)" stroke-width="2"><rect x="42" y="92" width="128" height="52" rx="10"/><rect x="42" y="214" width="128" height="52" rx="10"/></g>
+  <g font-size="14" text-anchor="middle"><text x="106" y="124">Client, reads</text><text x="106" y="246">Client, reads/writes</text></g>
+  <g fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="2"><rect x="310" y="130" width="148" height="64" rx="10"/><rect x="604" y="76" width="138" height="54" rx="10"/><rect x="604" y="214" width="138" height="54" rx="10"/></g>
+  <g font-size="15" text-anchor="middle"><text x="384" y="168">Primary</text><text x="673" y="109">Replica 1</text><text x="673" y="247">Replica 2</text></g>
+  <g fill="none" stroke="var(--blue)" stroke-width="2" marker-end="url(#a)"><path d="M170 118h140"/><path d="M170 240h140"/><path d="M458 150h146"/><path d="M458 174 604 235"/></g>
+  <path d="M458 176h104V103h42" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#m)"/>
+  <path d="M458 180h104v61h42" fill="none" stroke="var(--teal)" stroke-width="2" marker-end="url(#m)"/>
+  <g font-size="12" fill="var(--muted)"><text x="206" y="109">reads</text><text x="194" y="231">reads/writes</text><text x="492" y="142">replication</text><text x="470" y="205">replication</text></g>
+</svg>

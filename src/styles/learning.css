@@ -1,0 +1,98 @@
+/* Shared teaching blocks stay inside the reading column. */
+.sl-markdown-content .learning-flow {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+	gap: 1px;
+	padding: 1px;
+	background: var(--sl-color-gray-4);
+	list-style: none;
+}
+.sl-markdown-content .learning-flow > * {
+	margin: 0;
+	padding: 1rem;
+	background: var(--sl-color-black);
+}
+.sl-markdown-content .learning-flow a {
+	display: block;
+	font-weight: 600;
+}
+.sl-markdown-content .learning-flow p { margin: .5rem 0 0; }
+.sl-markdown-content .walkthrough,
+.sl-markdown-content .pool-budget {
+	margin-block: 1.5rem;
+	padding: 1.25rem;
+	border: 1px solid var(--sl-color-gray-4);
+	border-radius: .5rem;
+	background: var(--sl-color-gray-6);
+}
+.sl-markdown-content .walkthrough [hidden] { display: none !important; }
+.sl-markdown-content .pool-budget [hidden] { display: none !important; }
+.sl-markdown-content .walkthrough-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: .5rem;
+	margin-bottom: 1.25rem;
+}
+.sl-markdown-content .walkthrough-controls label {
+	flex: 1 1 100%;
+	font-size: .875rem;
+	font-weight: 600;
+}
+.sl-markdown-content :is(.walkthrough-controls, .pool-budget) :is(select, button, input) {
+	font: inherit;
+	color: var(--sl-color-white);
+	background: var(--sl-color-black);
+	border: 1px solid var(--sl-color-gray-3);
+	border-radius: .25rem;
+	min-height: 2.75rem;
+	padding: .45rem .65rem;
+	max-width: 100%;
+}
+.sl-markdown-content .walkthrough-controls select {
+	display: block;
+	width: 100%;
+	margin-top: .35rem;
+}
+.sl-markdown-content .walkthrough-controls button { cursor: pointer; }
+.sl-markdown-content .walkthrough-controls button:disabled { opacity: .5; cursor: default; }
+.sl-markdown-content :is(.walkthrough, .pool-budget) :focus-visible {
+	outline: 2px solid var(--sl-color-text-accent);
+	outline-offset: 3px;
+}
+.sl-markdown-content .walkthrough-steps { padding-inline-start: 1.75rem; }
+.sl-markdown-content .walkthrough-steps > li { padding-inline-start: .5rem; }
+.sl-markdown-content .walkthrough-steps > li::marker { color: var(--sl-color-text-accent); font-weight: 700; }
+.sl-markdown-content .walkthrough-steps > li[aria-current] { animation: learning-step .18s ease-out; }
+.sl-markdown-content .walkthrough svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin-block: 1rem;
+}
+/* Announce the current explanation without duplicating visible prose. */
+.walkthrough-status {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+.sl-markdown-content .pool-budget form {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+	gap: 1rem;
+}
+.sl-markdown-content .pool-budget label { display: grid; gap: .3rem; font-size: .875rem; }
+.sl-markdown-content .pool-budget output { display: block; margin-top: 1rem; font-weight: 600; }
+@keyframes learning-step { from { opacity: .65; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+	.sl-markdown-content .walkthrough-steps > li[aria-current] { animation: none; }
+}
+@media print {
+	.sl-markdown-content .walkthrough [hidden] { display: block !important; }
+	.sl-markdown-content .walkthrough .walkthrough-steps > li[hidden] { display: list-item !important; }
+	.sl-markdown-content .walkthrough-controls { display: none; }
+}

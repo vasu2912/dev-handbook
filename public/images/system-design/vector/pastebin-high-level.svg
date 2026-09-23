@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Paste-sharing service, high-level design</title>
+  <desc id="desc">A client sends requests to a web server. Write, read, and analytics APIs use SQL and an object store.</desc>
+  <style>
+    :root { color-scheme: light dark; --bg:#f8fafc; --ink:#172033; --line:#53657d; --client:#d9f99d; --app:#dbeafe; --data:#bfdbfe; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#111827; --ink:#e5edf8; --line:#9fb3cc; --client:#365314; --app:#1e3a5f; --data:#1e4b73; } }
+    text { font: 18px system-ui, sans-serif; fill:var(--ink); } .small { font-size:15px; }
+    .box { stroke:var(--line); stroke-width:2; rx:12; } .flow { fill:none; stroke:var(--line); stroke-width:2.5; marker-end:url(#arrow); }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="var(--line)"/></marker></defs>
+  <rect width="960" height="540" fill="var(--bg)"/>
+  <g text-anchor="middle">
+    <rect class="box" x="380" y="30" width="200" height="56" fill="var(--client)"/><text x="480" y="65">Client</text>
+    <rect class="box" x="380" y="130" width="200" height="56" fill="var(--app)"/><text x="480" y="165">Web server</text>
+    <rect class="box" x="80" y="270" width="200" height="62" fill="var(--app)"/><text x="180" y="308">Write API</text>
+    <rect class="box" x="380" y="270" width="200" height="62" fill="var(--app)"/><text x="480" y="308">Read API</text>
+    <rect class="box" x="680" y="270" width="200" height="62" fill="var(--app)"/><text x="780" y="308">Analytics</text>
+    <path class="flow" d="M480 86v44"/><path class="flow" d="M480 186V230H180v40"/><path class="flow" d="M480 186v84"/><path class="flow" d="M480 186V230H780v40"/>
+    <rect class="box" x="210" y="420" width="220" height="62" fill="var(--data)"/><text x="320" y="458">SQL database</text>
+    <rect class="box" x="530" y="420" width="220" height="62" fill="var(--data)"/><text x="640" y="458">Object store</text>
+    <path class="flow" d="M180 332v45h140v43"/><path class="flow" d="M480 332v45H320v43"/><path class="flow" d="M180 332v45h460v43"/><path class="flow" d="M480 332v45h160v43"/>
+  </g>
+  <text class="small" x="24" y="520">Fast reads come from SQL metadata; paste bodies live in object storage.</text>
+</svg>
