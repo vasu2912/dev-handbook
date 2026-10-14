@@ -1,7 +1,3 @@
-# The official Astro Docs MCP index also returns Starlight documentation.
-[mcp_servers.astro-docs]
-url = "https://mcp.docs.astro.build/mcp"
-
 [mcp_servers.chrome-devtools]
 command = "npx"
 args = ["chrome-devtools-mcp@latest"]

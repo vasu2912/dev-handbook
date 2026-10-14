@@ -21,23 +21,16 @@ Use the matching skill in `.agents/skills` before starting work in this reposito
 
 ## Development
 
-When starting the dev server, use background mode:
+Use `pnpm dev` for the React and Vite development server. Run long-lived servers in background mode and keep their process ID and log path available for stopping and inspection.
 
-```
-astro dev --background
-```
+Use `pnpm check` before completing a migration or content change. This checks TypeScript, builds the static site, and verifies rendered pages, internal links, anchors, and local assets.
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+## Site architecture
 
-## Documentation
+Articles stay in `src/content/docs/` as Markdown. `src/navigation.json` controls the reading order. Keep existing article paths and heading anchors stable.
 
-Full documentation: https://docs.astro.build
+The build compiles Markdown, syntax highlighting, and Mermaid diagrams before rendering React into static HTML. Reader controls hydrate in the browser. Keep content parsers and diagram renderers out of the client bundle.
 
-Consult these guides before working on related tasks:
+Use Radix for dialogs and menus, and Pagefind for search. The site must work on static hosting without authentication, paid APIs, or a server runtime. Verify both `/` and a `SITE_BASE` such as `/dev-handbook/` when changing paths or deployment behavior.
 
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+Consult the official [React documentation](https://react.dev/), [Vite documentation](https://vite.dev/guide/), [Radix documentation](https://www.radix-ui.com/primitives/docs/overview/introduction), and [Pagefind documentation](https://pagefind.app/docs/) for related changes.

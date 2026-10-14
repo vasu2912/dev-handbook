@@ -59,6 +59,6 @@ Benchmark → profile → fix → repeat.
 ## Additional talking points
 
 - SQL scaling patterns and NoSQL: see [database](/system-design/databases/).
-- A graph database (Neo4j) would be natural here if not for the constraint: see [graph database](/system-design/databases/#graph-database).
+- A graph database (Neo4j) would be natural here if not for the constraint: see [graph database](/system-design/databases/#graph-databases).
 
 ---

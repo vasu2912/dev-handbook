@@ -1,68 +1,6 @@
 (function () {
   'use strict';
 
-  /* ---- Reading progress bar ---- */
-  function initProgress() {
-    if (document.getElementById('reading-progress')) return;
-    var bar = document.createElement('div');
-    bar.id = 'reading-progress';
-    document.body.prepend(bar);
-    window.addEventListener(
-      'scroll',
-      function () {
-        var h = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.transform = 'scaleX(' + (h > 0 ? window.scrollY / h : 0) + ')';
-      },
-      { passive: true },
-    );
-  }
-
-  /* ---- Mermaid lazy loader ---- */
-  function initMermaid() {
-    var blocks = document.querySelectorAll(
-      'pre[data-language="mermaid"] code, pre code.language-mermaid',
-    );
-    if (!blocks.length) return;
-
-    function render() {
-      var isDark =
-        document.documentElement.dataset.theme === 'dark' ||
-        (window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches &&
-          document.documentElement.dataset.theme !== 'light');
-
-      window.mermaid.initialize({
-        startOnLoad: false,
-        useMaxWidth: false,
-        theme: isDark ? 'dark' : 'default',
-        fontFamily: "'Inter', 'Space Grotesk', system-ui, sans-serif",
-        securityLevel: 'loose',
-      });
-
-      blocks.forEach(function (block) {
-        var pre = block.parentElement;
-        if (pre.dataset.rendered) return;
-        pre.dataset.rendered = 'true';
-        var div = document.createElement('div');
-        div.className = 'mermaid-diagram';
-        div.textContent = block.innerText;
-        pre.replaceWith(div);
-      });
-
-      window.mermaid.run({ querySelector: '.mermaid-diagram' });
-    }
-
-    if (window.mermaid) {
-      render();
-    } else {
-      var script = document.createElement('script');
-      script.src =
-        'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
-      script.onload = render;
-      document.body.appendChild(script);
-    }
-  }
-
   /* Chapter examples remain fully readable until controls are initialized. */
   function initWalkthroughs() {
     document.querySelectorAll('.walkthrough:not([data-ready])').forEach(function (root) {
@@ -159,18 +97,6 @@
     });
   }
 
-  function init() {
-    initProgress();
-    initMermaid();
-    initWalkthroughs();
-    initPoolBudgets();
-  }
-
-  /* Handle both initial load and Astro view-transition navigations */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-  document.addEventListener('astro:after-swap', init);
+  initWalkthroughs();
+  initPoolBudgets();
 })();

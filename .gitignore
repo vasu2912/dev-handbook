@@ -1,6 +1,8 @@
-# Build output and generated Astro state
+# Build output and generated content
 dist/
 .astro/
+.cache/
+.artifacts/
 
 # Dependencies
 node_modules/

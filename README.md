@@ -1,67 +1,67 @@
 # Dev Handbook
 
-Dev Handbook is a static Astro and Starlight site with practical guides for understanding software and backend engineering. It has no server runtime, database, authentication, or CMS.
+An open learning library built with React, Vite, and TypeScript. Every article is generated as HTML during the build. Readers can view the content without JavaScript, while React adds bookmarks, reading completion, appearance controls, and accessible dialogs. There is no authentication, database, or production server.
 
-## Project structure
+## Develop locally
 
-The main site files are:
-
-```text
-.
-├── public/                 # static assets, including the favicon
-├── src/
-│   ├── components/        # Starlight reading-layout override
-│   ├── styles/custom.css   # light and dark theme overrides
-│   ├── content/
-│   │   └── docs/           # Markdown and MDX pages
-│   └── content.config.ts
-├── astro.config.mjs        # Starlight title, metadata, and sidebar
-└── package.json
-```
-
-Starlight maps each `.md` or `.mdx` file in `src/content/docs/` to a route based on its file name. The sidebar in `astro.config.mjs` keeps the reading path explicit.
-
-`src/components/TwoColumnContent.astro` replaces Starlight's right rail with a collapsed Contents disclosure. `src/styles/custom.css` sets the 17rem sidebar and centered 50rem article. Sidebar groups default to collapsed except the current branch; Starlight preserves explicit navigation choices within the session.
-
-`src/styles/sidebar-icons.css` maps every sidebar link and group to a Tabler outline icon. The SVGs and MIT license are vendored in `public/icons/sidebar/` from `@tabler/icons` 3.46.0. Icons inherit text color through CSS masks and add no JavaScript. New sidebar entries need an explicit topic icon mapping; there is no generic fallback. Group selectors match a direct child link, so update the selector if that link moves.
-
-`src/content/docs/java-spring/` holds the Spring Boot section. It uses a chosen Java 21 and Spring Boot 4.0 example baseline, states version-sensitive behavior explicitly, and links official sources at the end of each page. Keep explanations focused, but give worked examples enough space to show inputs, code, and observable outcomes. Label partial snippets and illustrative output. Extend `astro.config.mjs` navigation and `src/styles/sidebar-icons.css` together with any new page.
-
-`src/content/docs/agentic-ai/` is the diagram-led Agentic AI handbook. It covers model foundations, retrieval, tool use, context and memory, orchestration, subagents, MCP, security, production operation, tutorials, and walkthroughs. `research/agentic-ai-interview-questions.md` preserves the original question bank, while `scripts/build-agentic-ai-question-map.mjs` generates the sequential coverage map used to verify that every source question has a primary reading destination.
-
-`src/styles/learning.css` styles chapter diagrams, operation maps, walkthroughs, and the connection-budget calculator. `public/js/site.js` adds reader-controlled scenario selection, Previous, Next step, and Reset controls without autoplay. Write every scenario as a `section[data-scenario]` with a visible name and an `ol.walkthrough-steps`; its list items remain readable without JavaScript and in print. Calculator forms start hidden, with a visible static result, and appear after initialization. Keep examples in their chapters rather than duplicating their content in JavaScript.
-
-## Local development
+Use Node 22.12 or newer and pnpm 11.
 
 ```sh
 pnpm install
-pnpm run dev
+pnpm dev
 ```
 
-Build the static output with:
+Open `http://localhost:5173`. React and CSS changes use Vite hot reload. Markdown and navigation changes rebuild the content and reload the page. The development server binds to localhost. Set `PORT` to change its port.
+
+Full-text search uses the generated production index. To try it locally:
 
 ```sh
-pnpm run build
+pnpm build
+pnpm preview
 ```
 
-Astro writes the deployable files to `dist/`. The site uses static output, so Cloudflare Pages can serve the directory without a Worker or server function.
+Run `pnpm check` to check TypeScript, build the site, and audit every rendered page, internal link, heading anchor, and local asset.
 
-## Documentation tooling
+## Edit the handbook
 
-The repository-local `.codex/config.toml` connects Codex to the official Astro Docs MCP server. Its search index covers both Astro and Starlight documentation. Start a new Codex task from this repository after changing MCP settings so the tool list is refreshed.
+Articles live in `src/content/docs/`. Keep Markdown frontmatter with a `title` and `description`. File names determine routes. For example, `system-design/index.md` becomes `/system-design/`, and `system-design/caching.md` becomes `/system-design/caching/`.
 
-## Diagrams
+`src/navigation.json` preserves the reading sequence and nested topics. Add new articles to this navigation, or to a directory covered by an `autogenerate` entry. The build rejects missing destinations and articles that readers cannot reach through navigation.
 
-Original system diagrams live in `public/images/system-design/vector/`. Agentic AI diagram sources live in `diagrams/source/agentic-ai/`; their audited site exports live in `public/images/agentic-ai/vector/`. Articles must embed the SVG export, never the `.excalidraw` source or PNG review render.
+Markdown supports tables, fenced code, raw HTML, and Starlight-style `:::tip[Title]`, `:::note`, `:::caution`, and `:::danger` callouts. Shiki highlights code during the build. Beautiful Mermaid renders Mermaid fences as SVG during the build, so diagrams need no browser JavaScript. Existing SVG assets remain in `public/images/`.
 
-Keep diagrams as compact SVGs with a descriptive file name, a `viewBox`, `role="img"`, and meaningful `<title>` and `<desc>` elements. Do not embed external scripts or raster data. Keep source attribution in the surrounding article when a diagram re-expresses a sourced concept or dataset.
+`src/App.tsx` selects the page layout. The home, header, navigation, reading layout, and appearance controls live in `src/components/`. `src/components/Search.tsx` connects Pagefind's existing UI to a Radix dialog and loads only when search opens. `src/lib/content.ts` validates page metadata at the rendering boundary. `src/lib/reader.ts` stores bookmarks and completed articles in this browser. Clearing browser storage removes those preferences.
 
-## Cloudflare Pages
+`src/styles/site.css` owns the responsive layout and typography. `src/styles/diagrams.css` defines shared diagram colors. `src/styles/learning.css` and `public/js/site.js` preserve the existing chapter walkthroughs and connection-budget calculator. The chapter script loads only when the page contains those examples. Each example must remain readable without JavaScript and in print.
 
-Create a Pages project from this repository and use these settings:
+The content pipeline lives in `scripts/content.mjs`. `scripts/build.mjs` builds the client, renders pages through React's server renderer at build time, and creates the Pagefind index. `scripts/dev.mjs` uses Vite's middleware and server renderer for local development. Only `dist/` is deployed. `.cache/` contains disposable build state.
 
-- Build command: `pnpm run build`
-- Build output directory: `dist`
-- Node version: 22 or newer (required by pnpm 11)
+The Agentic AI question bank lives in `research/agentic-ai-interview-questions.md`. `scripts/build-agentic-ai-question-map.mjs` generates its coverage map. Diagram sources live in `diagrams/source/agentic-ai/`; articles embed SVG exports from `public/images/agentic-ai/vector/`.
 
-Set the production branch to the branch you use for releases. Preview deployments can build pull requests without site-side configuration. This repository does not include deployment credentials or a Cloudflare binding.
+## Deploy to Cloudflare Pages
+
+Connect the repository to Cloudflare Pages and use:
+
+- Build command: `pnpm build`
+- Output directory: `dist`
+- Node version: 22.12 or newer
+
+Keep `SITE_BASE` unset for a root deployment. Optionally set `SITE_URL` to your production origin, such as `https://your-site.pages.dev`, to generate canonical URLs, Open Graph URLs, and a sitemap.
+
+All routes have their own `index.html`. `404.html` handles missing pages. The site requires no Pages Functions or Workers. Use the provided `pages.dev` address to avoid buying a domain.
+
+## Deploy to GitHub Pages
+
+The included `.github/workflows/pages.yml` builds and deploys the site when you manually run it. In repository settings, choose **Pages → Build and deployment → GitHub Actions**. Open **Actions → Deploy handbook to GitHub Pages → Run workflow** to publish. The workflow uses the public repository's free Pages hosting.
+
+The workflow derives the base path from GitHub's Pages configuration, including project subdirectories. To verify a project path locally:
+
+```sh
+SITE_BASE=/dev-handbook/ pnpm build
+SITE_BASE=/dev-handbook/ node scripts/check-site.mjs
+SITE_BASE=/dev-handbook/ pnpm preview
+```
+
+Open `http://localhost:4173/dev-handbook/`. Links, article images, assets, search, and chapter controls respect `SITE_BASE`. The build adds `.nojekyll`. It produces real HTML files for deep links, so refreshing an article does not need an SPA routing workaround.
+
+Hosting can stay free using a provider subdomain and static assets. Adding paid APIs, storage, or a custom domain would introduce separate costs.
