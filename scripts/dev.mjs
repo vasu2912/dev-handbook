@@ -5,14 +5,25 @@ import { compileContent, siteBase } from "./content.mjs";
 import { documentFor } from "./html.mjs";
 let pages = await compileContent();
 const base = siteBase();
+const port = Number(process.env.PORT || 5173);
 const vite = await createServer({
-  server: { middlewareMode: true },
+  server: { middlewareMode: true, hmr: { host: '127.0.0.1', port: port + 1 } },
   appType: "custom",
 });
 let recompiling = Promise.resolve();
-vite.watcher.add(["src/content/docs", "src/navigation.json"]);
+vite.watcher.add([
+  "src/content/docs",
+  "src/navigation.json",
+  "scripts/figures",
+  "src/figures/token-bucket/figure.css",
+]);
 vite.watcher.on("all", (_event, file) => {
-  if (!file.includes("/content/docs/") && !file.endsWith("/navigation.json"))
+  if (
+    !file.includes("/content/docs/") &&
+    !file.endsWith("/navigation.json") &&
+    !file.includes("/scripts/figures/") &&
+    !file.endsWith("/token-bucket/figure.css")
+  )
     return;
   recompiling = recompiling
     .then(async () => {
@@ -55,7 +66,6 @@ const server = createHttpServer((req, res) => {
     }
   });
 });
-const port = Number(process.env.PORT || 5173);
 server.listen(port, "127.0.0.1", () =>
   console.info(`Dev Handbook: http://localhost:${port}${base}`),
 );

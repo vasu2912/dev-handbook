@@ -34,7 +34,7 @@ Firehose/stream pushes, visibility stripping (hide @reply, hide retweets), analy
 
 ## Sketch the high-level design
 
-![High-level social-feed architecture](/images/system-design/vector/social-feed-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--social-feed-1"></div>
 
 ## Define the core components
 
@@ -69,7 +69,7 @@ Reads the user's own tweets from the SQL database.
 
 ## Scale the design
 
-![Scaled social-feed architecture](/images/system-design/vector/social-feed-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--social-feed-2"></div>
 
 :::caution[The fan-out bottleneck]
 A user with millions of followers takes minutes to fan out, risking race conditions with @replies. Mitigations:

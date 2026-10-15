@@ -24,7 +24,7 @@ The canonical iterative-scaling example. Watch how a design evolves: benchmark �
 
 ## Sketch the high-level design
 
-![Initial AWS service architecture](/images/system-design/vector/scaling-aws-initial.svg)
+<div data-anatomy="system-design--walkthroughs--scaling-on-aws-1"></div>
 
 ## Define the core components (the journey)
 
@@ -71,7 +71,7 @@ Traffic spikes during business hours.
 - Add **autoscaling**: a group per web/app server type, min/max instances, trigger on CPU/latency/network (CloudWatch).
 - Automate DevOps (Chef, Puppet, Ansible); monitor host, aggregate, and log levels.
 
-![AWS scaling journey](/images/system-design/vector/scaling-aws-journey.svg)
+<div data-anatomy="system-design--walkthroughs--scaling-on-aws-2"></div>
 
 :::tip[The pattern to memorize]
 single box → vertical → split storage/DB → horizontal + LB + CDN → cache + read replicas → autoscale. Each step fixes the bottleneck the previous step revealed.

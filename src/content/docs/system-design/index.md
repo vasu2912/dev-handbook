@@ -19,6 +19,7 @@ The remaining pages describe the building blocks you combine in a request path:
 - [Asynchronous processing](/system-design/asynchronous-processing/) separates slow work from the user request.
 - [Communication protocols](/system-design/communication-protocols/) describe HTTP, TCP, UDP, RPC, REST, and real-time connections.
 - [Real-time backends](/system-design/real-time-backends/) explain polling, SSE, WebSockets, reconnection, fan-out, and connection limits.
+- [Rate limiting](/system-design/rate-limiting/) controls admission and permits bounded bursts.
 - [Security](/system-design/security-overview/) treats every layer as part of the defense.
 
 ## Start with one request

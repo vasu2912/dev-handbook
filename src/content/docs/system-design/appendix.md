@@ -65,7 +65,7 @@ Handy metrics based on numbers above:
 
 ### Latency numbers visualized
 
-![Latency comparison diagram](/images/system-design/vector/latency-comparison.svg)
+<div data-anatomy="system-design--appendix-1"></div>
 
 :::note[Use the table for exact values]
 The chart is a visual summary of the latency figures. The table above lists the same values in text. The chart credits the original [latency numbers reference](https://gist.github.com/jboner/2841832) in the image and in the source list below.
@@ -113,7 +113,7 @@ Common system design questions, with links to resources for each design.
 
 > Articles on how real world systems are designed.
 
-![Twitter timeline architecture at scale](/images/system-design/vector/twitter-timeline-scaled.svg)
+<div data-anatomy="system-design--appendix-2"></div>
   
   *Source: [Twitter timelines at scale](https://www.infoq.com/presentations/Twitter-Timeline-Scalability)*
 

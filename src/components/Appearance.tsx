@@ -13,15 +13,15 @@ export function Appearance() {
   function size(value: string) {
     document.documentElement.style.setProperty("--reading-size", value);
     try {
-      localStorage.setItem("handbook-size", value);
+      localStorage.setItem("handbook-type-size", value);
     } catch {
       /* The selected size remains active for this visit. */
     }
   }
   useEffect(() => {
     try {
-      const value = localStorage.getItem("handbook-size");
-      if (value && ["16px", "18px", "20px"].includes(value))
+      const value = localStorage.getItem("handbook-type-size");
+      if (value && ["12px", "14px", "16px"].includes(value))
         document.documentElement.style.setProperty("--reading-size", value);
     } catch {
       /* Use the default reading size. */
@@ -47,9 +47,9 @@ export function Appearance() {
           <Dropdown.Separator />
           <Dropdown.Label>Reading size</Dropdown.Label>
           {[
-            { label: "Compact", value: "16px" },
-            { label: "Comfortable", value: "18px" },
-            { label: "Large", value: "20px" },
+            { label: "Compact", value: "12px" },
+            { label: "Reference", value: "14px" },
+            { label: "Large", value: "16px" },
           ].map((option) => (
             <Dropdown.Item
               key={option.value}

@@ -5,7 +5,7 @@ description: Validate, authorize, approve, sandbox, retry, and audit tool calls 
 
 A safe tool path treats the model's call as a request from an untrusted planner. The application decides whether the request can become an effect.
 
-![A safe tool call moves from model proposal through validation, authorization, approval, execution, and verification](/images/agentic-ai/vector/safe-tool-execution.svg)
+<div data-anatomy="agentic-ai--tools--safe-execution-1"></div>
 
 ## Validate more than the schema
 

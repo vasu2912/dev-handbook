@@ -21,12 +21,7 @@ An `EntityManager` represents a persistence context. Within that context, one en
 
 A new entity has not entered a persistence context. A managed entity participates in change tracking. Detachment ends that tracking, not the object's lifetime. A removed entity is scheduled for deletion.
 
-<svg role="img" aria-label="Entity lifecycle: persist moves new to managed, detach moves managed to detached, and remove schedules deletion" viewBox="0 0 480 320" style="max-width:100%;height:auto">
-<defs><marker id="entity-state-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--diagram-muted)"/></marker></defs>
-<g stroke="var(--diagram-border)" fill="var(--diagram-bg)"><rect x="20" y="20" width="150" height="60" rx="8"/><rect x="310" y="20" width="150" height="60" rx="8" fill="var(--diagram-green-bg)"/><rect x="310" y="220" width="150" height="60" rx="8" fill="var(--diagram-yellow-bg)"/><rect x="20" y="220" width="150" height="60" rx="8" fill="var(--diagram-red-bg)"/></g>
-<g fill="var(--diagram-ink)" font-size="18" text-anchor="middle"><text x="95" y="56">New</text><text x="385" y="56">Managed</text><text x="385" y="256">Detached</text><text x="95" y="256">Removed</text><text x="240" y="35">persist</text><text x="383" y="144">detach</text><text x="383" y="167">or clear</text><text x="143" y="144">remove</text></g>
-<g fill="none" stroke="var(--diagram-muted)" stroke-width="2" marker-end="url(#entity-state-arrow)"><path d="M170 50 H300"/><path d="M385 80 V118 M385 176 V210"/><path d="M310 70 L105 210"/></g>
-</svg>
+<div data-anatomy="java-spring--jpa-entities-1"></div>
 
 `find` loads a stored row into the managed state. Closing or clearing the context detaches its entities. `merge` is intentionally not a detached-to-managed arrow in this diagram, because it returns a managed copy rather than attaching the supplied object.
 
@@ -73,7 +68,7 @@ The caller receives `Augusta Ada`, while the committed row contains `Ada Lovelac
 <ol class="walkthrough-steps">
 <li><strong>Load customer 7</strong><p>The persistence context tracks the loaded Customer. Its Java name and the stored name are both Ada.</p></li>
 <li><strong>Mutate the managed entity</strong><p>setName changes the Java field to Ada Lovelace. Hibernate tracks the change. A setter does not itself require an immediate SQL update.</p></li>
-<li><strong>Flush, then commit</strong><p>Flush sends the UPDATE within the current transaction. If the service returns normally and commit succeeds, a new transaction reads Ada Lovelace. A rollback after flush would still undo the update.</p><svg role="img" aria-label="Managed name Ada Lovelace is flushed and then committed to the database" viewBox="0 0 480 110" style="max-width:100%;height:auto"><rect x="10" y="10" width="460" height="90" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/><g fill="var(--diagram-ink)" text-anchor="middle" font-size="18"><text x="240" y="42">Managed → flush → commit</text><text x="240" y="76">Stored name: Ada Lovelace</text></g></svg></li>
+<li><strong>Flush, then commit</strong><p>Flush sends the UPDATE within the current transaction. If the service returns normally and commit succeeds, a new transaction reads Ada Lovelace. A rollback after flush would still undo the update.</p><div data-anatomy="java-spring--jpa-entities-2"></div></li>
 </ol>
 </section>
 <section data-scenario="Detached change stays in memory">
@@ -81,7 +76,7 @@ The caller receives `Augusta Ada`, while the committed row contains `Ada Lovelac
 <ol class="walkthrough-steps">
 <li><strong>Flush the first name change</strong><p>Start with the worked example's load, mutation, and first flush. The transaction has written Ada Lovelace, but has not committed.</p></li>
 <li><strong>Detach, then mutate again</strong><p>detach removes this object from the persistence context. setName now changes its field to Augusta Ada without creating another tracked update.</p></li>
-<li><strong>Compare the object and stored row</strong><p>The second flush adds no UPDATE for this object. After a successful commit, the returned name is Augusta Ada but a fresh database read returns Ada Lovelace.</p><svg role="img" aria-label="Detached object contains Augusta Ada while the committed database contains Ada Lovelace" viewBox="0 0 480 140" style="max-width:100%;height:auto"><rect x="10" y="10" width="460" height="50" rx="8" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow)"/><rect x="10" y="80" width="460" height="50" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/><g fill="var(--diagram-ink)" text-anchor="middle" font-size="18"><text x="240" y="42">Detached object: Augusta Ada</text><text x="240" y="112">Committed row: Ada Lovelace</text></g></svg></li>
+<li><strong>Compare the object and stored row</strong><p>The second flush adds no UPDATE for this object. After a successful commit, the returned name is Augusta Ada but a fresh database read returns Ada Lovelace.</p><div data-anatomy="java-spring--jpa-entities-3"></div></li>
 </ol>
 </section>
 </section>

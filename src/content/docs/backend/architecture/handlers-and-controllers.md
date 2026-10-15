@@ -10,24 +10,7 @@ A handler is the function mapped to a route. A controller is the same role in a 
 The runtime gives the handler a request object and a response object. The handler reads path parameters, query parameters, headers, and the body from the request. It sets status, headers, and the response body on the response.
 
 
-```mermaid
-flowchart TD
-    Req[HTTP Request] --> RM{Route Match}
-    RM -->|Match found| H[Handler]
-    RM -->|No match| 404[404 Not Found]
-    
-    subgraph H [Handler Responsibilities]
-        direction TB
-        V[Validate Input]
-        CS[Call Service]
-        FR[Format Response]
-        V --> CS --> FR
-    end
-    
-    H --> Res[HTTP Response]
-```
-
-
+<div data-anatomy="backend--architecture--handlers-and-controllers-1"></div>
 ## Keep the handler flow explicit
 
 ```text

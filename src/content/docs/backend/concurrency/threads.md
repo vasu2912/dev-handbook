@@ -8,26 +8,7 @@ sidebar:
 A thread is an independent path of execution managed by the operating system. Each thread has a stack for function calls and local variables, and an instruction pointer that records where execution resumes.
 
 
-```mermaid
-flowchart LR
-    Q[Task Queue] -->|pull| T1(Worker Thread 1)
-    Q -->|pull| T2(Worker Thread 2)
-    Q -->|pull| T3(Worker Thread 3)
-    
-    subgraph Process
-        subgraph Thread Pool
-            T1
-            T2
-            T3
-        end
-        M[(Shared Memory)]
-        T1 <--> M
-        T2 <--> M
-        T3 <--> M
-    end
-```
-
-
+<div data-anatomy="backend--concurrency--threads-1"></div>
 ## How the scheduler runs threads
 
 The OS scheduler preempts threads and gives each a time slice. When a thread performs blocking I/O, the OS marks it blocked and schedules another runnable thread. When the I/O completes, the thread becomes runnable and waits for another slice.

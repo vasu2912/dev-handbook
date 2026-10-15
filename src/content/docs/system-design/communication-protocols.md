@@ -5,7 +5,7 @@ sidebar:
   order: 15
 ---
 
-![OSI seven-layer model](/images/system-design/vector/osi-seven-layer-model.svg)
+<div data-anatomy="system-design--communication-protocols-1"></div>
 
 *Concept redrawn from [OSI 7 layer model](http://www.escotal.com/osilayer.html).* 
 
@@ -33,7 +33,7 @@ Reliability costs time and memory. A server that keeps many TCP connections open
 
 Choose TCP when every byte must arrive intact or you want the transport to estimate and share network capacity.
 
-![TCP connection diagram](/images/system-design/vector/tcp-reliable-stream.svg)
+<div data-anatomy="system-design--communication-protocols-2"></div>
 
 *Concept redrawn from [How to make a multiplayer game](http://www.wildbunny.co.uk/blog/2012/10/09/how-to-make-a-multi-player-game-part-1/).* 
 
@@ -45,7 +45,7 @@ UDP can broadcast to devices on a subnet. DHCP uses this property before a clien
 
 Choose UDP when low latency matters more than complete delivery, when late data is worse than lost data, or when the application needs its own error correction.
 
-![UDP datagram diagram](/images/system-design/vector/udp-datagrams.svg)
+<div data-anatomy="system-design--communication-protocols-3"></div>
 
 *Concept redrawn from [How to make a multiplayer game](http://www.wildbunny.co.uk/blog/2012/10/09/how-to-make-a-multi-player-game-part-1/).* 
 
@@ -59,7 +59,7 @@ Server-sent events (SSE) keeps one HTTP response open and streams server-to-clie
 
 WebSockets begin with an HTTP upgrade handshake and then keep a bidirectional message connection. They fit chat, presence, collaborative editing, and games. Proxies, load balancing, connection limits, and reconnect state become part of the design.
 
-<svg role="img" aria-label="Comparison of short polling, long polling, server-sent events, and WebSocket message flow" viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif;margin:20px 0"><rect width="760" height="170" rx="8" fill="var(--diagram-bg)"/><g font-size="11" text-anchor="middle" fill="var(--diagram-ink)"><text x="95" y="25" font-weight="700">Short polling</text><text x="285" y="25" font-weight="700">Long polling</text><text x="475" y="25" font-weight="700">SSE</text><text x="665" y="25" font-weight="700">WebSocket</text><path d="M35 55h120M35 80h120M225 55h120M225 105h120M415 55h120M415 80h120M415 105h120M605 55h120M605 80h120M605 105h120" stroke="var(--diagram-accent)" stroke-width="2" stroke-dasharray="6 4"/><text x="95" y="135">repeated requests</text><text x="285" y="135">held request, then reply</text><text x="475" y="135">server-to-client stream</text><text x="665" y="135">messages both ways</text></g></svg>
+<div data-anatomy="system-design--communication-protocols-4"></div>
 
 | Pattern | Direction | Connection | Good fit |
 | --- | --- | --- | --- |
@@ -87,7 +87,7 @@ RPC exposes behavior and can fit internal traffic where a generated native clien
 
 RPC clients can become tightly coupled to the server implementation. Every new operation may need a new procedure. Debugging and caching can require special tooling.
 
-![RPC request flow](/images/system-design/vector/rpc-request-flow.svg)
+<div data-anatomy="system-design--communication-protocols-5"></div>
 
 *Concept redrawn from [Puncsky’s system design notes](http://www.puncsky.com/blog/2016-02-13-crack-the-system-design-interview).* 
 

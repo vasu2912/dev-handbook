@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 import MarkdownIt from "markdown-it";
@@ -9,6 +9,7 @@ import { load } from "cheerio";
 import { z } from "zod";
 import { slug as slugify } from "github-slugger";
 import { renderMermaidSVG } from "beautiful-mermaid";
+import { normalizeDiagrams } from "./diagrams.mjs";
 
 const frontmatter = z.object({
   title: z.string().min(1),
@@ -41,6 +42,15 @@ async function filesIn(directory) {
   ).flat();
 }
 export async function compileContent() {
+  const anatomySource = new URL("./figures/anatomy.mjs", import.meta.url);
+  const anatomySpecs = new URL("./figures/anatomy-specs.mjs", import.meta.url);
+  const { anatomyFigure } = await import(
+    `${anatomySource.href}?v=${(await stat(anatomySource)).mtimeMs}-${(await stat(anatomySpecs)).mtimeMs}`
+  );
+  const figureSource = new URL("./figures/token-bucket.mjs", import.meta.url);
+  const { tokenBucketFigure } = await import(
+    `${figureSource.href}?v=${(await stat(figureSource)).mtimeMs}`
+  );
   const base = siteBase();
   const files = (await filesIn("src/content/docs"))
     .filter((file) => /\.mdx?$/.test(file))
@@ -89,7 +99,7 @@ export async function compileContent() {
   const renderFence = md.renderer.rules.fence;
   md.renderer.rules.fence = (tokens, index, options, env, self) => {
     if (tokens[index].info.trim() === "mermaid") {
-      return `<figure class="mermaid-diagram">${renderMermaidSVG(tokens[index].content, { bg: "var(--surface)", fg: "var(--text)", accent: "var(--accent)", font: "Geist Variable", transparent: true })}</figure>`;
+      return `<figure class="mermaid-diagram">${renderMermaidSVG(tokens[index].content, { bg: "var(--surface)", fg: "var(--text)", accent: "var(--diagram-accent)", font: "Inter Variable", transparent: true })}</figure>`;
     }
     return renderFence(tokens, index, options, env, self);
   };
@@ -111,6 +121,21 @@ export async function compileContent() {
       .filter((source) => source.slug)
       .map(async (source) => {
         const $ = load(md.render(source.source), null, false);
+        $("[data-anatomy]").each((index, element) => {
+          $(element).replaceWith(
+            anatomyFigure($(element).attr("data-anatomy"), index + 1),
+          );
+        });
+        if ($("[data-figure]").length > 1)
+          throw new Error(
+            `${source.file}: each article supports one interactive figure.`,
+          );
+        for (const element of $("[data-figure]").toArray()) {
+          const name = $(element).attr("data-figure");
+          if (name !== "token-bucket")
+            throw new Error(`${source.file}: unknown figure: ${name}`);
+          $(element).replaceWith(await tokenBucketFigure());
+        }
         const ids = new Set(
           $("[id]")
             .toArray()
@@ -183,25 +208,23 @@ export async function compileContent() {
             $(element).attr(attr, base + value.slice(1));
         });
         $("img").attr("loading", "lazy").attr("decoding", "async");
-        $('img[src$=".svg"]').each((_, element) => {
+        for (const element of $('img[src$=".svg"]').toArray()) {
           const original = $(element).attr("src");
-          if (!original?.startsWith(base)) return;
-          $(element).attr("data-local-svg", original?.slice(base.length));
-        });
-        for (const element of $("img[data-local-svg]").toArray()) {
-          const file = $(element).attr("data-local-svg");
-          if (file && !file.includes("..")) {
-            const asset = await readFile(path.join("public", file), "utf8");
-            const dimensions = asset.match(
-              /viewBox=["'][-.\d]+\s+[-.\d]+\s+([.\d]+)\s+([.\d]+)["']/,
-            );
-            if (dimensions)
-              $(element)
-                .attr("width", dimensions[1])
-                .attr("height", dimensions[2]);
-          }
-          $(element).removeAttr("data-local-svg");
+          if (!original?.startsWith(base + "images/")) continue;
+          const file = original.slice(base.length);
+          if (file.includes("..")) continue;
+          const asset = load(
+            await readFile(path.join("public", file), "utf8"),
+            { xmlMode: true },
+          );
+          const svg = asset("svg");
+          svg
+            .attr("role", "img")
+            .attr("aria-label", $(element).attr("alt") || "Diagram");
+          svg.removeAttr("aria-labelledby");
+          $(element).replaceWith(svg.toString());
         }
+        normalizeDiagrams($);
         const headings = $("h2, h3")
           .toArray()
           .map((element) => ({
@@ -209,7 +232,9 @@ export async function compileContent() {
             title: $(element).text(),
             level: Number(element.tagName.slice(1)),
           }));
-        const words = $.text().trim().split(/\s+/).length;
+        const readable = load($.html(), null, false);
+        readable("style, script, [data-pagefind-ignore]").remove();
+        const words = readable.text().trim().split(/\s+/).length;
         return {
           slug: source.slug,
           title: source.title,

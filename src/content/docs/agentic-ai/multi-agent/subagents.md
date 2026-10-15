@@ -7,7 +7,7 @@ A subagent is an agent invoked by another agent or orchestrator. It receives a b
 
 The parent should delegate an outcome, not its entire uncertainty.
 
-![A supervisor delegates independent work to isolated research, code, and operations workers, then merges structured results while preserving evidence and disagreements](/images/agentic-ai/vector/subagent-orchestration.svg)
+<div data-anatomy="agentic-ai--multi-agent--subagents-1"></div>
 
 ## Pass the minimum complete context
 

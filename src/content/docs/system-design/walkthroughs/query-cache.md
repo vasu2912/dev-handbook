@@ -28,7 +28,7 @@ sidebar:
 
 ## Sketch the high-level design
 
-![High-level query-cache architecture](/images/system-design/vector/query-cache-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--query-cache-1"></div>
 
 ## Define the core components
 
@@ -48,7 +48,7 @@ Update when page contents change, a page is added/removed, or page rank changes.
 
 ## Scale the design
 
-![Scaled query-cache architecture](/images/system-design/vector/query-cache-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--query-cache-2"></div>
 
 :::caution[Iterate, do not jump]
 Benchmark → profile → fix → repeat.

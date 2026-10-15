@@ -236,6 +236,10 @@
             "slug": "system-design/reliability"
           },
           {
+            "label": "Rate limiting",
+            "slug": "system-design/rate-limiting"
+          },
+          {
             "label": "Reverse proxies",
             "slug": "system-design/reverse-proxy"
           },

@@ -5,7 +5,7 @@ sidebar:
   order: 14
 ---
 
-![Application workers and asynchronous processing](/images/system-design/vector/asynchronous-processing.svg)
+<div data-anatomy="system-design--asynchronous-processing-1"></div>
 
 *Concept redrawn from [Introduction to architecting systems for scale](http://lethain.com/introduction-to-architecting-systems-for-scale/#platform_layer).* 
 
@@ -28,7 +28,7 @@ client -> API -> queue -> worker -> database
 
 The user is not blocked by the worker. A social post can appear in the author's timeline immediately while fan-out to every follower happens later. The interface must say whether "accepted" means stored, queued, or complete.
 
-<svg role="img" aria-label="A client submits a job, the API queues it and returns a job ID, then a worker stores the result" viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif;margin:20px 0"><rect width="760" height="180" rx="8" fill="var(--diagram-bg)"/><g font-size="12" text-anchor="middle" fill="var(--diagram-ink)"><rect x="35" y="55" width="90" height="35" rx="4" fill="var(--diagram-neutral)"/><text x="80" y="77">Client</text><rect x="180" y="55" width="90" height="35" rx="4" fill="var(--diagram-accent-fill)"/><text x="225" y="77">API</text><rect x="325" y="55" width="90" height="35" rx="4" fill="var(--diagram-yellow-bg)"/><text x="370" y="77">Queue</text><rect x="470" y="55" width="90" height="35" rx="4" fill="var(--diagram-purple-bg)"/><text x="515" y="77">Worker</text><rect x="615" y="55" width="90" height="35" rx="4" fill="var(--diagram-green-bg)"/><text x="660" y="77">Store</text><path d="M125 72h50M270 72h50M415 72h50M560 72h50" stroke="var(--diagram-muted)" stroke-width="2"/><text x="225" y="125" fill="var(--diagram-accent)">202 + job_id</text><path d="M225 90v25" stroke="var(--diagram-accent)" stroke-width="2"/><text x="515" y="125" fill="var(--diagram-green)">process and write</text><path d="M515 90v25" stroke="var(--diagram-green)" stroke-width="2"/></g></svg>
+<div data-anatomy="system-design--asynchronous-processing-2"></div>
 
 Redis can act as a simple broker, but messages can be lost depending on configuration. RabbitMQ supports AMQP and requires node operations. Amazon SQS is hosted, but delivery can be delayed and a message can be delivered more than once. Make consumers idempotent and acknowledge only after durable progress.
 

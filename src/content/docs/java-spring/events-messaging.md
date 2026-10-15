@@ -73,7 +73,7 @@ Assume the relay reads only committed rows, retries pending rows after restart, 
 <p><strong>Crash before database commit</strong></p>
 <ol class="walkthrough-steps">
 <li><strong>Write inside the transaction</strong><p>The producer changes o42 to PLACED and inserts e42. Both writes are uncommitted. Other transactions still see o42 as DRAFT and no e42 row.</p></li>
-<li><strong>The process stops before commit</strong><p>The database rolls back both writes. The relay cannot publish an uncommitted row. Durable state is o42=DRAFT, outbox empty, broker empty.</p><svg role="img" aria-label="Before commit crash leaves a draft order and no event in database or broker" viewBox="0 0 440 100" width="100%" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="200" height="80" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/><rect x="235" y="10" width="200" height="80" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/><g fill="var(--diagram-ink)" font-size="18" text-anchor="middle"><text x="105" y="42">DB: o42 DRAFT</text><text x="105" y="69">outbox empty</text><text x="335" y="42">Broker</text><text x="335" y="69">no e42</text></g></svg></li>
+<li><strong>The process stops before commit</strong><p>The database rolls back both writes. The relay cannot publish an uncommitted row. Durable state is o42=DRAFT, outbox empty, broker empty.</p><div data-anatomy="java-spring--events-messaging-1"></div></li>
 <li><strong>Retry the business request deliberately</strong><p>No event represents a committed placement. The caller must resolve any uncertainty about its request before retrying. An outbox does not deduplicate duplicate order-placement requests.</p></li>
 </ol>
 </section>
@@ -81,7 +81,7 @@ Assume the relay reads only committed rows, retries pending rows after restart, 
 <p><strong>Crash after commit before publish</strong></p>
 <ol class="walkthrough-steps">
 <li><strong>Commit the order and event</strong><p>The database durably stores o42=PLACED and e42 with published_at=NULL. The broker has not received e42.</p></li>
-<li><strong>The process stops before publication</strong><p>A restarted relay can still find e42. An in-memory event or a plain after-commit callback would have no stored publication intent to recover.</p><svg role="img" aria-label="Committed placed order and pending outbox event survive while broker has no event" viewBox="0 0 440 100" width="100%" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="200" height="80" rx="6" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/><rect x="235" y="10" width="200" height="80" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/><g fill="var(--diagram-ink)" font-size="18" text-anchor="middle"><text x="105" y="42">DB: o42 PLACED</text><text x="105" y="69">e42 pending</text><text x="335" y="42">Broker</text><text x="335" y="69">no e42 yet</text></g></svg></li>
+<li><strong>The process stops before publication</strong><p>A restarted relay can still find e42. An in-memory event or a plain after-commit callback would have no stored publication intent to recover.</p><div data-anatomy="java-spring--events-messaging-2"></div></li>
 <li><strong>Publish from stored intent</strong><p>The relay publishes e42, receives confirmation, then commits published_at. A send failure leaves the row pending for a later attempt. Publication can be late without losing the committed intent.</p></li>
 </ol>
 </section>
@@ -89,7 +89,7 @@ Assume the relay reads only committed rows, retries pending rows after restart, 
 <p><strong>Crash after publish before delivery mark</strong></p>
 <ol class="walkthrough-steps">
 <li><strong>The broker accepts e42</strong><p>The relay receives confirmation. The broker has e42, but the database still has published_at=NULL. Consumer completion is independent of this confirmation.</p></li>
-<li><strong>The relay stops before marking success</strong><p>After restart, the pending row looks unsent. The relay publishes the same e42 again. The broker can now deliver two copies with the same event ID.</p><svg role="img" aria-label="Pending outbox event is retried, producing two broker copies with the same event ID" viewBox="0 0 440 115" width="100%" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="180" height="90" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/><rect x="255" y="10" width="180" height="90" rx="6" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow)"/><path d="M185 55H255l-9 -5m9 5l-9 5" fill="none" stroke="var(--diagram-ink)"/><g fill="var(--diagram-ink)" font-size="18" text-anchor="middle"><text x="95" y="43">Outbox</text><text x="95" y="72">e42 pending</text><text x="345" y="43">Broker copies</text><text x="345" y="72">e42, e42</text></g></svg></li>
+<li><strong>The relay stops before marking success</strong><p>After restart, the pending row looks unsent. The relay publishes the same e42 again. The broker can now deliver two copies with the same event ID.</p><div data-anatomy="java-spring--events-messaging-3"></div></li>
 <li><strong>Deduplicate the business effect</strong><p>The consumer commits its effect and a durable e42 marker together. A repeated e42 skips the effect. The relay eventually commits published_at after confirmation, but that mark does not remove duplicates already published.</p></li>
 </ol>
 </section>

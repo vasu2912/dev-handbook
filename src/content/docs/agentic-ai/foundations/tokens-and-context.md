@@ -7,7 +7,7 @@ A model does not receive text as words. A tokenizer converts text into integer t
 
 One token may represent a whole short word, part of a longer word, punctuation, whitespace, or a byte sequence. Token counts therefore vary by language, formatting, and tokenizer.
 
-![Text is converted into tokenizer-specific token IDs, which share a context-window budget with instructions, history, evidence, tool results, and output](/images/agentic-ai/vector/tokenization-context.svg)
+<div data-anatomy="agentic-ai--foundations--tokens-and-context-1"></div>
 
 ## Subword tokenization balances vocabulary and sequence length
 

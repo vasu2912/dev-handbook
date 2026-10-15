@@ -7,7 +7,7 @@ A large language model receives tokens and assigns a probability to possible nex
 
 The mechanism is less mysterious than the output makes it appear. A fluent paragraph is still the result of repeated conditional prediction.
 
-![An LLM repeatedly predicts a next-token distribution, selects one token, appends it to the context, and predicts again](/images/agentic-ai/vector/llm-generation.svg)
+<div data-anatomy="agentic-ai--foundations--llms-1"></div>
 
 ## Training changes parameters
 

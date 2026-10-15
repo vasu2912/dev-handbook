@@ -12,35 +12,7 @@ Many backends spend more than 70% of request time on I/O such as database calls,
 As a rough example, a request with three to five database queries and one or two external calls may spend about 250 ms waiting for network operations while doing about 10 ms of CPU work. The exact numbers depend on placement and load, but the shape matters. I/O wait can dominate the request.
 
 
-<svg viewBox="0 0 700 200" style="max-width:100%;height:auto;font-family:'Inter',system-ui,sans-serif; margin: 1.5rem 0;" role="img" aria-label="Timeline showing concurrent vs parallel execution">
-  <rect width="700" height="200" fill="var(--diagram-bg)" rx="8" stroke="var(--diagram-border)"/>
-  <text x="20" y="30" fill="var(--diagram-ink)" font-weight="bold" font-size="14">Concurrent (1 Core)</text>
-  <rect x="150" y="20" width="40" height="20" fill="var(--diagram-accent-bg)" stroke="var(--diagram-accent)"/>
-  <text x="170" y="34" fill="var(--diagram-accent-fill)" font-size="12" text-anchor="middle">T1</text>
-  <rect x="190" y="26" width="60" height="8" fill="var(--diagram-muted)" stroke="none" rx="4"/>
-  <text x="220" y="18" fill="var(--diagram-muted)" font-size="10" text-anchor="middle">I/O</text>
-  <rect x="250" y="20" width="40" height="20" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/>
-  <text x="270" y="34" fill="var(--diagram-green)" font-size="12" text-anchor="middle">T2</text>
-  <rect x="290" y="20" width="40" height="20" fill="var(--diagram-accent-bg)" stroke="var(--diagram-accent)"/>
-  <text x="310" y="34" fill="var(--diagram-accent-fill)" font-size="12" text-anchor="middle">T1</text>
-  <line x1="20" y1="60" x2="680" y2="60" stroke="var(--diagram-border)" stroke-dasharray="4"/>
-  <text x="20" y="90" fill="var(--diagram-ink)" font-weight="bold" font-size="14">Parallel (2 Cores)</text>
-  <text x="20" y="125" fill="var(--diagram-muted)" font-size="12">Core 1</text>
-  <rect x="100" y="110" width="100" height="20" fill="var(--diagram-accent-bg)" stroke="var(--diagram-accent)"/>
-  <text x="150" y="124" fill="var(--diagram-accent-fill)" font-size="12" text-anchor="middle">T1</text>
-  <text x="20" y="165" fill="var(--diagram-muted)" font-size="12">Core 2</text>
-  <rect x="100" y="150" width="100" height="20" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/>
-  <text x="150" y="164" fill="var(--diagram-green)" font-size="12" text-anchor="middle">T2</text>
-  <rect x="200" y="116" width="100" height="8" fill="var(--diagram-muted)" rx="4"/>
-  <text x="250" y="108" fill="var(--diagram-muted)" font-size="10" text-anchor="middle">I/O</text>
-  <line x1="100" y1="190" x2="680" y2="190" stroke="var(--diagram-ink)" marker-end="url(#arrow)"/>
-  <text x="660" y="180" fill="var(--diagram-ink)" font-size="12" text-anchor="end">Time</text>
-  <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--diagram-ink)" />
-    </marker>
-  </defs>
-</svg>
+<div data-anatomy="backend--concurrency--concurrency-and-parallelism-1"></div>
 
 
 ## Use the terms precisely

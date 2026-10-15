@@ -7,7 +7,7 @@ The model produces a probability distribution over possible next tokens. A decod
 
 The strategy affects variation. It does not turn an unsupported answer into a supported one.
 
-![A schema can constrain generated syntax, but application code must still validate meaning, authorize the action, and request approval when needed](/images/agentic-ai/vector/structured-output.svg)
+<div data-anatomy="agentic-ai--foundations--generation-and-structured-output-1"></div>
 
 ## Greedy and sampled decoding
 

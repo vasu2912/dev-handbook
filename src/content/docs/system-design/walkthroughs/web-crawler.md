@@ -32,7 +32,7 @@ Search analytics, personalized results, page rank. Do not use existing systems l
 
 ## Sketch the high-level design
 
-![High-level web-crawler architecture](/images/system-design/vector/web-crawler-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--web-crawler-1"></div>
 
 ## Define the core components
 
@@ -63,7 +63,7 @@ Add a `timestamp` to each crawl result. Refresh after a default period (say one 
 
 ## Scale the design
 
-![Scaled web-crawler architecture](/images/system-design/vector/web-crawler-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--web-crawler-2"></div>
 
 :::caution[Iterate, do not jump]
 Benchmark → profile → fix → repeat.

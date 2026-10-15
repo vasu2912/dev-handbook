@@ -15,7 +15,7 @@ CAP describes the guarantees a distributed data system can provide during a netw
 
 Networks fail, so a practical distributed system must tolerate partitions. During the partition, the design chooses whether to preserve consistency or availability. CAP does not say that a system permanently chooses only two properties. It describes the choice made while communication is broken.
 
-![CAP theorem: consistency, availability, and partition tolerance](/images/system-design/vector/cap-tradeoffs.svg)
+<div data-anatomy="system-design--availability-and-consistency-1"></div>
 
 *Concept redrawn from [CAP theorem revisited](https://robertgreiner.com/cap-theorem-revisited/).* 
 

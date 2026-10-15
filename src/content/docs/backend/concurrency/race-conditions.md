@@ -8,41 +8,7 @@ sidebar:
 A race condition occurs when the result depends on the timing of interleaved operations. Shared mutable state is the common cause.
 
 
-<svg viewBox="0 0 600 300" style="max-width:100%;height:auto;font-family:'Inter',system-ui,sans-serif; margin: 1.5rem 0;" role="img" aria-label="Race Condition Diagram">
-  <rect width="600" height="300" fill="var(--diagram-bg)" rx="8" stroke="var(--diagram-border)"/>
-  <text x="50" y="30" fill="var(--diagram-accent-fill)" font-weight="bold">Thread A</text>
-  <text x="450" y="30" fill="var(--diagram-green)" font-weight="bold">Thread B</text>
-  <rect x="250" y="20" width="100" height="40" rx="4" fill="var(--diagram-muted)" stroke="var(--diagram-border)"/>
-  <text x="300" y="45" fill="var(--diagram-ink)" font-size="14" text-anchor="middle">Counter: 0</text>
-  <g transform="translate(50, 80)">
-    <rect width="120" height="30" fill="var(--diagram-accent-bg)" rx="4"/>
-    <text x="60" y="20" fill="var(--diagram-accent-fill)" font-size="12" text-anchor="middle">Read Counter (0)</text>
-  </g>
-  <g transform="translate(430, 120)">
-    <rect width="120" height="30" fill="var(--diagram-green-bg)" rx="4"/>
-    <text x="60" y="20" fill="var(--diagram-green)" font-size="12" text-anchor="middle">Read Counter (0)</text>
-  </g>
-  <g transform="translate(50, 160)">
-    <rect width="120" height="30" fill="var(--diagram-accent-bg)" rx="4"/>
-    <text x="60" y="20" fill="var(--diagram-accent-fill)" font-size="12" text-anchor="middle">Increment (0+1=1)</text>
-  </g>
-  <g transform="translate(430, 200)">
-    <rect width="120" height="30" fill="var(--diagram-green-bg)" rx="4"/>
-    <text x="60" y="20" fill="var(--diagram-green)" font-size="12" text-anchor="middle">Increment (0+1=1)</text>
-  </g>
-  <g transform="translate(50, 240)">
-    <rect width="120" height="30" fill="var(--diagram-red-bg)" rx="4"/>
-    <text x="60" y="20" fill="var(--diagram-red)" font-size="12" text-anchor="middle">Write 1</text>
-  </g>
-  <g transform="translate(430, 240)">
-    <rect width="120" height="30" fill="var(--diagram-red-bg)" rx="4"/>
-    <text x="60" y="20" fill="var(--diagram-red)" font-size="12" text-anchor="middle">Write 1</text>
-  </g>
-  <path d="M 250 40 L 110 80" fill="none" stroke="var(--diagram-ink)" stroke-dasharray="4" marker-end="url(#arrow)"/>
-  <path d="M 350 40 L 490 120" fill="none" stroke="var(--diagram-ink)" stroke-dasharray="4" marker-end="url(#arrow)"/>
-  <path d="M 110 240 L 290 60" fill="none" stroke="var(--diagram-red)" marker-end="url(#arrow)"/>
-  <path d="M 490 240 L 310 60" fill="none" stroke="var(--diagram-red)" marker-end="url(#arrow)"/>
-</svg>
+<div data-anatomy="backend--concurrency--race-conditions-1"></div>
 
 
 ## The lost update

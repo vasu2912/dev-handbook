@@ -7,7 +7,7 @@ sidebar:
 
 A reverse proxy is a web server that accepts public requests and forwards them to an internal server. Clients see one public address. The proxy chooses a backend and returns its response.
 
-![Reverse proxy diagram](/images/system-design/vector/reverse-proxy.svg)
+<div data-anatomy="system-design--reverse-proxy-1"></div>
 
 *Concept redrawn from [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/6/67/Reverse_proxy_h2g2bob.svg).* 
 

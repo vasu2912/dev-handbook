@@ -1,0 +1,291 @@
+@import "../../../scripts/figures/vendor/anatomy/iso.css";
+.anatomy-figure.iso {
+  --anatomy-paper: var(--surface);
+  --anatomy-card: var(--surface);
+  --anatomy-face: #fff;
+  --anatomy-top: #fafbfc;
+  --anatomy-shade-0: #d8dce1;
+  --anatomy-shade-1: #e1e5e9;
+  --anatomy-shade-2: #e9ecef;
+  --anatomy-shade-3: #f2f4f6;
+  --anatomy-lit-top: #505c6c;
+  --anatomy-lit-shade: #374354;
+  --anatomy-hi: #5f6b7c;
+  --anatomy-mid: #8e98a6;
+  --anatomy-lo: #b6bec9;
+  --anatomy-faint: #d5dbe2;
+  --anatomy-lit: #283547;
+  --anatomy-halo: #bbc2cc;
+  --anatomy-halo-opacity: 0.16;
+  --anatomy-dot: #3a4658;
+  margin: 30px 0;
+  color: var(--text);
+  font: 13px/1.65 var(--font);
+}
+:root[data-theme="dark"] .anatomy-figure.iso {
+  --anatomy-face: #252d38;
+  --anatomy-top: #2c3542;
+  --anatomy-shade-0: #141a23;
+  --anatomy-shade-1: #1a222d;
+  --anatomy-shade-2: #222c38;
+  --anatomy-shade-3: #2b3644;
+  --anatomy-lit-top: #d5deea;
+  --anatomy-lit-shade: #9facbf;
+  --anatomy-hi: #aab9ce;
+  --anatomy-mid: #72839b;
+  --anatomy-lo: #4d5e75;
+  --anatomy-faint: #354358;
+  --anatomy-lit: #edf2f9;
+  --anatomy-halo: #000;
+  --anatomy-dot: #dce5f1;
+}
+.prose .anatomy-frame.iso-plate {
+  padding: 18px 20px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: none;
+  background: var(--surface);
+  overflow: hidden;
+}
+.anatomy-heading,
+.anatomy-hint {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--secondary-text);
+}
+.anatomy-heading strong {
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--text);
+  text-align: right;
+}
+.anatomy-heading > span {
+  white-space: nowrap;
+}
+.anatomy-hint [data-anatomy-readout] {
+  color: var(--text);
+  text-align: right;
+}
+.prose .anatomy-stage svg {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  min-width: 0;
+}
+.anatomy-stage {
+  position: relative;
+}
+.anatomy-stage [data-anatomy-part] {
+  cursor: pointer;
+}
+.anatomy-stage .iso-top,
+.anatomy-stage .iso-shade,
+.anatomy-stage .iso-edge {
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
+}
+.anatomy-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 14px;
+}
+.anatomy-controls[hidden] {
+  display: none;
+}
+.anatomy-controls button,
+.anatomy-controls select {
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+  font: 12px var(--font);
+}
+.anatomy-controls label {
+  flex: 1;
+  min-width: 0;
+}
+.anatomy-controls select {
+  width: 100%;
+  text-overflow: ellipsis;
+}
+.anatomy-controls button {
+  flex-shrink: 0;
+}
+.anatomy-controls button:hover,
+.anatomy-controls select:hover {
+  border-color: var(--secondary-text);
+}
+.anatomy-controls button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--surface);
+}
+.prose .anatomy-explanation {
+  margin: 18px 0 0;
+  padding-left: 20px;
+}
+.prose .anatomy-explanation li {
+  padding-left: 4px;
+  margin: 12px 0;
+}
+.prose .anatomy-explanation strong {
+  font-weight: 550;
+}
+.prose .anatomy-explanation p {
+  margin: 4px 0 0;
+  color: var(--secondary-text);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.anatomy-figure[data-ready] .anatomy-explanation {
+  list-style: none;
+  padding-left: 0;
+}
+.anatomy-figure[data-ready] .anatomy-explanation li {
+  padding-left: 0;
+}
+.anatomy-explanation [hidden] {
+  display: none;
+}
+.prose .anatomy-takeaway {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 14px 0 0;
+  color: var(--secondary-text);
+}
+.prose .anatomy-key {
+  border: 0;
+  background: none;
+  border-radius: 0;
+  margin: 12px 0 0;
+  padding: 0;
+  font-size: 11px;
+  color: var(--secondary-text);
+}
+.prose .anatomy-key summary {
+  padding: 0;
+  cursor: pointer;
+}
+.prose .anatomy-key p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+@media (max-width: 640px) {
+  .prose .anatomy-frame.iso-plate {
+    padding: 14px 12px 12px;
+  }
+  .anatomy-heading strong {
+    font-size: 12px;
+    max-width: 85%;
+  }
+  .anatomy-stage {
+    width: 114%;
+    margin-left: -7%;
+  }
+  .anatomy-hint {
+    font-size: 10px;
+    gap: 8px;
+  }
+  .anatomy-controls {
+    gap: 5px;
+  }
+  .anatomy-controls button,
+  .anatomy-controls select {
+    padding: 8px;
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anatomy-stage * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media print {
+  .anatomy-figure {
+    break-inside: avoid;
+  }
+  .anatomy-controls,
+  .anatomy-key {
+    display: none !important;
+  }
+  .anatomy-explanation [hidden] {
+    display: list-item !important;
+  }
+  .anatomy-figure[data-ready] .anatomy-explanation {
+    list-style: decimal;
+    padding-left: 20px;
+  }
+}
+.anatomy-figure[data-focus="0"] [data-anatomy-part="0"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="0"] [data-anatomy-part="0"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="0"] [data-anatomy-part="0"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.anatomy-figure[data-focus="1"] [data-anatomy-part="1"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="1"] [data-anatomy-part="1"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="1"] [data-anatomy-part="1"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.anatomy-figure[data-focus="2"] [data-anatomy-part="2"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="2"] [data-anatomy-part="2"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="2"] [data-anatomy-part="2"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.anatomy-figure[data-focus="3"] [data-anatomy-part="3"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="3"] [data-anatomy-part="3"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="3"] [data-anatomy-part="3"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.anatomy-figure[data-focus="4"] [data-anatomy-part="4"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="4"] [data-anatomy-part="4"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="4"] [data-anatomy-part="4"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.anatomy-figure[data-focus="5"] [data-anatomy-part="5"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="5"] [data-anatomy-part="5"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="5"] [data-anatomy-part="5"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}
+.anatomy-figure[data-focus="6"] [data-anatomy-part="6"] .iso-top {
+  fill: var(--anatomy-lit-top);
+}
+.anatomy-figure[data-focus="6"] [data-anatomy-part="6"] .iso-shade {
+  fill: var(--anatomy-lit-shade);
+}
+.anatomy-figure[data-focus="6"] [data-anatomy-part="6"] .iso-edge {
+  stroke: var(--anatomy-lit);
+}

@@ -5,7 +5,7 @@ description: Understand stdio, Streamable HTTP, the 2026 stateless lifecycle, di
 
 MCP supports local process communication through stdio and remote communication through Streamable HTTP. Custom transports must preserve the protocol's message and security requirements.
 
-![A modern MCP client may discover server capabilities and then exchanges independent requests carrying per-request protocol metadata](/images/agentic-ai/vector/mcp-lifecycle.svg)
+<div data-anatomy="agentic-ai--mcp--transports-and-lifecycle-1"></div>
 
 ## Stdio fits local, process-owned servers
 

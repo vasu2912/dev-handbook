@@ -82,13 +82,7 @@ The proxy does not supply a timeout, retry policy, or local transaction guarante
 
 Compare two attempts to charge order `o42`. The following timeline uses an illustrative provider, not the catalog endpoint. Times show the order of events, not measured latency.
 
-<svg role="img" aria-label="A connection failure sends no payment request, but a lost response can leave an accepted payment with an unknown client outcome" viewBox="0 0 460 280" width="100%" xmlns="http://www.w3.org/2000/svg">
-<rect x="1" y="1" width="458" height="278" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/>
-<g fill="var(--diagram-ink)" font-size="18"><text x="20" y="32" font-weight="700">Connect failure</text><text x="20" y="66">Caller</text><text x="314" y="66">Provider</text><text x="72" y="100">Connection refused</text><text x="20" y="139" font-weight="700">Response lost after acceptance</text><text x="65" y="183">POST o42 → accepted</text><text x="65" y="224">Caller waits ← response lost</text><text x="65" y="262">Timeout ≠ payment failed</text></g>
-<path d="M20 84H440" stroke="var(--diagram-red)" stroke-width="2" stroke-dasharray="5 5"/>
-<path d="M20 164H440l-10 -5m10 5l-10 5" fill="none" stroke="var(--diagram-green)" stroke-width="2"/>
-<path d="M440 205H20l10 -5m-10 5l10 5" fill="none" stroke="var(--diagram-red)" stroke-width="2" stroke-dasharray="5 5"/>
-</svg>
+<div data-anatomy="java-spring--http-clients-1"></div>
 
 | Time | Connection refused before any request bytes | Timeout after provider accepts payment |
 | --- | --- | --- |

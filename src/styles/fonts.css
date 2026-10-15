@@ -1,8 +1,32 @@
 @font-face {
-  font-family: "Geist Variable";
+  font-family: "Inter Variable";
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("@fontsource-variable/geist/files/geist-latin-wght-normal.woff2")
+  src: url("@fontsource-variable/inter/files/inter-latin-standard-normal.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "Inter Variable";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("@fontsource-variable/inter/files/inter-latin-standard-italic.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "EB Garamond Variable";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "EB Garamond Variable";
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-italic.woff2")
     format("woff2-variations");
 }

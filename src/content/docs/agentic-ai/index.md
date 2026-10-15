@@ -5,11 +5,11 @@ description: Build a clear model of language models, retrieval, agents, tools, s
 
 An agentic system gives a model a bounded way to gather information, choose an action, and observe what happened. The model supplies judgment where fixed rules are too rigid. Ordinary code still owns permissions, validation, budgets, durable state, and irreversible effects.
 
-![Artificial intelligence contains machine learning and deep learning, while an agentic system combines a model with an application loop, tools, state, policy, and stop conditions](/images/agentic-ai/vector/ai-system-map.svg)
+<div data-anatomy="agentic-ai-1"></div>
 
 That division of work is the central idea in this handbook. A model may suggest that an incident needs a Kubernetes restart. It must not gain cluster-admin access merely because it produced a convincing explanation.
 
-![A model becomes an agent only when it can observe state, choose a bounded action, and receive the result](/images/agentic-ai/vector/agentic-ai-map.svg)
+<div data-anatomy="agentic-ai-2"></div>
 
 ## Follow the dependency chain
 

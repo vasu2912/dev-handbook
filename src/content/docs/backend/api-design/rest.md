@@ -8,14 +8,7 @@ sidebar:
 Roy Fielding described REST in his dissertation as an architectural style for networked systems. REST is short for Representational State Transfer. A resource has a representation, and the client and server transfer representations of its state under a set of constraints.
 
 
-```mermaid
-flowchart LR
-    A["/users"] --> B["/users/{id}"]
-    B --> C["/users/{id}/orders"]
-    C --> D["/users/{id}/orders/{id}"]
-```
-
-
+<div data-anatomy="backend--api-design--rest-1"></div>
 ## The six constraints
 
 | Constraint | Meaning | Why it helps |

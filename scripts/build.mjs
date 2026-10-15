@@ -20,7 +20,7 @@ const { render } = await import(
 );
 const font = (await readdir("dist/assets")).find(
   (file) =>
-    file.startsWith("geist-latin-wght-normal") && file.endsWith(".woff2"),
+    file.startsWith("inter-latin-standard-normal") && file.endsWith(".woff2"),
 );
 const template = (await readFile("dist/index.html", "utf8")).replace(
   "<!--page-head-->",

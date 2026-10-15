@@ -7,7 +7,7 @@ The Transformer processes token representations through repeated attention and f
 
 The original Transformer used an encoder and a decoder for sequence-to-sequence work. Many generative language models use a decoder-style stack with causal masking, which prevents a position from attending to future output tokens.
 
-![Attention combines information from other token positions by comparing queries and keys and weighting their values](/images/agentic-ai/vector/transformer-attention.svg)
+<div data-anatomy="agentic-ai--foundations--transformers-and-attention-1"></div>
 
 ## Tokens become vectors
 

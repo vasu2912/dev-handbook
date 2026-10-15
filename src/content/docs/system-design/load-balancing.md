@@ -7,11 +7,11 @@ sidebar:
 
 A load balancer distributes incoming requests to application servers, databases, or other computing resources. It returns the selected resource's response to the client. Health checks keep traffic away from unhealthy nodes. Distribution prevents one node from taking all traffic and removes a single server as the only point of failure.
 
-![Load-balancing architecture](/images/system-design/vector/load-balancing.svg)
+<div data-anatomy="system-design--load-balancing-1"></div>
 
 *Concept redrawn from [Scalable system design patterns](http://horicky.blogspot.com/2010/10/scalable-system-design-patterns.html).* 
 
-<svg role="img" aria-label="Layer 4 routes by IP and port, while layer 7 routes by HTTP path and headers" viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif;margin:20px 0"><rect width="760" height="180" rx="8" fill="var(--diagram-bg)"/><g font-size="12" text-anchor="middle" fill="var(--diagram-ink)"><text x="190" y="25" font-weight="700">Layer 4</text><text x="570" y="25" font-weight="700">Layer 7</text><rect x="35" y="55" width="70" height="32" rx="4" fill="var(--diagram-neutral)"/><text x="70" y="76">Client</text><rect x="145" y="48" width="90" height="46" rx="4" fill="var(--diagram-accent-fill)"/><text x="190" y="68">LB</text><text x="190" y="83" font-size="10">IP + port</text><rect x="275" y="40" width="60" height="30" rx="4" fill="var(--diagram-green-bg)"/><text x="305" y="60">S1</text><rect x="275" y="80" width="60" height="30" rx="4" fill="var(--diagram-green-bg)"/><text x="305" y="100">S2</text><path d="M105 71h35M235 65l35-10M235 80l35 15" stroke="var(--diagram-muted)" stroke-width="2"/><rect x="415" y="55" width="70" height="32" rx="4" fill="var(--diagram-neutral)"/><text x="450" y="76">Client</text><rect x="525" y="48" width="90" height="46" rx="4" fill="var(--diagram-yellow-bg)"/><text x="570" y="68">LB</text><text x="570" y="83" font-size="10">path + headers</text><rect x="655" y="40" width="70" height="30" rx="4" fill="var(--diagram-green-bg)"/><text x="690" y="60">API pool</text><rect x="655" y="80" width="70" height="30" rx="4" fill="var(--diagram-purple-bg)"/><text x="690" y="100">static pool</text><path d="M485 71h35M615 65l35-10M615 80l35 15" stroke="var(--diagram-muted)" stroke-width="2"/></g></svg>
+<div data-anatomy="system-design--load-balancing-2"></div>
 
 Hardware load balancers exist, but software such as [HAProxy](https://www.haproxy.org/) and [NGINX](https://nginx.org/) can fill the role. Common routing policies include random choice, least loaded, round robin, weighted round robin, and a session or cookie key.
 

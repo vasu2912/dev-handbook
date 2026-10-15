@@ -11,7 +11,7 @@ state -> model proposal -> policy checks -> action -> observation -> new state
 
 The loop belongs to application code. A model can propose that the task is complete, but the application decides whether the proposal satisfies the completion rule.
 
-![A bounded agent loop observes state, decides the next step, acts through a tool, records the result, and checks completion, budget, and policy stops](/images/agentic-ai/vector/agent-loop.svg)
+<div data-anatomy="agentic-ai--agents--agent-loop-1"></div>
 
 ## State makes the loop inspectable
 

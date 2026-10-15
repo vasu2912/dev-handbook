@@ -11,25 +11,7 @@ sidebar:
 
 "Secrets" = API keys, database passwords, encryption keys, JWT signing keys. The one unforgivable mistake is committing them to source control.
 
-<svg role="img" aria-label="Secrets management: hardcoded source code vs environment variables" viewBox="0 0 660 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif">
-  <defs>
-    <marker id="sec-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="var(--diagram-muted)"/>
-    </marker>
-  </defs>
-  <rect x="2" y="16" width="310" height="66" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="2"/>
-  <text x="157" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-red-text)">✗ Hardcode in source code</text>
-  <text x="157" y="56" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">committed to git → everyone with repo access sees it</text>
-  <text x="157" y="72" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">deleting it doesn't help: it's in the history</text>
-  <rect x="348" y="16" width="310" height="66" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)" stroke-width="2"/>
-  <text x="503" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-green)">✓ Environment variables</text>
-  <text x="503" y="56" text-anchor="middle" font-size="11" fill="var(--diagram-green)">or a secret manager: AWS Parameter Store, Vault</text>
-  <text x="503" y="72" text-anchor="middle" font-size="11" fill="var(--diagram-green)">never in version control</text>
-  <line x1="312" y1="49" x2="346" y2="49" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#sec-arrow)"/>
-  <rect x="2" y="116" width="656" height="56" rx="8" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow)" stroke-width="1.5"/>
-  <text x="330" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-yellow-stroke)">If a secret ever leaks: rotate it immediately</text>
-  <text x="330" y="156" text-anchor="middle" font-size="11" fill="var(--diagram-yellow-stroke)">delete the old value and issue a new one; don't just remove the commit</text>
-</svg>
+<div data-anatomy="backend--security--misconfiguration-1"></div>
 
 ## 2 · Debug mode in production
 
@@ -40,22 +22,7 @@ In development you log **everything**: stack traces, full SQL queries, database 
 | `debug`   | stack traces, SQL, config, sensitive data | local only           |
 | `info`    | normal operational events                 | staging & production |
 
-<svg role="img" aria-label="Log level configuration: debug in dev vs info in production" viewBox="0 0 660 140" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif">
-  <defs>
-    <marker id="log-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="var(--diagram-muted)"/>
-    </marker>
-  </defs>
-  <rect x="2" y="18" width="300" height="72" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="1.5"/>
-  <text x="152" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-red-text)">debug in production</text>
-  <text x="152" y="58" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">stack traces + SQL + secrets in logs</text>
-  <text x="152" y="74" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">a log breach = code structure leaked</text>
-  <rect x="358" y="18" width="300" height="72" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)" stroke-width="1.5"/>
-  <text x="508" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-green)">info in production</text>
-  <text x="508" y="58" text-anchor="middle" font-size="11" fill="var(--diagram-green)">only operational events</text>
-  <text x="508" y="74" text-anchor="middle" font-size="11" fill="var(--diagram-green)">nothing sensitive</text>
-  <line x1="302" y1="54" x2="356" y2="54" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#log-arrow)"/>
-</svg>
+<div data-anatomy="backend--security--misconfiguration-2"></div>
 
 :::tip[The rule]
 Set `debug` locally, `info` in staging and production. Never let a stack trace or a raw SQL query reach a production log.

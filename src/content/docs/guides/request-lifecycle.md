@@ -6,25 +6,7 @@ description: Trace a web request through the parts of a backend and locate the d
 This guide follows `GET /accounts/42` from a browser to a database and back. The path is ordinary. That is why it is useful: most backend systems repeat some version of it.
 
 
-```mermaid
-sequenceDiagram
-    participant B as Browser
-    participant D as DNS
-    participant E as Edge/LB
-    participant A as Application
-    participant DB as Database
-    
-    B->>D: 1. Resolve domain
-    D-->>B: 2. Return IP address
-    B->>E: 3. HTTP Request
-    E->>A: 4. Route Request
-    A->>DB: 5. Query Data
-    DB-->>A: 6. Return Data
-    A-->>E: 7. HTTP Response
-    E-->>B: 8. Deliver Response
-```
-
-
+<div data-anatomy="guides--request-lifecycle-1"></div>
 ## 1. The browser sends a request
 
 The browser resolves the hostname, opens or reuses a connection, and sends an HTTP request.

@@ -34,23 +34,7 @@ HTTP draining does not make background work durable. Consumers and executors nee
 The diagram describes a deployment whose router is explicitly configured to honor readiness or target deregistration. The withdrawal step belongs to that platform. Boot controls its own availability state and server shutdown, not every upstream connection.
 
 <figure>
-<svg viewBox="0 0 600 614" width="100%" role="img" aria-labelledby="service-life-title service-life-desc" xmlns="http://www.w3.org/2000/svg">
-<title id="service-life-title">Configuration, startup, traffic, and shutdown</title>
-<desc id="service-life-desc">Load and validate external configuration. Start the context, migrations, and runners while not ready. Once ready, a configured router admits traffic. On termination, the platform withdraws routing and accounts for propagation delay. SIGTERM then lets the server drain in-flight work and close resources before the outer deadline.</desc>
-<g font-family="sans-serif" font-size="21" fill="var(--diagram-ink)">
-<rect x="20" y="10" width="560" height="92" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/>
-<text x="40" y="44">1. Load configuration</text><text x="40" y="77" fill="var(--diagram-muted)">Jar + external settings; reject invalid values</text>
-<rect x="20" y="134" width="560" height="92" rx="6" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow-stroke)"/>
-<text x="40" y="168">2. Start, but do not route yet</text><text x="40" y="201" fill="var(--diagram-muted)">Context, migrations, runners; readiness waits</text>
-<rect x="20" y="258" width="560" height="92" rx="6" fill="var(--diagram-green-bg)" stroke="var(--diagram-green-stroke)"/>
-<text x="40" y="292">3. Ready to accept traffic</text><text x="40" y="325" fill="var(--diagram-muted)">Configured router observes readiness</text>
-<rect x="20" y="382" width="560" height="92" rx="6" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow-stroke)"/>
-<text x="40" y="416">4. Withdraw traffic at the platform</text><text x="40" y="449" fill="var(--diagram-muted)">Deregister target; allow propagation time</text>
-<rect x="20" y="506" width="560" height="98" rx="6" fill="var(--diagram-accent-bg)" stroke="var(--diagram-accent)"/>
-<text x="40" y="540">5. SIGTERM, drain, close</text><text x="40" y="574" fill="var(--diagram-muted)">Finish accepted work within the deadline</text>
-</g>
-<g fill="var(--diagram-muted)" stroke="var(--diagram-muted)" stroke-width="2"><path d="M300 102V124M300 226V248M300 350V372M300 474V496"/><path d="m295 119 5 7 5-7m-10 124 5 7 5-7m-10 124 5 7 5-7m-10 124 5 7 5-7" fill="none"/></g>
-</svg>
+<div data-anatomy="java-spring--running-services-1"></div>
 <figcaption>One deliberate sequence. Some platforms begin withdrawal and signal delivery concurrently; verify their actual termination contract.</figcaption>
 </figure>
 

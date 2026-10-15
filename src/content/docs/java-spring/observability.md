@@ -55,20 +55,7 @@ management.opentelemetry.tracing.export.otlp.endpoint=http://localhost:4318/v1/t
 The HTTP span is framework instrumentation. This scenario also assumes explicit child spans around connection acquisition and SQL execution, plus a Boot-built HTTP client for the inventory call. Actuator alone does not create this detailed JDBC waterfall. Without those child spans, pool metrics support a hypothesis about waiting but cannot attribute 900 ms to this request.
 
 <figure>
-<svg viewBox="0 0 600 350" width="100%" role="img" aria-labelledby="slow-trace-title slow-trace-desc" xmlns="http://www.w3.org/2000/svg">
-<title id="slow-trace-title">Illustrative order trace waterfall</title>
-<desc id="slow-trace-desc">The HTTP request lasts 1200 milliseconds. Connection acquisition starts at 20 milliseconds and takes 900. SQL runs from 920 to 960. Inventory HTTP runs from 960 to 1100. The remaining 160 milliseconds are outside these child spans.</desc>
-<rect x="0" y="0" width="600" height="350" rx="8" fill="var(--diagram-bg)"/>
-<g fill="var(--diagram-muted)" font-size="20" font-family="sans-serif"><text x="24" y="30">Elapsed time</text><text x="210" y="30">0</text><text x="356" y="30">600</text><text x="491" y="30">1,200 ms</text></g>
-<g stroke="var(--diagram-border)" stroke-dasharray="4 4"><path d="M220 45V290M385 45V290M550 45V290"/></g>
-<g fill="var(--diagram-ink)" font-size="20" font-family="sans-serif"><text x="24" y="78">POST /orders</text><text x="24" y="145">Acquire</text><text x="24" y="212">SQL</text><text x="24" y="279">Inventory HTTP</text></g>
-<rect x="220" y="54" width="330" height="32" rx="4" fill="var(--diagram-accent-fill)" stroke="var(--diagram-accent)"/>
-<rect x="225.5" y="121" width="247.5" height="32" rx="4" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow-stroke)"/>
-<rect x="473" y="188" width="11" height="32" rx="2" fill="var(--diagram-green-bg)" stroke="var(--diagram-green-stroke)"/>
-<rect x="484" y="255" width="38.5" height="32" rx="3" fill="var(--diagram-purple-bg)" stroke="var(--diagram-purple)"/>
-<g fill="var(--diagram-ink)" font-size="20" font-family="sans-serif"><text x="319" y="77">1,200 ms</text><text x="310" y="144">900 ms</text><text x="398" y="212">40 ms</text><text x="399" y="279">140 ms</text></g>
-<text x="24" y="327" fill="var(--diagram-muted)" font-size="20" font-family="sans-serif">Most measured time is before SQL starts.</text>
-</svg>
+<div data-anatomy="java-spring--observability-1"></div>
 <figcaption>Illustrative trace <code>4bf92f3577b34da6a3ce929d0e0e4736</code>. Child spans do not cover all local work.</figcaption>
 </figure>
 

@@ -10,18 +10,7 @@ HTTP is a contract between a client and a server. The method says what kind of o
 For the full resource-oriented design model, continue with [API design](/backend/api-design/). Use [URL design](/backend/api-design/url-design/) for paths, [methods and idempotency](/backend/api-design/methods-and-idempotency/) for retries, and [CRUD endpoints](/backend/api-design/crud-endpoints/) for response status and body choices.
 
 
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server
-    
-    C->>S: GET /api/users HTTP/1.1<br/>Host: example.com<br/>Accept: application/json
-    activate S
-    S-->>C: HTTP/1.1 200 OK<br/>Content-Type: application/json<br/><br/>{"users": [...]}
-    deactivate S
-```
-
-
+<div data-anatomy="backend--http-and-apis-1"></div>
 ## Methods carry intent
 
 `GET` reads a representation. `POST` asks the server to create a subordinate resource or perform an operation. `PUT` replaces a resource at a known location. `PATCH` applies a partial change. `DELETE` removes a resource.

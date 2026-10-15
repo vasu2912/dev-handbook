@@ -5,7 +5,7 @@ sidebar:
   order: 12
 ---
 
-![Database scaling patterns](/images/system-design/vector/database-scaling-patterns.svg)
+<div data-anatomy="system-design--databases-1"></div>
 
 *Original redraw based on [Scaling up to your first 10 million users](https://www.youtube.com/watch?v=kKjm4ehYiMs).* 
 
@@ -26,7 +26,7 @@ Relational systems scale through replication, federation, sharding, denormalizat
 
 The primary accepts reads and writes, then replicates writes to one or more read replicas. Replicas can forward changes to more replicas in a tree. If the primary fails, the system can continue serving reads until an operator or an automated process promotes a replica.
 
-![Master-replica database replication](/images/system-design/vector/database-master-replica.svg)
+<div data-anatomy="system-design--databases-2"></div>
 
 *Original redraw based on [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/).* 
 
@@ -36,7 +36,7 @@ Promotion needs a clear owner and a way to prevent two primaries from accepting 
 
 Multiple primaries accept reads and writes and coordinate changes. If one fails, another can continue serving writes.
 
-![Multi-primary database replication](/images/system-design/vector/database-multi-primary.svg)
+<div data-anatomy="system-design--databases-3"></div>
 
 *Original redraw based on [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/).* 
 
@@ -48,7 +48,7 @@ Both models add hardware and operational work. Replicas replay writes, so a writ
 
 Federation, also called functional partitioning, splits data by function. A product might use separate `forums`, `users`, and `products` databases. Each database handles less traffic, keeps a larger fraction of its data in memory, and can write in parallel without one central write queue.
 
-![Federated databases by function](/images/system-design/vector/database-federation.svg)
+<div data-anatomy="system-design--databases-4"></div>
 
 *Original redraw based on [Scaling up to your first 10 million users](https://www.youtube.com/watch?v=kKjm4ehYiMs).* 
 
@@ -58,7 +58,7 @@ Federation works when functions have clear ownership. It works poorly when one q
 
 Sharding distributes rows across databases. Each shard owns a subset of the data. A users table might shard by user ID, last-name prefix, or geography.
 
-![Database sharding](/images/system-design/vector/database-sharding.svg)
+<div data-anatomy="system-design--databases-5"></div>
 
 *Original redraw based on [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/).* 
 
@@ -88,7 +88,7 @@ Benchmark and profile before changing a schema or index. A load generator such a
 
 An index can speed columns used for filtering, grouping, ordering, or joining. B-tree indexes keep keys sorted and usually provide logarithmic lookup plus ordered scans.
 
-<svg role="img" aria-label="A B-tree reaches a matching row through a few branches, while a table scan checks rows in sequence" viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif;margin:20px 0"><rect width="760" height="190" rx="8" fill="var(--diagram-bg)"/><g font-size="12" text-anchor="middle" fill="var(--diagram-ink)"><text x="190" y="25" font-weight="700" fill="var(--diagram-green)">B-tree lookup, O(log N)</text><rect x="150" y="45" width="80" height="30" rx="4" fill="var(--diagram-white)" stroke="var(--diagram-green)"/><text x="190" y="65">root</text><rect x="100" y="100" width="80" height="30" rx="4" fill="var(--diagram-white)" stroke="var(--diagram-green)"/><text x="140" y="120">branch</text><rect x="200" y="100" width="80" height="30" rx="4" fill="var(--diagram-white)" stroke="var(--diagram-green)"/><text x="240" y="120">match</text><path d="M170 75l-30 25M210 75l30 25" stroke="var(--diagram-green)" stroke-width="2"/><text x="570" y="25" font-weight="700" fill="var(--diagram-red-text)">Full scan, O(N)</text><rect x="520" y="45" width="100" height="95" rx="4" fill="var(--diagram-white)" stroke="var(--diagram-red)"/><path d="M520 68h100M520 91h100M520 114h100" stroke="var(--diagram-red-stroke)"/><text x="570" y="62">row 1</text><text x="570" y="85">row 2</text><text x="570" y="108">...</text><text x="570" y="132">row N</text></g></svg>
+<div data-anatomy="system-design--databases-6"></div>
 
 An index consumes memory and storage. Inserts and updates become slower because the index must change too. For a bulk load, it can be faster to load rows first and rebuild indexes afterward. Confirm the plan with the database's query planner.
 
@@ -132,7 +132,7 @@ ColumnFamily<RowKey, Columns<ColumnKey, Value, Timestamp>>
 
 A column family groups columns like a table. Columns with one row key form a row. Timestamps support versioning and conflict resolution. Bigtable introduced the model, which influenced HBase and Cassandra. Ordered row keys make selected ranges efficient. Wide-column stores fit very large, high-throughput data sets when the query model is known in advance.
 
-![Wide-column data model](/images/system-design/vector/database-wide-column.svg)
+<div data-anatomy="system-design--databases-7"></div>
 
 *Original redraw based on [SQL & NoSQL, a brief history](http://blog.grio.com/2015/11/sql-nosql-a-brief-history.html).* 
 
@@ -140,7 +140,7 @@ A column family groups columns like a table. Columns with one row key form a row
 
 A graph database stores nodes and relationships between nodes. It fits many-to-many relationships such as social graphs, where traversals would require many relational joins.
 
-![Graph database model](/images/system-design/vector/database-graph.svg)
+<div data-anatomy="system-design--databases-8"></div>
 
 *Original redraw based on [Graph database](https://en.wikipedia.org/wiki/File:GraphDatabase_PropertyGraph.png).* 
 
@@ -148,7 +148,7 @@ Graph stores are less uniform than relational systems, so tools and operational 
 
 ## SQL or NoSQL
 
-![Transition from relational databases to NoSQL systems](/images/system-design/vector/database-sql-nosql.svg)
+<div data-anatomy="system-design--databases-9"></div>
 
 *Original redraw based on [Transitioning from RDBMS to NoSQL](https://www.infoq.com/articles/Transition-RDBMS-NoSQL/).* 
 

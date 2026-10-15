@@ -7,7 +7,7 @@ sidebar:
 
 The Domain Name System (DNS) translates a name such as `www.example.com` to an IP address. DNS is hierarchical. A resolver learns which authoritative servers to query, then caches answers for the record's time to live (TTL).
 
-![DNS security presentation diagram](/images/system-design/vector/dns-resolution.svg)
+<div data-anatomy="system-design--dns-1"></div>
 
 *Concept redrawn from [DNS security presentation](http://www.slideshare.net/srikrupa5/dns-security-presentation-issa).* 
 

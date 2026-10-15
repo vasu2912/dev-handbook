@@ -1,0 +1,206 @@
+.token-bucket.iso {
+  --anatomy-paper: var(--surface);
+  --anatomy-face: #fff;
+  --anatomy-top: #fff;
+  --anatomy-shade-0: #dcdfe4;
+  --anatomy-shade-1: #e4e6ea;
+  --anatomy-shade-2: #eceef1;
+  --anatomy-shade-3: #f4f5f7;
+  --anatomy-lit-top: #555e6d;
+  --anatomy-lit-shade: #333c4c;
+  --anatomy-hi: #616b7b;
+  --anatomy-mid: #929aa7;
+  --anatomy-lo: #b9c0c9;
+  --anatomy-faint: #d8dce2;
+  --anatomy-lit: #303a4b;
+  --anatomy-halo: #b9c0c9;
+  --anatomy-halo-opacity: 0.2;
+  --anatomy-dot: #3a3a3e;
+  margin: 32px 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.6;
+}
+:root[data-theme="dark"] .token-bucket.iso {
+  --anatomy-face: #242b35;
+  --anatomy-top: #29313d;
+  --anatomy-shade-0: #141921;
+  --anatomy-shade-1: #1b212b;
+  --anatomy-shade-2: #222a35;
+  --anatomy-shade-3: #29313d;
+  --anatomy-lit-top: #dce2eb;
+  --anatomy-lit-shade: #9ba8bc;
+  --anatomy-hi: #adbbce;
+  --anatomy-mid: #748198;
+  --anatomy-lo: #4e5d72;
+  --anatomy-faint: #344156;
+  --anatomy-lit: #edf2f9;
+  --anatomy-halo: #000;
+  --anatomy-dot: #dce2eb;
+}
+.token-bucket .bucket-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  overflow: hidden;
+}
+.bucket-heading,
+.bucket-hint {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.bucket-heading strong {
+  font-weight: 500;
+  color: var(--text);
+}
+.bucket-stage {
+  width: 100%;
+}
+.token-bucket .bucket-stage svg {
+  margin: 0;
+  max-width: 100%;
+}
+.bucket-hint [data-bucket-readout] {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.bucket-controls {
+  padding: 18px 0 0;
+}
+.bucket-controls[hidden] {
+  display: none;
+}
+.bucket-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bucket-actions button {
+  padding: 9px 12px;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 12px;
+}
+.bucket-actions button:hover {
+  border-color: var(--muted);
+}
+.bucket-actions button:disabled {
+  opacity: 0.45;
+}
+.bucket-actions button[data-action="send"],
+.bucket-actions button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.bucket-rate {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.bucket-rate select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 8px;
+}
+.token-bucket p {
+  margin: 0;
+}
+.bucket-mode {
+  color: var(--muted);
+  font-size: 11px;
+}
+.bucket-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+  padding: 14px 0;
+  border-block: 1px solid var(--border);
+}
+.bucket-stats dt {
+  font-size: 11px;
+  color: var(--muted);
+}
+.bucket-stats dd {
+  margin: 3px 0 0;
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.bucket-outcome {
+  min-height: 42px;
+  font-size: 12px;
+}
+.token-bucket figcaption {
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  text-align: left;
+}
+@media (max-width: 520px) {
+  .token-bucket .bucket-frame {
+    padding: 14px 10px;
+  }
+  .bucket-heading {
+    font-size: 10px;
+    gap: 8px;
+  }
+  .bucket-hint {
+    font-size: 10px;
+  }
+  .bucket-actions button {
+    flex: 1 0 auto;
+  }
+  .bucket-stats dd {
+    font-size: 17px;
+  }
+}
+@media print {
+  .token-bucket.iso,
+  :root[data-theme="dark"] .token-bucket.iso {
+    --anatomy-top: #fff;
+    --anatomy-shade-0: #dcdfe4;
+    --anatomy-shade-1: #e4e6ea;
+    --anatomy-shade-2: #eceef1;
+    --anatomy-shade-3: #f4f5f7;
+    --anatomy-lit-top: #555e6d;
+    --anatomy-lit-shade: #333c4c;
+    --anatomy-hi: #616b7b;
+    --anatomy-mid: #929aa7;
+    --anatomy-lo: #b9c0c9;
+    --anatomy-faint: #d8dce2;
+    --anatomy-lit: #303a4b;
+  }
+  .bucket-controls {
+    display: none !important;
+  }
+  .token-bucket {
+    break-inside: avoid;
+  }
+  .token-bucket [data-token] {
+    opacity: 1 !important;
+  }
+  .token-bucket [data-request] {
+    opacity: 0 !important;
+  }
+  .token-bucket [data-gate] {
+    transform: none !important;
+  }
+  .token-bucket [data-bucket-readout] {
+    visibility: hidden;
+  }
+}

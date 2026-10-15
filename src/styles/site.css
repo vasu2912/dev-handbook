@@ -2,14 +2,19 @@
 :root {
   --bg: #fafafa;
   --surface: #fff;
-  --surface-muted: #f6f7f9;
-  --text: #242831;
-  --muted: #636a76;
-  --border: #e6e8ec;
-  --accent: #30343b;
+  --surface-muted: #f1f1f1;
+  --text: #171717;
+  --secondary-text: #525252;
+  --muted: #8f8f8f;
+  --border: #ebebeb;
+  --accent: #171717;
   --accent-soft: #f0f1f3;
-  --reading-size: 18px;
-  --font: "Geist Variable", system-ui, -apple-system, sans-serif;
+  --reading-size: 14px;
+  --reading-line-height: calc(var(--reading-size) * 1.4642857143);
+  --font-serif: "EB Garamond Variable", Georgia, serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --font: "Inter Variable", system-ui, -apple-system, sans-serif;
   font-family: var(--font);
   color: var(--text);
   background: var(--bg);
@@ -23,6 +28,7 @@
   --surface: #191c23;
   --surface-muted: #20242d;
   --text: #e8ebf1;
+  --secondary-text: #b8bec8;
   --muted: #a3adbc;
   --border: #303640;
   --accent: #e0e4eb;
@@ -34,6 +40,11 @@
 }
 body {
   margin: 0;
+  font-size: 14px;
+  line-height: 20.5px;
+  font-weight: 450;
+  font-optical-sizing: auto;
+  -moz-osx-font-smoothing: grayscale;
 }
 a {
   color: inherit;
@@ -660,26 +671,26 @@ kbd {
 }
 .prose {
   font-size: var(--reading-size);
-  line-height: 1.85;
+  line-height: var(--reading-line-height);
   overflow-wrap: break-word;
 }
 .prose > *:first-child {
   margin-top: 0;
 }
 .prose p {
-  margin-bottom: 1.4em;
+  margin: 0 0 12px;
 }
 .prose h2 {
-  font-size: 1.38em;
-  line-height: 1.4;
-  font-weight: 600;
-  margin: 2.2em 0 0.85em;
+  font-size: 1em;
+  line-height: inherit;
+  font-weight: 550;
+  margin: 72px 0 20px;
 }
 .prose h3 {
-  font-size: 1.12em;
-  line-height: 1.5;
-  font-weight: 600;
-  margin: 1.9em 0 0.75em;
+  font-size: 1em;
+  line-height: inherit;
+  font-weight: 550;
+  margin: 28px 0 12px;
 }
 .prose h4 {
   font-size: 1em;
@@ -696,36 +707,36 @@ kbd {
 }
 .prose :is(ul, ol) {
   padding-left: 1.4em;
-  margin: 1.2em 0;
+  margin: 12px 0;
 }
 .prose li {
   padding-left: 0.25em;
-  margin: 0.5em 0;
+  margin: 6px 0;
 }
 .prose li > p {
   margin: 0.4em 0;
 }
 .prose strong {
-  font-weight: 620;
+  font-weight: 550;
 }
 .prose code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.82em;
+  font-size: 12.5px;
   border: 1px solid var(--border);
   background: var(--surface-muted);
   border-radius: 4px;
   padding: 2px 5px;
 }
 .prose pre {
-  padding: 22px;
+  padding: 14px 16px;
   overflow-x: auto;
   max-width: 100%;
-  font-size: 13px;
-  line-height: 1.75;
+  font-size: 12px;
+  line-height: 19px;
   border: 1px solid var(--border);
   border-radius: 7px;
   background: var(--surface-muted);
-  margin: 1.6em 0;
+  margin: 20px 0;
 }
 .prose pre code {
   padding: 0;
@@ -1122,7 +1133,7 @@ kbd {
     font-size: 10px;
   }
   .prose {
-    font-size: calc(var(--reading-size) - 1px);
+    font-size: var(--reading-size);
   }
   .prose pre {
     padding: 17px;
@@ -1178,7 +1189,7 @@ kbd {
 }
 @media (max-width: 520px) {
   .home-hero h1 {
-    font-size: 36px;
+    font-size: 14px;
   }
   .eyebrow {
     font-size: 10px;
@@ -1280,9 +1291,10 @@ kbd {
   border-radius: 0;
 }
 .brand {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 550;
   gap: 9px;
-  letter-spacing: -0.035em;
+  letter-spacing: normal;
 }
 .header-nav {
   gap: 22px;
@@ -1299,10 +1311,10 @@ kbd {
   margin-left: 12px;
 }
 .reading-layout {
-  grid-template-columns: 190px minmax(0, 680px);
-  gap: 72px;
-  max-width: 1080px;
-  padding: 0 30px;
+  grid-template-columns: 168px minmax(0, 550px) 168px;
+  gap: 48px;
+  max-width: 1022px;
+  padding: 0 20px;
 }
 .sidebar {
   top: 30px;
@@ -1320,7 +1332,7 @@ kbd {
   padding: 8px 0;
 }
 .nav-tree a {
-  font-size: 12px;
+  font-size: 13px;
   padding: 6px 10px;
   border-radius: 0;
 }
@@ -1359,16 +1371,17 @@ kbd {
   font-size: 11px;
 }
 .article-header h1 {
-  font-size: 32px;
-  line-height: 1.28;
+  font-size: 14px;
+  line-height: 20.5px;
   font-weight: 550;
-  letter-spacing: -0.04em;
-  margin-bottom: 16px;
+  letter-spacing: normal;
+  margin-bottom: 12px;
 }
 .article-description {
-  font-size: 15px;
-  line-height: 1.75;
-  max-width: 600px;
+  font-size: 14px;
+  line-height: 20.5px;
+  color: var(--secondary-text);
+  max-width: 550px;
 }
 .article-meta {
   border-bottom: 0;
@@ -1412,26 +1425,22 @@ kbd {
 }
 .prose {
   font-size: var(--reading-size);
-  line-height: 1.8;
+  line-height: var(--reading-line-height);
 }
 .prose h2 {
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 550;
-  margin-top: 2.3em;
+  margin-top: 72px;
 }
 .prose h3 {
-  font-size: 1.05em;
+  font-size: 1em;
   font-weight: 550;
 }
 .prose .code-block pre {
   border-radius: 10px;
   background: var(--surface);
 }
-.prose .mermaid-diagram {
-  background: var(--surface);
-  border-radius: 10px;
-  padding: 24px;
-}
+
 .copy-code {
   border: 0;
   background: transparent;
@@ -1450,11 +1459,14 @@ kbd {
   padding-top: 54px;
 }
 .home-hero h1 {
-  font-size: clamp(36px, 4.3vw, 52px);
+  font-size: 14px;
+  line-height: 20.5px;
+  letter-spacing: normal;
   font-weight: 550;
 }
 .hero-description {
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 20.5px;
 }
 .button-primary {
   background: #30343b;
@@ -1493,8 +1505,9 @@ kbd {
 }
 @media (max-width: 1250px) {
   .reading-layout {
-    grid-template-columns: 190px minmax(0, 680px);
-    gap: 55px;
+    grid-template-columns: 168px minmax(0, 550px);
+    gap: 48px;
+    max-width: 806px;
   }
 }
 @media (max-width: 800px) {
@@ -1519,10 +1532,10 @@ kbd {
     padding-top: 30px;
   }
   .article-header h1 {
-    font-size: 30px;
+    font-size: 14px;
   }
   .prose {
-    font-size: calc(var(--reading-size) - 1px);
+    font-size: var(--reading-size);
   }
   .home-hero {
     padding-top: 40px;
@@ -1536,10 +1549,10 @@ kbd {
     padding-inline: 20px;
   }
   .article-header h1 {
-    font-size: 27px;
+    font-size: 14px;
   }
   .home-hero h1 {
-    font-size: 36px;
+    font-size: 14px;
   }
   .mermaid-diagram {
     padding: 12px !important;
@@ -1590,4 +1603,25 @@ kbd {
     color: var(--shiki-light) !important;
     background: var(--shiki-light-bg) !important;
   }
+}
+
+/* Editorial typography shared with figure captions and reader controls. */
+.prose {
+  font-weight: 450;
+}
+.prose em {
+  font-family: var(--font-serif);
+  font-size: 1.16em;
+  font-weight: 400;
+  line-height: 1;
+}
+.prose blockquote {
+  font-family: var(--font-serif);
+  font-size: 23px;
+  line-height: 28px;
+  font-weight: 400;
+  margin-block: 26px;
+}
+.prose :is(code, kbd, pre) {
+  font-family: var(--font-mono);
 }

@@ -25,7 +25,7 @@ sidebar:
 
 ## Sketch the high-level design
 
-![High-level social-graph architecture](/images/system-design/vector/social-graph-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--social-graph-1"></div>
 
 ## Define the core components
 
@@ -43,7 +43,7 @@ Without the scale constraint, an unweighted shortest path is a plain **BFS**. At
 
 ## Scale the design
 
-![Scaled social-graph architecture](/images/system-design/vector/social-graph-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--social-graph-2"></div>
 
 :::caution[Iterate, do not jump]
 Benchmark → profile → fix → repeat.

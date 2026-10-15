@@ -7,7 +7,7 @@ sidebar:
 
 Separating the web layer from the application layer lets each scale and change independently. Adding an API can require more application workers without requiring more web servers. Application workers can also run [asynchronous processing](/system-design/asynchronous-processing/) outside the request path.
 
-![Application and platform layers separated for independent scaling](/images/system-design/vector/application-layer.svg)
+<div data-anatomy="system-design--application-layer-1"></div>
 
 *Concept redrawn from [Introduction to architecting systems for scale](http://lethain.com/introduction-to-architecting-systems-for-scale/#platform_layer).* 
 

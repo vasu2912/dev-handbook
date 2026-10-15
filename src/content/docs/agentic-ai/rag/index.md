@@ -7,7 +7,7 @@ Retrieval-augmented generation, or RAG, searches an external collection and plac
 
 RAG is useful for private documents, current information, citations, and large collections that do not fit in one prompt.
 
-![A RAG system prepares indexed evidence offline, then authorizes retrieval, reranks candidates, and generates a cited answer online](/images/agentic-ai/vector/rag-pipeline.svg)
+<div data-anatomy="agentic-ai--rag-1"></div>
 
 ## RAG joins two imperfect systems
 

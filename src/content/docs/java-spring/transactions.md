@@ -91,14 +91,14 @@ For the second run, change only `recordAttempt` to `Propagation.REQUIRES_NEW`. T
 <ol class="walkthrough-steps">
 <li><strong>Start the outer transaction</strong><p>The checkout proxy starts transaction T1. The order insert executes in T1 but has not committed.</p></li>
 <li><strong>Join T1 for the audit</strong><p>The separate AuditService proxy sees REQUIRED and joins T1. Its insert and the order insert share the same commit decision. Returning from recordAttempt does not commit T1.</p></li>
-<li><strong>Reject payment and roll back</strong><p>The unchecked exception leaves checkout. The outer interceptor rolls back T1. A new transaction finds neither order 43 nor the audit row. The caller receives IllegalStateException.</p><svg role="img" aria-label="One transaction contains both writes, and rollback removes both" viewBox="0 0 480 120" style="max-width:100%;height:auto"><rect x="10" y="10" width="460" height="100" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)"/><g fill="var(--diagram-ink)" text-anchor="middle" font-size="18"><text x="240" y="40">T1: order + audit</text><text x="240" y="78">ROLLBACK → neither row remains</text></g></svg></li>
+<li><strong>Reject payment and roll back</strong><p>The unchecked exception leaves checkout. The outer interceptor rolls back T1. A new transaction finds neither order 43 nor the audit row. The caller receives IllegalStateException.</p><div data-anatomy="java-spring--transactions-1"></div></li>
 </ol>
 </section>
 <section data-scenario="REQUIRES_NEW: audit survives rollback">
 <p><strong>REQUIRES_NEW: audit survives rollback</strong></p>
 <ol class="walkthrough-steps">
 <li><strong>Start the outer transaction</strong><p>T1 inserts order 43. It retains its connection and any locks when the call reaches AuditService.</p></li>
-<li><strong>Suspend T1 and commit T2</strong><p>The audit proxy starts independent transaction T2 on another connection. T2 inserts the attempt data supplied by the caller and commits when recordAttempt returns. It does not read T1's uncommitted order.</p><svg role="img" aria-label="T1 is suspended while independent T2 commits the audit" viewBox="0 0 480 140" style="max-width:100%;height:auto"><rect x="10" y="10" width="460" height="50" rx="8" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow)"/><rect x="10" y="80" width="460" height="50" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/><g fill="var(--diagram-ink)" text-anchor="middle" font-size="18"><text x="240" y="42">T1: order pending, suspended</text><text x="240" y="112">T2: audit committed</text></g></svg></li>
+<li><strong>Suspend T1 and commit T2</strong><p>The audit proxy starts independent transaction T2 on another connection. T2 inserts the attempt data supplied by the caller and commits when recordAttempt returns. It does not read T1's uncommitted order.</p><div data-anatomy="java-spring--transactions-2"></div></li>
 <li><strong>Resume and roll back T1</strong><p>Checkout resumes, then throws. T1 rolls back the order, but cannot undo T2's commit. A new transaction finds no order 43 and one audit row for attempt-43. The caller still receives IllegalStateException.</p></li>
 </ol>
 </section>

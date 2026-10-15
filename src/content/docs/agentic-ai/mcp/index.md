@@ -7,7 +7,7 @@ The Model Context Protocol, or MCP, standardizes how an AI application connects 
 
 MCP does not decide which tool the model should call. It does not make a tool safe. It gives the surrounding system a common way to discover and invoke capabilities.
 
-![An AI host owns the model, policy, and user experience while separate MCP clients connect it to capability servers over JSON-RPC transports](/images/agentic-ai/vector/mcp-topology.svg)
+<div data-anatomy="agentic-ai--mcp-1"></div>
 
 ## The host owns the user experience and policy
 

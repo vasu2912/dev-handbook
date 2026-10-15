@@ -16,39 +16,7 @@ run task -> start I/O -> register callback -> run another task
 Operating systems expose readiness mechanisms such as `epoll` on Linux, `kqueue` on macOS, and `IOCP` on Windows. The runtime uses them to learn which sockets can make progress, then runs the associated callbacks.
 
 
-<svg viewBox="0 0 500 400" style="max-width:100%;height:auto;font-family:'Inter',system-ui,sans-serif; margin: 1.5rem auto; display: block;" role="img" aria-label="Event Loop Cycle">
-  <rect width="500" height="400" fill="var(--diagram-bg)" rx="8" stroke="var(--diagram-border)"/>
-  <g transform="translate(190, 40)">
-    <rect width="120" height="40" rx="4" fill="var(--diagram-accent-bg)" stroke="var(--diagram-accent)"/>
-    <text x="60" y="24" fill="var(--diagram-accent-fill)" font-size="14" text-anchor="middle">1. Poll I/O</text>
-  </g>
-  <path d="M 250 80 L 250 120" fill="none" stroke="var(--diagram-ink)" stroke-width="2" marker-end="url(#arrow)"/>
-  <g transform="translate(190, 120)">
-    <rect width="120" height="40" rx="4" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)"/>
-    <text x="60" y="24" fill="var(--diagram-green)" font-size="14" text-anchor="middle">2. Check Callbacks</text>
-  </g>
-  <path d="M 250 160 L 250 200" fill="none" stroke="var(--diagram-ink)" stroke-width="2" marker-end="url(#arrow)"/>
-  <g transform="translate(190, 200)">
-    <rect width="120" height="40" rx="4" fill="var(--diagram-accent-bg)" stroke="var(--diagram-accent)"/>
-    <text x="60" y="24" fill="var(--diagram-accent-fill)" font-size="14" text-anchor="middle">3. Run Callback</text>
-  </g>
-  <path d="M 190 220 Q 90 220 90 260" fill="none" stroke="var(--diagram-ink)" stroke-width="2" marker-end="url(#arrow)"/>
-  <g transform="translate(30, 260)">
-    <rect width="120" height="40" rx="4" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)"/>
-    <text x="60" y="24" fill="var(--diagram-red)" font-size="14" text-anchor="middle">4. Start I/O</text>
-  </g>
-  <path d="M 90 300 Q 90 340 190 340" fill="none" stroke="var(--diagram-ink)" stroke-width="2" marker-end="url(#arrow)"/>
-  <g transform="translate(190, 320)">
-    <rect width="130" height="40" rx="4" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-ink)"/>
-    <text x="65" y="24" fill="var(--diagram-ink)" font-size="14" text-anchor="middle">5. Register Callback</text>
-  </g>
-  <path d="M 320 340 Q 420 340 420 220 T 310 60" fill="none" stroke="var(--diagram-ink)" stroke-width="2" marker-end="url(#arrow)"/>
-  <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--diagram-ink)" />
-    </marker>
-  </defs>
-</svg>
+<div data-anatomy="backend--concurrency--event-loop-1"></div>
 
 
 ## Why one thread can hold many tasks

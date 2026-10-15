@@ -53,8 +53,9 @@
         current.value = stepIndex + 1;
         previous.disabled = stepIndex === 0;
         next.disabled = stepIndex === steps[scenarioIndex].length - 1;
+        var heading = current.querySelector(':scope > strong');
         status.textContent = 'Step ' + (stepIndex + 1) + ' of ' + steps[scenarioIndex].length +
-          ': ' + current.textContent.trim();
+          ': ' + (heading ? heading.textContent.trim() : '');
       }
       select.addEventListener('change', function () {
         scenarioIndex = select.selectedIndex;

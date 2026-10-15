@@ -7,7 +7,7 @@ Context engineering selects what the model sees for one request. Memory decides 
 
 These are three different responsibilities.
 
-![Candidate inputs are deliberately selected into an ephemeral working context, while durable state and memory remain separately governed](/images/agentic-ai/vector/context-memory.svg)
+<div data-anatomy="agentic-ai--context-and-memory-1"></div>
 
 ## Build context in a deliberate order
 

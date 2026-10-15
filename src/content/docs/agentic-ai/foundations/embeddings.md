@@ -7,7 +7,7 @@ An embedding model converts an item into a numeric vector. Items with related le
 
 The embedding is not a summary you can read. It is an input to a similarity calculation.
 
-![An embedding model maps text to a dense vector so related items can be found by distance, while similarity alone does not establish truth or authorization](/images/agentic-ai/vector/embeddings-similarity.svg)
+<div data-anatomy="agentic-ai--foundations--embeddings-1"></div>
 
 ## Generative and embedding models do different jobs
 

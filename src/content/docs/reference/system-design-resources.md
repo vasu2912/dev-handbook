@@ -44,7 +44,7 @@ External sources that the repository links to. Grouped by use.
 The repository lists ~40 engineering blogs (Airbnb, AWS, Netflix, Stripe, Uber, and more). Read a few for the companies you target. The full list is in [appendix](/system-design/appendix/).
 
 ## Flashcard decks (Anki)
-![System design flashcard deck cover](/images/system-design/vector/system-design-flashcards.svg)
+<div data-anatomy="reference--system-design-resources-1"></div>
 
 Binary `.apkg` files in the repository, not part of these notes:
 
@@ -54,7 +54,7 @@ Binary `.apkg` files in the repository, not part of these notes:
 
 The sister repo adds a coding deck:
 
-![Coding flashcard deck cover](/images/system-design/vector/coding-flashcards.svg)
+<div data-anatomy="reference--system-design-resources-2"></div>
 
 - [Coding deck](https://github.com/donnemartin/interactive-coding-challenges/tree/master/anki_cards/Coding.apkg)
 

@@ -32,7 +32,7 @@ Additional logging and analytics.
 
 ## Sketch the high-level design
 
-![High-level personal-finance architecture](/images/system-design/vector/mint-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--mint-1"></div>
 
 ## Define the core components
 
@@ -59,7 +59,7 @@ Use a generic budget template by income tier (e.g. housing 40%, food 20%, gas 10
 
 ## Scale the design
 
-![Scaled personal-finance architecture](/images/system-design/vector/mint-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--mint-2"></div>
 
 :::caution[Iterate, do not jump]
 Benchmark → profile → fix → repeat.

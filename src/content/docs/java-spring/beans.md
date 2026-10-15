@@ -62,12 +62,7 @@ ReceiptService(@Qualifier("email") ReceiptSender sender) {
 
 Startup now resolves the dependency. Calling `issue("o-42")` on the injected `ReceiptService` returns `email receipt for o-42`. Both sender beans still exist. The qualifier narrows this injection point; it does not remove `archive` from the context.
 
-<svg role="img" aria-label="ReceiptService requires a ReceiptSender. The email qualifier selects EmailReceiptSender while ArchiveReceiptSender remains registered but is not injected here" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
-<defs><marker id="beans-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0L0 6L7 3Z" fill="var(--diagram-muted)"/></marker></defs>
-<g fill="var(--diagram-bg)" stroke="var(--diagram-border)"><rect x="10" y="85" width="170" height="50" rx="6"/><rect x="285" y="15" width="205" height="70" rx="6"/><rect x="285" y="140" width="205" height="70" rx="6"/></g>
-<g font-size="17" text-anchor="middle" fill="var(--diagram-ink)"><text x="95" y="116">ReceiptService</text><text x="387" y="43">EmailReceiptSender</text><text x="387" y="68">bean: email</text><text x="387" y="168">ArchiveReceiptSender</text><text x="387" y="193">bean: archive</text><text x="233" y="38">selected</text><text x="232" y="205">unused here</text></g>
-<path d="M180 104L280 51" fill="none" stroke="var(--diagram-green)" stroke-width="2" marker-end="url(#beans-arrow)"/><path d="M180 120L280 173" fill="none" stroke="var(--diagram-muted)" stroke-dasharray="5 5"/>
-</svg>
+<div data-anatomy="java-spring--beans-1"></div>
 
 `@Primary` identifies a genuine default for single-valued injection across callers. Prefer a qualifier when a particular caller needs a specific role. Missing dependencies also normally fail startup. Keep dependencies in final fields, but remember that a final reference does not make the collaborator thread-safe.
 

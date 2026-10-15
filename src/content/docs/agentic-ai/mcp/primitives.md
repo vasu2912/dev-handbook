@@ -5,7 +5,7 @@ description: Choose the MCP primitive that matches model-controlled actions, app
 
 MCP tools, resources, and prompts have different control relationships. Choosing the right primitive makes user consent and application behavior easier to understand.
 
-![MCP tools represent model-controlled operations, resources represent application-selected addressable context, and prompts represent user-invoked workflow templates](/images/agentic-ai/vector/mcp-primitives.svg)
+<div data-anatomy="agentic-ai--mcp--primitives-1"></div>
 
 ## Tools are model-controlled proposals
 

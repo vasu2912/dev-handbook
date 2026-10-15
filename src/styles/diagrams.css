@@ -1,52 +1,107 @@
 /* --- Diagram CSS variables (inherited by inline SVGs) --- */
 :root {
-  --diagram-bg: #f8fafc;
-  --diagram-ink: #0f172a;
-  --diagram-muted: #475569;
-  --diagram-border: #cbd5e1;
-  --diagram-accent: #2563eb;
-  --diagram-accent-bg: #dbeafe;
-  --diagram-accent-fill: #bfdbfe;
-  --diagram-accent-light: #eff6ff;
-  --diagram-green: #10b981;
-  --diagram-green-bg: #d1fae5;
-  --diagram-green-stroke: #16a34a;
-  --diagram-red: #ef4444;
-  --diagram-red-bg: #fee2e2;
-  --diagram-red-stroke: #dc2626;
-  --diagram-red-text: #b91c1c;
-  --diagram-yellow: #f59e0b;
-  --diagram-yellow-bg: #fef3c7;
-  --diagram-yellow-stroke: #d97706;
-  --diagram-purple: #7c3aed;
-  --diagram-purple-bg: #ede9fe;
-  --diagram-neutral: #e2e8f0;
-  --diagram-neutral-light: #f1f5f9;
-  --diagram-white: #fff;
+  --diagram-bg: var(--surface);
+  --diagram-ink: var(--text);
+  --diagram-muted: var(--muted);
+  --diagram-border: var(--border);
+  --diagram-accent: var(--accent);
+  --diagram-accent-bg: var(--accent-soft);
+  --diagram-accent-fill: var(--border);
+  --diagram-accent-light: var(--surface-muted);
+  --diagram-green: #437461;
+  --diagram-green-bg: #edf4ef;
+  --diagram-green-stroke: #437461;
+  --diagram-red: #ac5353;
+  --diagram-red-bg: #f8eeee;
+  --diagram-red-stroke: #ac5353;
+  --diagram-red-text: #9a4242;
+  --diagram-yellow: #976d34;
+  --diagram-yellow-bg: #f8f2e7;
+  --diagram-yellow-stroke: #976d34;
+  --diagram-purple: #76648f;
+  --diagram-purple-bg: #f2eef6;
+  --diagram-neutral: var(--border);
+  --diagram-neutral-light: var(--surface-muted);
+  --diagram-white: var(--surface);
 }
 
 :root[data-theme="dark"] {
-  --diagram-bg: #1e293b;
-  --diagram-ink: #e2e8f0;
-  --diagram-muted: #94a3b8;
-  --diagram-border: #475569;
-  --diagram-accent: #60a5fa;
-  --diagram-accent-bg: #1e3a5f;
-  --diagram-accent-fill: #1d4ed8;
-  --diagram-accent-light: #172554;
-  --diagram-green: #34d399;
-  --diagram-green-bg: #14532d;
-  --diagram-green-stroke: #4ade80;
-  --diagram-red: #fb7185;
-  --diagram-red-bg: #7f1d1d;
-  --diagram-red-stroke: #f87171;
-  --diagram-red-text: #fca5a5;
-  --diagram-yellow: #fbbf24;
-  --diagram-yellow-bg: #713f12;
-  --diagram-yellow-stroke: #fbbf24;
-  --diagram-purple: #a78bfa;
-  --diagram-purple-bg: #3b0764;
-  --diagram-neutral: #334155;
-  --diagram-neutral-light: #1e293b;
-  --diagram-white: #1e293b;
+  --diagram-bg: var(--surface);
+  --diagram-ink: var(--text);
+  --diagram-muted: var(--muted);
+  --diagram-border: var(--border);
+  --diagram-accent: var(--accent);
+  --diagram-accent-bg: var(--accent-soft);
+  --diagram-accent-fill: var(--border);
+  --diagram-accent-light: var(--surface-muted);
+  --diagram-green: #91b7a3;
+  --diagram-green-bg: #23382f;
+  --diagram-green-stroke: #91b7a3;
+  --diagram-red: #df9999;
+  --diagram-red-bg: #3b292b;
+  --diagram-red-stroke: #df9999;
+  --diagram-red-text: #df9999;
+  --diagram-yellow: #c8aa76;
+  --diagram-yellow-bg: #393226;
+  --diagram-yellow-stroke: #c8aa76;
+  --diagram-purple: #b3a1cd;
+  --diagram-purple-bg: #302b3a;
+  --diagram-neutral: var(--border);
+  --diagram-neutral-light: var(--surface);
+  --diagram-white: var(--surface);
+}
+
+/* All diagram renderers use the same page framing and type. */
+.prose :is(.handbook-diagram, .mermaid-diagram),
+.token-bucket .bucket-frame {
+  margin-block: 28px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow-x: auto;
+}
+.prose .diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  font-family: var(--font);
+  font-weight: 450;
+}
+.prose .handbook-diagram > svg {
+  min-width: min(100%, 560px);
+}
+.prose .diagram-svg text {
+  font-family: var(--font);
+}
+.prose figcaption {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: left;
+}
+.prose :is(.walkthrough, .pool-budget) {
+  background: var(--surface);
+  border-radius: 12px;
+}
+@media (max-width: 640px) {
+  .prose :is(.handbook-diagram, .mermaid-diagram) {
+    padding: 14px 10px;
+  }
+  .prose .handbook-diagram > svg {
+    min-width: 480px;
+    max-width: none;
+  }
+}
+@media print {
+  .prose :is(.handbook-diagram, .mermaid-diagram) {
+    overflow: visible;
+    break-inside: avoid;
+  }
+  .prose .handbook-diagram > svg {
+    min-width: 0;
+    max-width: 100%;
+  }
 }

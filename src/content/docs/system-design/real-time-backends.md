@@ -94,7 +94,7 @@ TCP can report a connection error, but it cannot tell the application which doma
 
 Use heartbeats to detect dead connections and free their resources. Use application-level event IDs to recover the data gap. These solve different problems.
 
-![A client reconnects with its last received event ID](/images/system-design/vector/realtime-connection-lifecycle.svg)
+<div data-anatomy="system-design--real-time-backends-1"></div>
 
 The usual sequence is:
 
@@ -133,7 +133,7 @@ A persistent connection has connection affinity. One process owns the socket and
 
 Each subscription maps a connection to a topic or query, such as `board:412`. Horizontal scaling adds instances, but it does not move those local subscriptions. The event path must reach every instance that owns a matching connection.
 
-![Publish and subscribe fan-out across real-time instances](/images/system-design/vector/realtime-pubsub-fanout.svg)
+<div data-anatomy="system-design--real-time-backends-2"></div>
 
 Sticky sessions keep a reconnecting client near its old instance. They can reduce connection movement, but they do not make the other instances aware of that connection. They also make failover harder. Keep the connection local and share events through a broker or another coordination layer.
 

@@ -5,7 +5,7 @@ description: Design checkpoints, idempotency, retries, queues, compensation, and
 
 An in-memory agent loop disappears when its process crashes. Durable execution records enough state to resume work without repeating completed effects.
 
-![A durable workflow moves through planned, approved, executing, verifying, and complete states with checkpoints, idempotency keys, retries, and compensation](/images/agentic-ai/vector/durable-execution.svg)
+<div data-anatomy="agentic-ai--orchestration--durable-execution-1"></div>
 
 ## Checkpoint at meaningful boundaries
 

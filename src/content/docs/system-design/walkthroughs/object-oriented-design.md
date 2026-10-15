@@ -72,19 +72,5 @@ Show you know [chaining](/reference/system-design-glossary/) and the `hash % siz
 3. Write the key methods.
 4. Agree on the amount of code before implementing.
 
-```mermaid
-classDiagram
-    class Cache {
-        -lookup: dict
-        -linked_list: LinkedList
-        +get(query)
-        +set(query, results)
-    }
-    class Node {
-        +query
-        +results
-    }
-    Cache --> Node: stores
-```
-
+<div data-anatomy="system-design--walkthroughs--object-oriented-design-1"></div>
 ---

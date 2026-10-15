@@ -5,7 +5,7 @@ description: Handle missing user input and long-running work through Multi Round
 
 Some operations need information that is not available at the start. Others outlive one HTTP response. Modern MCP addresses these cases without restoring a hidden protocol session.
 
-![MCP Multi Round-Trip Requests pause a logical request for missing input, while tasks represent independently running work that can be inspected, updated, or cancelled](/images/agentic-ai/vector/mcp-elicitation-tasks.svg)
+<div data-anatomy="agentic-ai--mcp--elicitation-and-tasks-1"></div>
 
 ## Multi Round-Trip Requests carry input in-band
 

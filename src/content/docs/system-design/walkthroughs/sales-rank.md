@@ -31,7 +31,7 @@ The general e-commerce site: design only the sales-rank feature.
 
 ## Sketch the high-level design
 
-![High-level sales-ranking architecture](/images/system-design/vector/sales-rank-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--sales-rank-1"></div>
 
 ## Define the core components
 
@@ -54,7 +54,7 @@ Computing rank is batch work over logs. The aggregate table has far fewer rows t
 
 ## Scale the design
 
-![Scaled sales-ranking architecture](/images/system-design/vector/sales-rank-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--sales-rank-2"></div>
 
 :::caution[Iterate, do not jump]
 Benchmark → profile → fix → repeat.

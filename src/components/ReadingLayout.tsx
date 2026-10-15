@@ -19,6 +19,72 @@ export function ReadingLayout({
     containsArticle(item, page.article.slug),
   );
   useEffect(() => {
+    const figures = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-anatomy-figure]"),
+    );
+    if (!figures.length) return;
+    let active = true;
+    const disposers: Array<() => void> = [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (!visible.length) return;
+        for (const entry of visible) observer.unobserve(entry.target);
+        void import("../figures/anatomy/live")
+          .then(({ mountAnatomy }) => {
+            if (!active) return;
+            for (const entry of visible) {
+              if (entry.target instanceof HTMLElement)
+                disposers.push(mountAnatomy(entry.target));
+            }
+          })
+          .catch(() => {
+            // The full static explanation remains readable when hydration fails.
+          });
+      },
+      { rootMargin: "120px 0px" },
+    );
+    figures.forEach((figure) => observer.observe(figure));
+    return () => {
+      active = false;
+      observer.disconnect();
+      disposers.forEach((dispose) => dispose());
+    };
+  }, [page.article.slug]);
+  useEffect(() => {
+    const figure = document.querySelector<HTMLElement>(
+      '[data-figure="token-bucket"]',
+    );
+    if (!figure) return;
+    let active = true;
+    let dispose: (() => void) | undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        void import("../figures/token-bucket/live")
+          .then(({ mountTokenBucket }) => {
+            if (active) dispose = mountTokenBucket(figure);
+          })
+          .catch(() => {
+            if (active) {
+              const hint = figure.querySelector(".bucket-hint");
+              if (hint)
+                hint.textContent =
+                  "Interactive controls could not load. Reload to try again.";
+            }
+          });
+      },
+      { rootMargin: "120px 0px" },
+    );
+    observer.observe(figure);
+    return () => {
+      active = false;
+      observer.disconnect();
+      dispose?.();
+    };
+  }, []);
+  useEffect(() => {
     function copy(event: MouseEvent) {
       if (!(event.target instanceof Element)) return;
       const button = event.target.closest("button.copy-code");

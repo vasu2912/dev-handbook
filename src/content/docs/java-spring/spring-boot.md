@@ -64,12 +64,7 @@ class LocalDatabaseConfiguration {
 
 This is a local, disposable database example, not production credentials or storage. `HikariDataSource` implements `javax.sql.DataSource`. Spring registers this bean and infers its `close()` lifecycle method. Boot's default datasource creation backs off because a datasource already exists. JDBC support can still use that bean. Defining one bean does not disable all auto-configuration.
 
-<svg role="img" aria-label="Simplified JDBC startup decision: check JDBC classes, then an application datasource; reuse that bean or create a default when connection details are available" viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
-<defs><marker id="boot-decision-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0L0 6L7 3Z" fill="var(--diagram-muted)"/></marker></defs>
-<g fill="var(--diagram-bg)" stroke="var(--diagram-border)"><rect x="90" y="10" width="360" height="50" rx="6"/><rect x="90" y="100" width="360" height="50" rx="6"/><rect x="10" y="220" width="245" height="65" rx="6"/><rect x="285" y="220" width="245" height="65" rx="6"/></g>
-<g fill="var(--diagram-ink)" text-anchor="middle" font-size="17"><text x="270" y="41">JDBC classes available?</text><text x="270" y="131">Application DataSource exists?</text><text x="132" y="247">Yes: use your bean</text><text x="132" y="271">Default creation backs off</text><text x="408" y="247">No: create a default</text><text x="408" y="271">Needs driver and settings</text><text x="292" y="84">yes</text></g>
-<g fill="none" stroke="var(--diagram-muted)" stroke-width="2" marker-end="url(#boot-decision-arrow)"><path d="M270 60V98"/><path d="M190 150V185H132V218"/><path d="M350 150V185H408V218"/></g>
-</svg>
+<div data-anatomy="java-spring--spring-boot-1"></div>
 
 The diagram assumes ordinary JDBC auto-configuration, with no R2DBC setup or explicit exclusions. If JDBC classes are missing, that configuration does not apply. If no custom datasource or usable connection details exist, adding a JDBC starter can expose a startup failure rather than create a working database.
 

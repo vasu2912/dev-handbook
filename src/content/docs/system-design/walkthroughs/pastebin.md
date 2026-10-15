@@ -37,7 +37,7 @@ Account registration, email verification, login, editing, visibility settings, c
 
 ## Sketch the high-level design
 
-![High-level paste-sharing architecture](/images/system-design/vector/pastebin-high-level.svg)
+<div data-anatomy="system-design--walkthroughs--pastebin-1"></div>
 
 ## Define the core components
 
@@ -82,7 +82,7 @@ Scan the table for entries whose expiration timestamp is past, then delete or ma
 
 ## Scale the design
 
-![Scaled paste-sharing architecture](/images/system-design/vector/pastebin-scaled.svg)
+<div data-anatomy="system-design--walkthroughs--pastebin-2"></div>
 
 :::caution[Iterate, do not jump]
 State that you would benchmark, profile, fix, and repeat: not jump to the final design.

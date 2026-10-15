@@ -19,7 +19,7 @@ Only one node handles traffic at a time. Older systems may call this master-slav
 
 In active-active failover, both nodes handle traffic. A DNS service, load balancer, or application routing logic knows about both nodes. If one node fails, the other absorbs its traffic. Older systems may call this master-master failover.
 
-![Active-passive and active-active failover patterns](/images/system-design/vector/failover-patterns.svg)
+<div data-anatomy="system-design--availability-patterns-1"></div>
 
 *Concept redrawn from [Scalable system design patterns](http://horicky.blogspot.com/2010/10/scalable-system-design-patterns.html).* 
 

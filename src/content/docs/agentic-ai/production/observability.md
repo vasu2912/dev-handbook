@@ -7,7 +7,7 @@ Agent observability connects a user request to every model call, tool call, suba
 
 A final error message is not enough. Operators need the trajectory that produced it.
 
-![A distributed trace links an agent run to model, retrieval, tool, MCP, and external API spans and then to run-level quality, safety, latency, and cost outcomes](/images/agentic-ai/vector/agent-observability.svg)
+<div data-anatomy="agentic-ai--production--observability-1"></div>
 
 ## Trace one task across boundaries
 

@@ -1,0 +1,19 @@
+# Generated output and local state
+dist/
+.astro/
+.cache/
+.artifacts/
+.wrangler/
+coverage/
+node_modules/
+.pnpm-store/
+
+# Third-party sources must retain their upstream formatting
+scripts/figures/vendor/
+
+# Repository skills and local agent configuration
+.agents/
+.codex/
+
+# Generated dependency lockfile
+pnpm-lock.yaml

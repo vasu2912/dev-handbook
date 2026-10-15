@@ -14,20 +14,7 @@ https://api.example.com/v1/organizations/42/projects?status=active
 ```
 
 
-<svg viewBox="0 0 750 150" style="max-width:100%;height:auto;font-family:'Inter',system-ui,sans-serif; margin: 1.5rem 0;" role="img" aria-label="URL Structure Breakdown">
-  <rect width="750" height="150" fill="var(--diagram-bg)" rx="8" stroke="var(--diagram-border)"/>
-  <text x="375" y="60" font-size="18" font-family="monospace" text-anchor="middle">
-    <tspan fill="var(--diagram-red)">https</tspan><tspan fill="var(--diagram-ink)">://</tspan><tspan fill="var(--diagram-green)">api.example.com</tspan><tspan fill="var(--diagram-ink)">/</tspan><tspan fill="var(--diagram-accent-fill)">users/123/orders</tspan><tspan fill="var(--diagram-ink)">?</tspan><tspan fill="var(--diagram-yellow)">filter=value&amp;sort=field</tspan>
-  </text>
-  <line x1="120" y1="70" x2="120" y2="100" stroke="var(--diagram-red)"/>
-  <text x="120" y="120" fill="var(--diagram-red)" font-size="14" text-anchor="middle">Scheme</text>
-  <line x1="250" y1="70" x2="250" y2="100" stroke="var(--diagram-green)"/>
-  <text x="250" y="120" fill="var(--diagram-green)" font-size="14" text-anchor="middle">Host</text>
-  <line x1="430" y1="70" x2="430" y2="100" stroke="var(--diagram-accent-fill)"/>
-  <text x="430" y="120" fill="var(--diagram-accent-fill)" font-size="14" text-anchor="middle">Path (collection/item/sub-collection)</text>
-  <line x1="620" y1="70" x2="620" y2="100" stroke="var(--diagram-yellow)"/>
-  <text x="620" y="120" fill="var(--diagram-yellow)" font-size="14" text-anchor="middle">Query</text>
-</svg>
+<div data-anatomy="backend--api-design--url-design-1"></div>
 
 
 ## Use plural resource names

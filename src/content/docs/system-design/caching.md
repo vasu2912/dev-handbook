@@ -5,7 +5,7 @@ sidebar:
   order: 13
 ---
 
-![Cache in front of a worker pool and data store](/images/system-design/vector/cache-overview.svg)
+<div data-anatomy="system-design--caching-1"></div>
 
 *Original redraw based on [Scalable system design patterns](http://horicky.blogspot.com/2010/10/scalable-system-design-patterns.html).* 
 
@@ -47,7 +47,7 @@ def get_user(user_id):
     return user
 ```
 
-![Cache-aside strategy](/images/system-design/vector/cache-aside.svg)
+<div data-anatomy="system-design--caching-2"></div>
 
 *Original redraw based on [From cache to in-memory data grid](http://www.slideshare.net/tmatyashovsky/from-cache-to-in-memory-data-grid-introduction-to-hazelcast).* 
 
@@ -69,7 +69,7 @@ def set_user(user_id, values):
     cache.set(user_id, user)
 ```
 
-![Write-through strategy](/images/system-design/vector/cache-write-through.svg)
+<div data-anatomy="system-design--caching-3"></div>
 
 *Original redraw based on [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/).* 
 
@@ -79,7 +79,7 @@ Writes take the database latency, but a successful write is immediately availabl
 
 Write-behind, or write-back, acknowledges a cache update and writes the durable store asynchronously. It improves write latency and can combine multiple updates. A cache failure before the write reaches storage can lose data. The implementation needs a durable queue, ordering rules, retries, and recovery behavior.
 
-![Write-behind strategy](/images/system-design/vector/cache-write-behind.svg)
+<div data-anatomy="system-design--caching-4"></div>
 
 *Original redraw based on [Scalability, availability, stability, patterns](http://www.slideshare.net/jboner/scalability-availability-stability-patterns/).* 
 
@@ -87,7 +87,7 @@ Write-behind, or write-back, acknowledges a cache update and writes the durable 
 
 Refresh-ahead reloads a recently used entry before its TTL expires. It can avoid a miss for predictable hot keys. If the prediction is wrong, refresh work consumes resources for entries no one requests.
 
-![Refresh-ahead strategy](/images/system-design/vector/cache-refresh-ahead.svg)
+<div data-anatomy="system-design--caching-5"></div>
 
 *Original redraw based on [From cache to in-memory data grid](http://www.slideshare.net/tmatyashovsky/from-cache-to-in-memory-data-grid-introduction-to-hazelcast).*  
 

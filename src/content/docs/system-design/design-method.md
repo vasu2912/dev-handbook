@@ -9,13 +9,7 @@ System design starts as an **open-ended problem**. You lead by defining scope, t
 
 Use these four steps to guide the design.
 
-```mermaid
-flowchart LR
-    A["Step 1<br/>Outline use cases"] --> B["Step 2<br/>High-level design"]
-    B --> C["Step 3<br/>Core components"]
-    C --> D["Step 4<br/>Scale the design"]
-```
-
+<div data-anatomy="system-design--design-method-1"></div>
 ## Define use cases, constraints, and assumptions
 
 Gather requirements and scope the problem. Record assumptions.

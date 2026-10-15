@@ -8,36 +8,7 @@ sidebar:
 A goroutine is a lightweight task managed by the Go runtime. Go's HTTP server can start one goroutine per request because a goroutine uses a small, growing stack instead of a full OS thread stack.
 
 
-```mermaid
-flowchart TD
-    subgraph Go Runtime
-        S[Go Scheduler]
-    end
-    
-    subgraph Goroutines
-        G1((G1))
-        G2((G2))
-        G3((G3))
-        G4((G4))
-        
-        G1 <-->|Channel| G2
-    end
-    
-    subgraph OS Threads
-        T1[Thread 1]
-        T2[Thread 2]
-    end
-    
-    G1 -.-> S
-    G2 -.-> S
-    G3 -.-> S
-    G4 -.-> S
-    
-    S --> T1
-    S --> T2
-```
-
-
+<div data-anatomy="backend--concurrency--goroutines-1"></div>
 ## Follow the M:N scheduler
 
 Go schedules many goroutines, called G, onto a smaller set of OS threads, called M. Logical processors, called P, determine how many goroutines can execute Go code in parallel. `GOMAXPROCS` controls that count. The runtime may create additional OS threads when a thread blocks in a system call or cgo.

@@ -7,7 +7,7 @@ Prompt injection is input crafted to make a model follow an attacker's instructi
 
 Indirect injection is especially dangerous for agents because untrusted data and powerful tools meet in one execution.
 
-![Untrusted content can carry hostile instructions into model context, so controls must remain at retrieval, authorization, approval, secret, egress, and audit boundaries](/images/agentic-ai/vector/prompt-injection-boundary.svg)
+<div data-anatomy="agentic-ai--security--prompt-injection-1"></div>
 
 ## An email can become an instruction channel
 

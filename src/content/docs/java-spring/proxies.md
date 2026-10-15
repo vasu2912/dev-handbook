@@ -53,7 +53,7 @@ Both calls use the injected `probe` reference. Only the first call crosses the p
 <h3>Injected annotated method</h3>
 <ol class="walkthrough-steps">
 <li><strong>Caller holds the proxy</strong><p>ProbeCaller invokes probe.insideTransaction(). No transaction is active before the call.</p></li>
-<li><strong>The interceptor opens a transaction</strong><p>The proxy finds transaction metadata on insideTransaction(). The transaction manager begins a transaction before invoking the target.</p><svg role="img" aria-label="Caller goes through proxy transaction advice to the target with an active transaction" viewBox="0 0 460 100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g fill="var(--diagram-bg)" stroke="var(--diagram-border)"><rect x="5" y="15" width="100" height="55" rx="5"/><rect x="150" y="15" width="135" height="55" rx="5"/><rect x="330" y="15" width="125" height="55" rx="5"/></g><g font-size="17" text-anchor="middle" fill="var(--diagram-ink)"><text x="55" y="48">Caller</text><text x="217" y="39">Proxy</text><text x="217" y="59">begin TX</text><text x="392" y="39">Target</text><text x="392" y="59">TX active</text><text x="128" y="49">→</text><text x="308" y="49">→</text></g></svg></li>
+<li><strong>The interceptor opens a transaction</strong><p>The proxy finds transaction metadata on insideTransaction(). The transaction manager begins a transaction before invoking the target.</p><div data-anatomy="java-spring--proxies-1"></div></li>
 <li><strong>The target returns true</strong><p>The transaction probe observes an active transaction. On normal return, the interceptor commits, releases resources, and returns true to the caller. The caller then prints true.</p></li>
 </ol>
 </section>
@@ -61,7 +61,7 @@ Both calls use the injected `probe` reference. Only the first call crosses the p
 <h3>Self-invoked annotated method</h3>
 <ol class="walkthrough-steps">
 <li><strong>The unannotated entry point is called</strong><p>ProbeCaller invokes probe.throughThis(). The reference is still a proxy, but throughThis() has no transaction annotation, so this entry does not open a transaction.</p></li>
-<li><strong>The target calls itself</strong><p>Inside throughThis(), this refers to the target. Calling this.insideTransaction() does not return through the proxy, so its transaction interceptor never gets this inner call.</p><svg role="img" aria-label="Inside the target throughThis calls insideTransaction directly; the proxy is bypassed and no transaction begins" viewBox="0 0 460 120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="5" y="5" width="450" height="105" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-border)"/><g font-size="17" text-anchor="middle" fill="var(--diagram-ink)"><text x="230" y="29">Inside target: no proxy crossing</text><text x="98" y="65">throughThis()</text><text x="218" y="65">→</text><text x="336" y="65">insideTransaction()</text><text x="230" y="95">No transaction begins</text></g></svg></li>
+<li><strong>The target calls itself</strong><p>Inside throughThis(), this refers to the target. Calling this.insideTransaction() does not return through the proxy, so its transaction interceptor never gets this inner call.</p><div data-anatomy="java-spring--proxies-2"></div></li>
 <li><strong>The target returns false</strong><p>The probe observes no active transaction. It returns false through throughThis(), and the caller prints false. The annotation is present, but the necessary interception boundary is missing.</p></li>
 </ol>
 </section>

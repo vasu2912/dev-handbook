@@ -11,24 +11,7 @@ sidebar:
 
 Your backend speaks many languages: SQL, HTML/CSS/JS, shell. Each language has special characters that separate **code** from **data**.
 
-<svg role="img" aria-label="How untrusted user input becomes executable code in queries and commands" viewBox="0 0 560 96" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif">
-  <defs>
-    <marker id="inj-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="var(--diagram-muted)"/>
-    </marker>
-  </defs>
-  <rect x="2" y="26" width="130" height="50" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)" stroke-width="1.5"/>
-  <text x="67" y="48" text-anchor="middle" font-size="13" font-weight="600" fill="var(--diagram-green)">Your code</text>
-  <text x="67" y="64" text-anchor="middle" font-size="11" fill="var(--diagram-green)">trusted</text>
-  <rect x="196" y="26" width="130" height="50" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="1.5"/>
-  <text x="261" y="48" text-anchor="middle" font-size="13" font-weight="600" fill="var(--diagram-red-text)">User input</text>
-  <text x="261" y="64" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">untrusted</text>
-  <rect x="390" y="26" width="168" height="50" rx="8" fill="var(--diagram-yellow-bg)" stroke="var(--diagram-yellow)" stroke-width="2"/>
-  <text x="474" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-yellow-stroke)">Query / command</text>
-  <text x="474" y="64" text-anchor="middle" font-size="11" fill="var(--diagram-yellow-stroke)">data becomes code</text>
-  <line x1="132" y1="51" x2="194" y2="51" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#inj-arrow)"/>
-  <line x1="326" y1="51" x2="388" y2="51" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#inj-arrow)"/>
-</svg>
+<div data-anatomy="backend--security--injection-attacks-1"></div>
 
 When you concatenate user input directly into a query or command, you **trust that the input has no special characters**. That trust is the vulnerability.
 
@@ -60,28 +43,7 @@ Returns Alice. Correct.
 
 Attacker enters: `' OR '1'='1' --`
 
-<svg role="img" aria-label="SQL injection attack breaking query logic with always-true condition" viewBox="0 0 620 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif">
-  <defs>
-    <marker id="sqli-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="var(--diagram-muted)"/>
-    </marker>
-  </defs>
-  <rect x="6" y="12" width="280" height="52" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="1.5"/>
-  <text x="146" y="34" text-anchor="middle" font-size="13" font-weight="600" fill="var(--diagram-red-text)">Attacker input</text>
-  <text x="146" y="52" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-red-text)">' OR '1'='1' --</text>
-  <rect x="6" y="96" width="280" height="66" rx="8" fill="var(--diagram-neutral-light)" stroke="var(--diagram-muted)" stroke-width="1.5"/>
-  <text x="146" y="118" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-ink)">SELECT * FROM users</text>
-  <text x="146" y="136" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-ink)">WHERE email = '' OR '1'='1' --'</text>
-  <text x="146" y="152" text-anchor="middle" font-size="11" fill="var(--diagram-muted)">the WHERE is always true</text>
-  <rect x="334" y="96" width="280" height="66" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="2"/>
-  <text x="474" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--diagram-red-text)">Returns ALL rows</text>
-  <text x="474" y="136" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">every user, every column</text>
-  <line x1="146" y1="64" x2="146" y2="94" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#sqli-arrow)"/>
-  <line x1="286" y1="129" x2="332" y2="129" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#sqli-arrow)"/>
-  <text x="20" y="206" font-size="12" fill="var(--diagram-muted)">1. the first ' closes the string</text>
-  <text x="20" y="224" font-size="12" fill="var(--diagram-muted)">2. OR '1'='1' is always true</text>
-  <text x="20" y="242" font-size="12" fill="var(--diagram-muted)">3. -- comments out the rest</text>
-</svg>
+<div data-anatomy="backend--security--injection-attacks-2"></div>
 
 What happened:
 
@@ -109,25 +71,7 @@ The `;` ends the first statement. `DROP TABLE users` deletes the whole table.
 
 Separate the **query** from the **data**. Send two things: the statement, and the values.
 
-<svg role="img" aria-label="Parameterized queries separating statement from user data" viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif">
-  <defs>
-    <marker id="param-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="var(--diagram-muted)"/>
-    </marker>
-  </defs>
-  <rect x="6" y="14" width="290" height="58" rx="8" fill="var(--diagram-green-bg)" stroke="var(--diagram-green)" stroke-width="1.5"/>
-  <text x="151" y="36" text-anchor="middle" font-size="13" font-weight="600" fill="var(--diagram-green)">Statement (no user data)</text>
-  <text x="151" y="56" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-green)">WHERE email = $1</text>
-  <rect x="324" y="14" width="290" height="58" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="1.5"/>
-  <text x="469" y="36" text-anchor="middle" font-size="13" font-weight="600" fill="var(--diagram-red-text)">Value (data)</text>
-  <text x="469" y="56" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-red-text)">' OR '1'='1' --</text>
-  <rect x="165" y="118" width="290" height="66" rx="8" fill="var(--diagram-neutral-light)" stroke="var(--diagram-muted)" stroke-width="1.5"/>
-  <text x="310" y="140" text-anchor="middle" font-size="13" font-weight="600" fill="var(--diagram-ink)">Database</text>
-  <text x="310" y="158" text-anchor="middle" font-size="12" fill="var(--diagram-muted)">treats $1 as a string, never code</text>
-  <text x="310" y="174" text-anchor="middle" font-size="12" font-weight="600" fill="var(--diagram-green)">No rows returned: safe</text>
-  <line x1="151" y1="72" x2="270" y2="116" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#param-arrow)"/>
-  <line x1="469" y1="72" x2="360" y2="116" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#param-arrow)"/>
-</svg>
+<div data-anatomy="backend--security--injection-attacks-3"></div>
 
 The database puts the value into the `$1` slot as **pure data**. It is never interpreted as code. The malicious input becomes a garbage string that matches no email.
 
@@ -179,24 +123,7 @@ ffmpeg -i input.jpg -h 120 -w 220 -o <user filename>
 
 Attacker passes: `; rm -rf /`
 
-<svg role="img" aria-label="Command injection attack splitting a shell command using a semicolon" viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:-apple-system,'Segoe UI',sans-serif">
-  <defs>
-    <marker id="cmd-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="var(--diagram-muted)"/>
-    </marker>
-  </defs>
-  <rect x="6" y="12" width="608" height="48" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="1.5"/>
-  <text x="310" y="32" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-red-text)">ffmpeg -i input.jpg -h 120 -w 220 -o ; rm -rf /</text>
-  <text x="310" y="50" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">the ; splits this into two shell commands</text>
-  <rect x="6" y="98" width="290" height="58" rx="8" fill="var(--diagram-neutral-light)" stroke="var(--diagram-muted)" stroke-width="1.5"/>
-  <text x="151" y="120" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-ink)">ffmpeg -i input.jpg -o</text>
-  <text x="151" y="140" text-anchor="middle" font-size="11" fill="var(--diagram-muted)">(the intended command)</text>
-  <rect x="324" y="98" width="290" height="58" rx="8" fill="var(--diagram-red-bg)" stroke="var(--diagram-red)" stroke-width="2"/>
-  <text x="469" y="120" text-anchor="middle" font-size="12" font-family="monospace" fill="var(--diagram-red-text)">rm -rf /</text>
-  <text x="469" y="140" text-anchor="middle" font-size="11" fill="var(--diagram-red-text)">deletes the file system</text>
-  <line x1="151" y1="60" x2="151" y2="96" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#cmd-arrow)"/>
-  <line x1="469" y1="60" x2="469" y2="96" stroke="var(--diagram-muted)" stroke-width="1.5" marker-end="url(#cmd-arrow)"/>
-</svg>
+<div data-anatomy="backend--security--injection-attacks-4"></div>
 
 The `;` ends the first command. `rm -rf /` runs next. Attackers can also use `|` (pipes) or `&` (background) for more creative damage.
 
