@@ -7,6 +7,8 @@ sidebar:
 
 Reliability is a property of the whole request path. A healthy application cannot produce a reliable response when its database, network, or downstream provider has no usable response.
 
+For focused pattern notes, read [circuit breakers](/microservices/circuit-breakers/), [timeouts and retries](/microservices/timeouts-and-retries/), and [bulkheads](/microservices/bulkheads/). They explain how failure detection, waiting limits, and capacity isolation work together.
+
 ## Bound waiting with timeouts
 
 Set a deadline for every network call. Keep each dependency deadline inside the caller's deadline, with time left to validate and return a response. Without a timeout, one stuck dependency can consume every worker and turn a partial outage into a full outage.

@@ -19,6 +19,8 @@ Read these pages in order:
 
 After that foundation, follow the backend engineer path.
 
+For depth, read [inference and serving internals](/agentic-ai/foundations/inference-and-serving/), [reasoning models](/agentic-ai/foundations/reasoning-models/), [multimodal models](/agentic-ai/foundations/multimodal/), [fine-tuning and adaptation](/agentic-ai/foundations/fine-tuning/), and [vector index internals](/agentic-ai/foundations/vector-indexes/). They assume the basics above and explain how models run, adapt, and are searched.
+
 ## If you build backend services
 
 Start with the boundary between model output and application authority:
@@ -29,8 +31,10 @@ Start with the boundary between model output and application authority:
 4. [Context engineering and memory](/agentic-ai/context-and-memory/)
 5. [Durable execution](/agentic-ai/orchestration/durable-execution/)
 6. [MCP mental model](/agentic-ai/mcp/)
-7. [Agent security](/agentic-ai/security/)
-8. [Production readiness](/agentic-ai/production/)
+7. [Agent protocols: MCP and A2A](/agentic-ai/protocols/)
+8. [Agent security](/agentic-ai/security/)
+9. [Guardrails](/agentic-ai/production/guardrails/)
+10. [Production readiness](/agentic-ai/production/)
 
 The ideas should feel familiar. Idempotency, scoped credentials, queues, checkpoints, and tracing do not stop mattering because an LLM chose the next operation.
 
@@ -43,6 +47,10 @@ Concentrate on decisions that affect many teams:
 - [Multi-agent systems](/agentic-ai/multi-agent/)
 - [MCP transports and lifecycle](/agentic-ai/mcp/transports-and-lifecycle/)
 - [MCP security and operations](/agentic-ai/mcp/security-and-operations/)
+- [Agent protocols: MCP and A2A](/agentic-ai/protocols/)
+- [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/)
+- [Reasoning models](/agentic-ai/foundations/reasoning-models/)
+- [Fine-tuning and adaptation](/agentic-ai/foundations/fine-tuning/)
 - [Reliability](/agentic-ai/production/reliability/)
 - [Observability](/agentic-ai/production/observability/)
 - [Evaluation](/agentic-ai/production/evaluation/)

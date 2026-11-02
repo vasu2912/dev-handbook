@@ -20,8 +20,19 @@ That division of work is the central idea in this handbook. A model may suggest 
 <li><a href="/agentic-ai/context-and-memory/">Context and memory</a><p>Choose what the model sees now and what the application keeps for later.</p></li>
 <li><a href="/agentic-ai/multi-agent/">Subagents</a><p>Delegate only when isolation, specialization, or parallel work earns the extra coordination cost.</p></li>
 <li><a href="/agentic-ai/mcp/">MCP</a><p>Connect hosts to tools and context through a versioned protocol with explicit trust boundaries.</p></li>
+<li><a href="/agentic-ai/protocols/">Agent protocols</a><p>Choose between MCP for tools and A2A for agent-to-agent tasks when ownership or trust differs.</p></li>
 <li><a href="/agentic-ai/production/">Production engineering</a><p>Design for unsafe input, partial failure, traces, evaluation, latency, and cost.</p></li>
 </ol>
+
+## Extend the foundations
+
+Five notes go deeper than the learning-flow basics, at the depth 2026 interviews now probe:
+
+- [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/): prefill, decode, the KV cache, batching, and serving tradeoffs.
+- [Reasoning models](/agentic-ai/foundations/reasoning-models/): test-time compute, thinking budgets, and when deliberation pays.
+- [Multimodal models](/agentic-ai/foundations/multimodal/): vision and audio input, document pipelines, and diffusion-based generation.
+- [Fine-tuning and adaptation](/agentic-ai/foundations/fine-tuning/): SFT, LoRA, preference tuning, distillation, and the decision order.
+- [Vector index internals](/agentic-ai/foundations/vector-indexes/): exact search, IVF, HNSW, quantization, and filtered search.
 
 ## Keep five boundaries visible
 
@@ -45,7 +56,7 @@ More autonomy creates more possible execution paths. Each path needs permissions
 
 Concept pages explain one mechanism and its trade-offs. Tutorials build a working example. Reference pages give exact terms, comparison tables, and checklists. Design walkthroughs apply the material to a complete system.
 
-Start with the [learning path that matches your background](/agentic-ai/learning-paths/). Use the [question coverage index](/agentic-ai/reference/question-coverage/) when you want to trace the original 560-question study list into the handbook.
+Start with the [learning path that matches your background](/agentic-ai/learning-paths/). Use the [question coverage index](/agentic-ai/reference/question-coverage/) when you want to trace the source study list, including its 2026 expansion sections, into the handbook.
 
 ## Sources
 

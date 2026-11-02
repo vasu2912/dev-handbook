@@ -56,6 +56,8 @@ The application can define a policy such as:
 
 These rules still need evaluation. A prompt alone cannot prove compliance.
 
+Continue with [vector index internals](/agentic-ai/foundations/vector-indexes/) for the search structures behind retrieval, or [GraphRAG](/agentic-ai/rag/graphrag/) for graph-based retrieval and collection-wide summaries.
+
 ## Sources
 
 - [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
