@@ -47,6 +47,8 @@ Replace `YOUR_USERNAME` and the repository name with your own. GitHub stores the
 
 ## Edit the handbook
 
+The [backend study map](src/content/docs/guides/backend-study-map.md) connects the subject notes for interview revision. The notes explain mechanisms, types, tradeoffs, failure cases, and implementation details. They cover backend foundations, microservices, databases, runtime fundamentals, Java and Spring, and engineering practice. Research scope and source selection are recorded in [the coverage notes](research/backend-study-notes-coverage.md).
+
 Articles live in `src/content/docs/`. Keep Markdown frontmatter with a `title` and `description`. File names determine routes. For example, `system-design/index.md` becomes `/system-design/`, and `system-design/caching.md` becomes `/system-design/caching/`.
 
 `src/navigation.json` preserves the reading sequence and nested topics. Add new articles to this navigation, or to a directory covered by an `autogenerate` entry. The build rejects missing destinations and articles that readers cannot reach through navigation.
@@ -63,7 +65,7 @@ The Anatomy files are pinned to the upstream commit recorded in `scripts/figures
 
 The content pipeline lives in `scripts/content.mjs`. `scripts/build.mjs` builds the client, renders pages through React's server renderer at build time, and creates the Pagefind index. `scripts/dev.mjs` uses Vite's middleware and server renderer for local development. Only `dist/` is deployed. `.cache/` contains disposable build state.
 
-The Agentic AI question bank lives in `research/agentic-ai-interview-questions.md`. `scripts/build-agentic-ai-question-map.mjs` generates its coverage map. Diagram sources live in `diagrams/source/agentic-ai/`; articles embed SVG exports from `public/images/agentic-ai/vector/`.
+The Agentic AI question bank lives in `research/agentic-ai-interview-questions.md`. `scripts/build-agentic-ai-question-map.mjs` generates its coverage map. Diagram sources live in `diagrams/source/agentic-ai/`; articles embed SVG exports from `public/images/agentic-ai/vector/`. The scope and source evidence for the 2026 interview topic expansion are recorded in `research/2026-interview-expansion-coverage.md`.
 
 ## Deploy to Cloudflare Pages
 

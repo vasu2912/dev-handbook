@@ -5,6 +5,8 @@ description: Choose the right kind of page and turn a vague backend question int
 
 This handbook is a set of working notes, not a course with a finish line. Start with the question in front of you, then choose the page type that matches the job.
 
+For interview revision, start with the [backend study map](/guides/backend-study-map/). It groups notes by subject and connects the high-level mechanisms to implementation details, tradeoffs, and failure cases.
+
 ## Choose a page type
 
 - **Guide:** Follow a path to complete a task, such as tracing a request or checking a system's failure modes.

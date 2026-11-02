@@ -7,6 +7,8 @@ sidebar:
 
 Backend code turns an incoming request into a result. The useful design questions are concrete: where do we validate input, where do business rules live, who owns a query, what does a retry do, and what happens when work waits or races?
 
+The [backend study map](/guides/backend-study-map/) connects these foundations to [microservices](/microservices/), [database internals](/databases/), [runtime fundamentals](/runtime/), and [engineering practice](/engineering/) for topic-based revision.
+
 This section builds that model in three connected parts:
 
 - [Architecture](/backend/architecture/) follows a request through routing, handlers, services, repositories, middleware, and request context.

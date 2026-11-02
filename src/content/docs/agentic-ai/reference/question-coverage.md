@@ -1,9 +1,9 @@
 ---
 title: Agentic AI question coverage
-description: Map all 560 source questions to the handbook pages that teach the underlying topics.
+description: Map all 669 source questions to the handbook pages that teach the underlying topics.
 ---
 
-This index proves coverage of the original study list. The handbook uses a dependency-based learning order instead of presenting 560 isolated answers.
+This index proves coverage of the source study list, including the 2026 expansion sections. The handbook uses a dependency-based learning order instead of presenting isolated answers.
 
 Questions retain their original wording. A mapping identifies the primary reading page. Related links on that page lead to deeper material.
 
@@ -677,8 +677,167 @@ Questions retain their original wording. A mapping identifies the primary readin
 | 559 | **Subagents vs tools—when would you use each?** | [Subagents and handoffs](/agentic-ai/multi-agent/subagents/) |
 | 560 | **Single agent vs multi-agent—how do you choose?** | [Multi-agent systems](/agentic-ai/multi-agent/) |
 
+## Inference and serving internals
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 561 | What happens under the hood when you call an LLM API? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 562 | What is prefill and how does it differ from decode? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 563 | What is the KV cache and why does it dominate accelerator memory? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 564 | Why does a long prompt cost more than a long answer per token? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 565 | What are time to first token and time per output token? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 566 | What is static batching versus continuous batching? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 567 | How does batching raise throughput without making a single request faster? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 568 | What is chunked prefill and what problem does it solve? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 569 | What is prefix (prompt) caching and when does it pay off? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 570 | How should prompt content be ordered to maximize cache hits? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 571 | What is speculative decoding? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 572 | What is quantization and how do you evaluate its quality cost? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 573 | When would you self-host inference instead of using a provider API? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 574 | How would you capacity-plan inference for a growing workload? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+| 575 | How would you design batching for a single GPU under a strict latency target? | [Inference and serving internals](/agentic-ai/foundations/inference-and-serving/) |
+
+## Reasoning models and test-time compute
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 576 | What is a reasoning model? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 577 | What is test-time compute? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 578 | How are reasoning tokens billed and surfaced? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 579 | What is a reasoning effort level or thinking budget? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 580 | When should you choose a reasoning model over a standard model? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 581 | When does a reasoning model waste money? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 582 | How do reasoning models change agent planning? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 583 | How does reasoning behave across multi-turn conversations and tool calls? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 584 | Can a reasoning trace be treated as a faithful audit record? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+| 585 | How do you evaluate reasoning models, including overthinking? | [Reasoning models and test-time compute](/agentic-ai/foundations/reasoning-models/) |
+
+## Multimodal models
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 586 | How do multimodal models convert images into processable input? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 587 | What does an image contribute to context and cost? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 588 | What is a diffusion model? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 589 | How do diffusion and autoregressive generation differ? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 590 | What is CLIP-style joint image-text embedding? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 591 | How would you ingest PDFs, tables, and scans for RAG? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 592 | Cascade speech pipeline versus speech-to-speech models? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 593 | What latency budget and interaction rules does a voice agent face? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 594 | How do guardrails cover image and audio input? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+| 595 | What failure modes are unique to document ingestion? | [Multimodal models](/agentic-ai/foundations/multimodal/) |
+
+## Fine-tuning and model adaptation
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 596 | When do you fine-tune instead of prompting or retrieving? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 597 | What is supervised fine-tuning? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 598 | What is LoRA and why does it make fine-tuning cheap? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 599 | What is QLoRA? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 600 | How do you serve many adapters on one base model? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 601 | What is RLHF? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 602 | How does DPO differ from RLHF? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 603 | What is distillation in LLM practice? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 604 | How do you build a high-quality fine-tuning dataset? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 605 | How do you evaluate a fine-tune without regressing other behaviors? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 606 | Why can't fine-tuning replace retrieval for fresh knowledge? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+| 607 | How do you version and roll back a fine-tuned model or adapter? | [Fine-tuning and model adaptation](/agentic-ai/foundations/fine-tuning/) |
+
+## Vector index internals
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 608 | Exact search versus approximate nearest-neighbor search? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 609 | How does an IVF index work? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 610 | How does HNSW work and why is it the default? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 611 | What do M, efConstruction, and efSearch trade against each other? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 612 | What is product quantization? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 613 | How do you measure recall@k for an index? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 614 | Why does filtered ANN search fail, and how do engines handle it? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 615 | How do deletions work in a graph index? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 616 | What happens to the index when the embedding model changes? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+| 617 | How do you budget memory for a vector index? | [Vector index internals](/agentic-ai/foundations/vector-indexes/) |
+
+## Agent interoperability and A2A
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 618 | What is the A2A protocol? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 619 | Why does agent-to-agent communication need a protocol? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 620 | What is an Agent Card? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 621 | What is an A2A task and its lifecycle? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 622 | What are messages, parts, and artifacts in A2A? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 623 | How does A2A handle long-running work? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 624 | How do A2A and MCP complement each other? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 625 | What is opaque execution and why does it matter? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 626 | When would you use in-process subagents instead of A2A? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+| 627 | How do identity and audit work across protocol boundaries? | [Agent protocols: MCP and A2A](/agentic-ai/protocols/) |
+
+## Guardrails
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 628 | What are guardrails in an LLM system? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 629 | What do input rails check versus output rails? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 630 | Where in the request path should guardrails run? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 631 | How do you measure false positives in moderation? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 632 | How do grounding checks verify answers against evidence? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 633 | Which OWASP LLM Top 10 risks do guardrails help address? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 634 | What can guardrails never fully address? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 635 | Should a guardrail fail open or closed, and what decides it? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 636 | How do you test guardrails in CI? | [Guardrails](/agentic-ai/production/guardrails/) |
+| 637 | How do you keep guardrail latency within budget? | [Guardrails](/agentic-ai/production/guardrails/) |
+
+## GraphRAG
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 638 | Why does vector retrieval struggle with global questions? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+| 639 | What is GraphRAG? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+| 640 | What does the GraphRAG indexing pipeline build? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+| 641 | How do local search and global search differ? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+| 642 | What does GraphRAG cost at index time? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+| 643 | How do you keep a GraphRAG index current? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+| 644 | When should you not use GraphRAG? | [GraphRAG](/agentic-ai/rag/graphrag/) |
+
+## Distributed consensus
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 645 | What problem does distributed consensus solve? | [Distributed consensus](/system-design/consensus/) |
+| 646 | What is a replicated state machine? | [Distributed consensus](/system-design/consensus/) |
+| 647 | How does Raft elect a leader? | [Distributed consensus](/system-design/consensus/) |
+| 648 | Why are election timeouts randomized? | [Distributed consensus](/system-design/consensus/) |
+| 649 | What is a term in Raft? | [Distributed consensus](/system-design/consensus/) |
+| 650 | What does the majority rule imply for failure tolerance and cluster sizing? | [Distributed consensus](/system-design/consensus/) |
+| 651 | Why does Raft count replicas only for entries from the current term? | [Distributed consensus](/system-design/consensus/) |
+| 652 | Why not simply elect the candidate with the longest log? | [Distributed consensus](/system-design/consensus/) |
+| 653 | How do reads stay linearizable under Raft? | [Distributed consensus](/system-design/consensus/) |
+| 654 | Where is Raft used in real systems (etcd, Kafka KRaft, CockroachDB)? | [Distributed consensus](/system-design/consensus/) |
+| 655 | How does consensus differ from two-phase commit? | [Distributed consensus](/system-design/consensus/) |
+| 656 | How do fencing tokens relate to leader terms? | [Distributed consensus](/system-design/consensus/) |
+
+## Python and AI-assisted engineering
+
+| # | Source question | Primary reading |
+|---:|---|---|
+| 657 | How does asyncio provide concurrency in Python? | [Python for AI backends](/engineering/python-for-backends/) |
+| 658 | What happens when a coroutine blocks the event loop? | [Python for AI backends](/engineering/python-for-backends/) |
+| 659 | Why does a broad except Exception break cancellation? | [Python for AI backends](/engineering/python-for-backends/) |
+| 660 | What is the GIL and how does Python get true parallelism? | [Python for AI backends](/engineering/python-for-backends/) |
+| 661 | What changed when free-threaded Python became officially supported? | [Python for AI backends](/engineering/python-for-backends/) |
+| 662 | How do Pydantic models connect to LLM structured output? | [Python for AI backends](/engineering/python-for-backends/) |
+| 663 | Why is FastAPI BackgroundTasks not a job system? | [Python for AI backends](/engineering/python-for-backends/) |
+| 664 | How do you stream LLM tokens to clients from FastAPI? | [Python for AI backends](/engineering/python-for-backends/) |
+| 665 | How do you use AI assistants without giving up code ownership? | [Engineering with AI assistants](/engineering/ai-assisted-engineering/) |
+| 666 | What are the documented risks of AI-generated code? | [Engineering with AI assistants](/engineering/ai-assisted-engineering/) |
+| 667 | What is package hallucination? | [Engineering with AI assistants](/engineering/ai-assisted-engineering/) |
+| 668 | What did the DORA 2024 report find about AI and delivery stability? | [Engineering with AI assistants](/engineering/ai-assisted-engineering/) |
+| 669 | How do you measure an AI-assisted engineering workflow? | [Engineering with AI assistants](/engineering/ai-assisted-engineering/) |
+
 ## Coverage check
 
-- Questions mapped: 560
-- Expected sequence: 1 through 560
+- Questions mapped: 669
+- Expected sequence: 1 through 669
 - Generated by `scripts/build-agentic-ai-question-map.mjs` from the preserved source list.

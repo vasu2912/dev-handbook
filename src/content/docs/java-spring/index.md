@@ -54,6 +54,8 @@ Most difficult Spring bugs occur where these boundaries meet. A method call bypa
 
 [Java essentials](/java-spring/java-essentials/) and [proxies](/java-spring/proxies/) support all of these paths. Neither requires a catalogue of language features or annotation attributes to be useful.
 
+For runtime revision, continue with [collections internals](/java-spring/collections-internals/), [JVM execution and garbage collection](/java-spring/jvm-internals/), and [Java concurrency and virtual threads](/java-spring/concurrency-internals/). The [circuit-breaker note](/microservices/circuit-breakers/) includes plain Java and Spring Boot implementations, with explained `application.properties` settings.
+
 ## Read for limits, not magic
 
 For each mechanism, ask what it guarantees and what remains outside the guarantee. A singleton bean gives one shared instance per container and bean definition, not exclusive access. A cache avoids repeated work, not stale data. An asynchronous call changes where work runs, not whether it survives a crash.

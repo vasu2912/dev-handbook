@@ -11,6 +11,8 @@ System design is the work of choosing where state lives, how work moves, and wha
 
 Start with [performance and scalability](/system-design/performance-and-scalability/), then compare [latency and throughput](/system-design/latency-and-throughput/). Next, study [availability and consistency](/system-design/availability-and-consistency/) and the [consistency patterns](/system-design/consistency-patterns/) that make those guarantees concrete.
 
+[Distributed consensus](/system-design/consensus/) explains how replicas agree on an ordered history through leader election, quorums, and log replication. It connects those consistency guarantees to Raft's commit and recovery rules.
+
 The remaining pages describe the building blocks you combine in a request path:
 
 - [Availability patterns](/system-design/availability-patterns/), [DNS](/system-design/dns/), [CDNs](/system-design/cdn/), [load balancing](/system-design/load-balancing/), and [reverse proxies](/system-design/reverse-proxy/) shape traffic at the edge.

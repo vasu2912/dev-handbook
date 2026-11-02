@@ -1,7 +1,6 @@
 ---
 title: HTTP status codes
 description: A compact lookup table for common HTTP response status codes.
-tableOfContents: false
 ---
 
 Use a status code to describe the outcome of the request. Use the response body for details that clients need to act on.

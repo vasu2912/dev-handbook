@@ -795,3 +795,144 @@ User ──► API/Auth ──►    │ Orchestrator│
 Then discuss **RBAC, scoped credentials, MCP tool schemas, HITL for writes, idempotency, retries, audit logs, tracing, token budgets, sandboxing, and evaluation**.
 
 That combination is much closer to what a **5+ year engineer / senior GenAI engineer interview** will test than memorizing LLM definitions.
+
+---
+
+# 21. Inference and serving internals (2026 expansion)
+
+561. What happens under the hood when you call an LLM API?
+562. What is prefill and how does it differ from decode?
+563. What is the KV cache and why does it dominate accelerator memory?
+564. Why does a long prompt cost more than a long answer per token?
+565. What are time to first token and time per output token?
+566. What is static batching versus continuous batching?
+567. How does batching raise throughput without making a single request faster?
+568. What is chunked prefill and what problem does it solve?
+569. What is prefix (prompt) caching and when does it pay off?
+570. How should prompt content be ordered to maximize cache hits?
+571. What is speculative decoding?
+572. What is quantization and how do you evaluate its quality cost?
+573. When would you self-host inference instead of using a provider API?
+574. How would you capacity-plan inference for a growing workload?
+575. How would you design batching for a single GPU under a strict latency target?
+
+# 22. Reasoning models and test-time compute (2026 expansion)
+
+576. What is a reasoning model?
+577. What is test-time compute?
+578. How are reasoning tokens billed and surfaced?
+579. What is a reasoning effort level or thinking budget?
+580. When should you choose a reasoning model over a standard model?
+581. When does a reasoning model waste money?
+582. How do reasoning models change agent planning?
+583. How does reasoning behave across multi-turn conversations and tool calls?
+584. Can a reasoning trace be treated as a faithful audit record?
+585. How do you evaluate reasoning models, including overthinking?
+
+# 23. Multimodal models (2026 expansion)
+
+586. How do multimodal models convert images into processable input?
+587. What does an image contribute to context and cost?
+588. What is a diffusion model?
+589. How do diffusion and autoregressive generation differ?
+590. What is CLIP-style joint image-text embedding?
+591. How would you ingest PDFs, tables, and scans for RAG?
+592. Cascade speech pipeline versus speech-to-speech models?
+593. What latency budget and interaction rules does a voice agent face?
+594. How do guardrails cover image and audio input?
+595. What failure modes are unique to document ingestion?
+
+# 24. Fine-tuning and model adaptation (2026 expansion)
+
+596. When do you fine-tune instead of prompting or retrieving?
+597. What is supervised fine-tuning?
+598. What is LoRA and why does it make fine-tuning cheap?
+599. What is QLoRA?
+600. How do you serve many adapters on one base model?
+601. What is RLHF?
+602. How does DPO differ from RLHF?
+603. What is distillation in LLM practice?
+604. How do you build a high-quality fine-tuning dataset?
+605. How do you evaluate a fine-tune without regressing other behaviors?
+606. Why can't fine-tuning replace retrieval for fresh knowledge?
+607. How do you version and roll back a fine-tuned model or adapter?
+
+# 25. Vector index internals (2026 expansion)
+
+608. Exact search versus approximate nearest-neighbor search?
+609. How does an IVF index work?
+610. How does HNSW work and why is it the default?
+611. What do M, efConstruction, and efSearch trade against each other?
+612. What is product quantization?
+613. How do you measure recall@k for an index?
+614. Why does filtered ANN search fail, and how do engines handle it?
+615. How do deletions work in a graph index?
+616. What happens to the index when the embedding model changes?
+617. How do you budget memory for a vector index?
+
+# 26. Agent interoperability and A2A (2026 expansion)
+
+618. What is the A2A protocol?
+619. Why does agent-to-agent communication need a protocol?
+620. What is an Agent Card?
+621. What is an A2A task and its lifecycle?
+622. What are messages, parts, and artifacts in A2A?
+623. How does A2A handle long-running work?
+624. How do A2A and MCP complement each other?
+625. What is opaque execution and why does it matter?
+626. When would you use in-process subagents instead of A2A?
+627. How do identity and audit work across protocol boundaries?
+
+# 27. Guardrails (2026 expansion)
+
+628. What are guardrails in an LLM system?
+629. What do input rails check versus output rails?
+630. Where in the request path should guardrails run?
+631. How do you measure false positives in moderation?
+632. How do grounding checks verify answers against evidence?
+633. Which OWASP LLM Top 10 risks do guardrails help address?
+634. What can guardrails never fully address?
+635. Should a guardrail fail open or closed, and what decides it?
+636. How do you test guardrails in CI?
+637. How do you keep guardrail latency within budget?
+
+# 28. GraphRAG (2026 expansion)
+
+638. Why does vector retrieval struggle with global questions?
+639. What is GraphRAG?
+640. What does the GraphRAG indexing pipeline build?
+641. How do local search and global search differ?
+642. What does GraphRAG cost at index time?
+643. How do you keep a GraphRAG index current?
+644. When should you not use GraphRAG?
+
+# 29. Distributed consensus (2026 expansion)
+
+645. What problem does distributed consensus solve?
+646. What is a replicated state machine?
+647. How does Raft elect a leader?
+648. Why are election timeouts randomized?
+649. What is a term in Raft?
+650. What does the majority rule imply for failure tolerance and cluster sizing?
+651. Why does Raft count replicas only for entries from the current term?
+652. Why not simply elect the candidate with the longest log?
+653. How do reads stay linearizable under Raft?
+654. Where is Raft used in real systems (etcd, Kafka KRaft, CockroachDB)?
+655. How does consensus differ from two-phase commit?
+656. How do fencing tokens relate to leader terms?
+
+# 30. Python and AI-assisted engineering (2026 expansion)
+
+657. How does asyncio provide concurrency in Python?
+658. What happens when a coroutine blocks the event loop?
+659. Why does a broad except Exception break cancellation?
+660. What is the GIL and how does Python get true parallelism?
+661. What changed when free-threaded Python became officially supported?
+662. How do Pydantic models connect to LLM structured output?
+663. Why is FastAPI BackgroundTasks not a job system?
+664. How do you stream LLM tokens to clients from FastAPI?
+665. How do you use AI assistants without giving up code ownership?
+666. What are the documented risks of AI-generated code?
+667. What is package hallucination?
+668. What did the DORA 2024 report find about AI and delivery stability?
+669. How do you measure an AI-assisted engineering workflow?

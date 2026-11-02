@@ -35,4 +35,4 @@ Offline evaluation checks known tasks before release. A small controlled rollout
 
 Keep a rollback path for prompts, models, policies, tools, and server connections. A tool kill switch should not require waiting for a new application deployment.
 
-Continue with [reliability](/agentic-ai/production/reliability/), [observability](/agentic-ai/production/observability/), [evaluation](/agentic-ai/production/evaluation/), and [performance and cost](/agentic-ai/production/performance-and-cost/).
+Continue with [reliability](/agentic-ai/production/reliability/), [observability](/agentic-ai/production/observability/), [guardrails](/agentic-ai/production/guardrails/), [evaluation](/agentic-ai/production/evaluation/), and [performance and cost](/agentic-ai/production/performance-and-cost/).

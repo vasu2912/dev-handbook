@@ -8,6 +8,10 @@
         "slug": "guides/how-to-use-this-handbook"
       },
       {
+        "label": "Backend interview study map",
+        "slug": "guides/backend-study-map"
+      },
+      {
         "label": "A request from browser to database",
         "slug": "guides/request-lifecycle"
       }
@@ -136,6 +140,10 @@
             "slug": "backend/security/authentication"
           },
           {
+            "label": "OAuth and OpenID Connect",
+            "slug": "backend/security/oauth-and-oidc"
+          },
+          {
             "label": "Authorization",
             "slug": "backend/security/authorization"
           },
@@ -156,6 +164,120 @@
       {
         "label": "Data and storage",
         "slug": "backend/data-and-storage"
+      }
+    ]
+  },
+  {
+    "label": "Microservices",
+    "collapsed": true,
+    "items": [
+      {
+        "label": "Microservices study notes",
+        "slug": "microservices"
+      },
+      {
+        "label": "Service boundaries",
+        "slug": "microservices/service-boundaries"
+      },
+      {
+        "label": "Discovery and gateways",
+        "slug": "microservices/discovery-and-gateways"
+      },
+      {
+        "label": "Circuit breakers",
+        "slug": "microservices/circuit-breakers"
+      },
+      {
+        "label": "Timeouts and retries",
+        "slug": "microservices/timeouts-and-retries"
+      },
+      {
+        "label": "Bulkheads and backpressure",
+        "slug": "microservices/bulkheads"
+      },
+      {
+        "label": "Sagas and distributed transactions",
+        "slug": "microservices/sagas"
+      },
+      {
+        "label": "Outbox and delivery",
+        "slug": "microservices/outbox-and-delivery"
+      },
+      {
+        "label": "Kafka and message brokers",
+        "slug": "microservices/message-brokers"
+      },
+      {
+        "label": "CQRS and event sourcing",
+        "slug": "microservices/cqrs-and-event-sourcing"
+      },
+      {
+        "label": "Distributed locks and fencing",
+        "slug": "microservices/distributed-locks"
+      },
+      {
+        "label": "Migrating a monolith",
+        "slug": "microservices/migration"
+      }
+    ]
+  },
+  {
+    "label": "Databases and SQL",
+    "collapsed": true,
+    "items": [
+      {
+        "label": "Database study notes",
+        "slug": "databases"
+      },
+      {
+        "label": "Schema design and SQL",
+        "slug": "databases/schema-and-sql"
+      },
+      {
+        "label": "Transactions and locking",
+        "slug": "databases/transactions-and-locking"
+      },
+      {
+        "label": "Indexes and query plans",
+        "slug": "databases/indexes-and-query-plans"
+      },
+      {
+        "label": "Migrations and recovery",
+        "slug": "databases/migrations-and-recovery"
+      },
+      {
+        "label": "Cache patterns",
+        "slug": "databases/cache-patterns"
+      }
+    ]
+  },
+  {
+    "label": "Runtime and CS foundations",
+    "collapsed": true,
+    "items": [
+      {
+        "label": "Runtime study notes",
+        "slug": "runtime"
+      },
+      {
+        "label": "Processes and I/O",
+        "slug": "runtime/processes-and-io"
+      },
+      {
+        "label": "Memory and storage",
+        "slug": "runtime/memory-and-storage"
+      },
+      {
+        "label": "Networking",
+        "slug": "runtime/networking"
+      },
+      {
+        "label": "Data structures and complexity",
+        "slug": "runtime/data-structures"
+      },
+      {
+        "label": "Algorithm patterns",
+        "slug": "runtime/algorithms"
       }
     ]
   },
@@ -206,6 +328,10 @@
           {
             "label": "Consistency patterns",
             "slug": "system-design/consistency-patterns"
+          },
+          {
+            "label": "Distributed consensus",
+            "slug": "system-design/consensus"
           },
           {
             "label": "Databases",
@@ -301,6 +427,26 @@
           {
             "label": "Embeddings and semantic search",
             "slug": "agentic-ai/foundations/embeddings"
+          },
+          {
+            "label": "Inference and serving internals",
+            "slug": "agentic-ai/foundations/inference-and-serving"
+          },
+          {
+            "label": "Reasoning models",
+            "slug": "agentic-ai/foundations/reasoning-models"
+          },
+          {
+            "label": "Multimodal models",
+            "slug": "agentic-ai/foundations/multimodal"
+          },
+          {
+            "label": "Fine-tuning and adaptation",
+            "slug": "agentic-ai/foundations/fine-tuning"
+          },
+          {
+            "label": "Vector index internals",
+            "slug": "agentic-ai/foundations/vector-indexes"
           }
         ]
       },
@@ -323,6 +469,10 @@
           {
             "label": "Evaluate and secure RAG",
             "slug": "agentic-ai/rag/evaluation-and-security"
+          },
+          {
+            "label": "GraphRAG",
+            "slug": "agentic-ai/rag/graphrag"
           }
         ]
       },
@@ -409,6 +559,16 @@
         ]
       },
       {
+        "label": "Agent protocols",
+        "collapsed": true,
+        "items": [
+          {
+            "label": "Agent protocols: MCP and A2A",
+            "slug": "agentic-ai/protocols"
+          }
+        ]
+      },
+      {
         "label": "Production engineering",
         "collapsed": true,
         "items": [
@@ -435,6 +595,10 @@
           {
             "label": "Observability",
             "slug": "agentic-ai/production/observability"
+          },
+          {
+            "label": "Guardrails",
+            "slug": "agentic-ai/production/guardrails"
           },
           {
             "label": "Evaluation",
@@ -543,6 +707,18 @@
             "slug": "java-spring/java-essentials"
           },
           {
+            "label": "Collections internals",
+            "slug": "java-spring/collections-internals"
+          },
+          {
+            "label": "JVM and garbage collection",
+            "slug": "java-spring/jvm-internals"
+          },
+          {
+            "label": "Java concurrency and virtual threads",
+            "slug": "java-spring/concurrency-internals"
+          },
+          {
             "label": "What Spring Boot does",
             "slug": "java-spring/spring-boot"
           },
@@ -639,6 +815,48 @@
             "slug": "java-spring/running-services"
           }
         ]
+      }
+    ]
+  },
+  {
+    "label": "Engineering practice",
+    "collapsed": true,
+    "items": [
+      {
+        "label": "Backend engineering practice",
+        "slug": "engineering"
+      },
+      {
+        "label": "Object design and patterns",
+        "slug": "engineering/object-design"
+      },
+      {
+        "label": "Testing boundaries",
+        "slug": "engineering/testing"
+      },
+      {
+        "label": "Containers and Kubernetes",
+        "slug": "engineering/containers-and-kubernetes"
+      },
+      {
+        "label": "Git, CI, and delivery",
+        "slug": "engineering/git-and-delivery"
+      },
+      {
+        "label": "Observability and debugging",
+        "slug": "engineering/observability"
+      },
+      {
+        "label": "API integration contracts",
+        "slug": "engineering/api-integrations"
+      },
+      {
+        "label": "Python for AI backends",
+        "slug": "engineering/python-for-backends"
+      },
+      {
+        "label": "Engineering with AI assistants",
+        "slug": "engineering/ai-assisted-engineering"
       }
     ]
   },
