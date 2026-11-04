@@ -25,6 +25,14 @@
           ? "dark"
           : "light";
       }
+      // Keep in step with src/lib/preferences.ts.
+      try {
+        const size = localStorage.getItem("handbook-type-size");
+        if (["15px", "17px", "19px"].includes(size))
+          document.documentElement.style.setProperty("--reading-size", size);
+      } catch {
+        /* Use the default reading size. */
+      }
     </script>
   </head>
   <body>

@@ -10,6 +10,7 @@ import {
 import { containsArticle, href, type PageWithContent } from "../lib/content";
 import type { ReaderControls } from "../lib/reader";
 import { Sidebar } from "./Navigation";
+import { OnThisPage, ReadingProgress } from "./OnThisPage";
 export function ReadingLayout({
   page,
   reader,
@@ -108,6 +109,7 @@ export function ReadingLayout({
   }, []);
   return (
     <div className="reading-layout">
+      <ReadingProgress />
       <aside className="sidebar" aria-label="Handbook navigation">
         <Sidebar page={page} completed={reader.completed} />
       </aside>
@@ -184,30 +186,43 @@ export function ReadingLayout({
             </button>
           </div>
         </article>
-        <nav className="article-pagination" aria-label="Continue reading">
-          {page.previous ? (
-            <a href={href(page.base, page.previous.slug)}>
-              <span>
-                <ArrowLeftIcon /> Previous
-              </span>
-              <strong>{page.previous.title}</strong>
-            </a>
-          ) : (
-            <div />
-          )}
-          {page.next && (
-            <a href={href(page.base, page.next.slug)}>
-              <span>
-                Up next <ArrowRightIcon />
-              </span>
-              <strong>{page.next.title}</strong>
-            </a>
-          )}
-        </nav>
+        {(page.previous || page.next) && (
+          <nav className="article-pagination" aria-label="Continue reading">
+            {page.previous && (
+              <a
+                className="pager pager-previous"
+                href={href(page.base, page.previous.slug)}
+                rel="prev"
+              >
+                <span className="pager-label">Previous</span>
+                <span className="pager-title">
+                  <ArrowLeftIcon aria-hidden="true" />
+                  {page.previous.title}
+                </span>
+              </a>
+            )}
+            {page.next && (
+              <a
+                className="pager pager-next"
+                href={href(page.base, page.next.slug)}
+                rel="next"
+              >
+                <span className="pager-label">Up next</span>
+                <span className="pager-title">
+                  {page.next.title}
+                  <ArrowRightIcon aria-hidden="true" />
+                </span>
+              </a>
+            )}
+          </nav>
+        )}
         <footer className="article-footer">
           Free to read. Open to everyone.
         </footer>
       </main>
+      {page.article.headings.length > 0 && (
+        <OnThisPage headings={page.article.headings} />
+      )}
     </div>
   );
 }
