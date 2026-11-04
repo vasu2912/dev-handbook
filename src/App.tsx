@@ -13,7 +13,7 @@ export function App({ page }: { page: PageWithContent }) {
       </a>
       <Header page={page} {...controls} />
       {page.kind === "home" ? (
-        <Home page={page} />
+        <Home page={page} reader={controls.reader} />
       ) : page.kind === "not-found" ? (
         <main id="main" className="not-found">
           <p className="eyebrow">404</p>

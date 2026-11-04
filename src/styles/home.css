@@ -1,0 +1,256 @@
+/* Landing page: a cover, search, and the contents. Uses the site's own colour tokens. */
+.landing {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.landing h1,
+.landing h2,
+.landing h3 {
+  margin: 0;
+}
+.landing p {
+  margin: 0;
+}
+
+.cover {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(64svh, 600px);
+  overflow: hidden;
+  border-radius: 12px;
+  background: #0d0d0c;
+  color: #fff;
+  isolation: isolate;
+}
+.cover-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  filter: grayscale(1) brightness(0.42);
+  z-index: -1;
+}
+.cover-copy {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+  padding: 48px;
+}
+.cover h1 {
+  font-size: clamp(44px, 6.4vw, 88px);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  max-width: 11ch;
+}
+.cover p {
+  font-size: 19px;
+  line-height: 1.45;
+  max-width: 36ch;
+}
+.cover-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(460px, 100%);
+  min-height: 52px;
+  margin-top: 8px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: #171717;
+  font-size: 16px;
+  text-align: left;
+}
+.cover-search svg {
+  width: 18px;
+  height: 18px;
+}
+.cover-search kbd {
+  margin-left: auto;
+  border: 0;
+  background: #ececec;
+  color: #525252;
+}
+.cover-search:hover {
+  background: #f1f1f1;
+}
+.cover-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 550;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 0.45);
+  text-underline-offset: 4px;
+}
+.cover-start:hover {
+  text-decoration-color: currentColor;
+}
+.cover a:focus-visible,
+.cover button:focus-visible {
+  outline-color: #fff;
+}
+
+.saved {
+  margin-top: 56px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 24px;
+}
+.saved h2 {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.saved ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.saved a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.contents {
+  margin-top: 104px;
+  scroll-margin-top: 24px;
+}
+.contents-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.contents-heading h2 {
+  font-size: 40px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+.contents-heading p {
+  color: var(--secondary-text);
+}
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px 48px;
+}
+.shelf h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.shelf h3 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.shelf-meta {
+  margin-top: 4px !important;
+  font-size: 14px;
+  color: var(--secondary-text);
+}
+.shelf ul {
+  display: grid;
+  gap: 7px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.shelf li a {
+  color: var(--text);
+}
+.shelf li a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.shelf li[data-read] a {
+  color: var(--secondary-text);
+}
+.shelf li[data-read]::after {
+  content: " · read";
+  font-size: 14px;
+  color: var(--secondary-text);
+}
+.shelf-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.shelf-more:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.landing-footer {
+  display: grid;
+  gap: 6px;
+  margin: 120px 0 0;
+  padding: 32px 0 48px;
+  font-size: 14px;
+  color: var(--secondary-text);
+}
+.landing-footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .shelf-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 800px) {
+  .landing {
+    padding: 0 24px;
+  }
+}
+@media (max-width: 560px) {
+  .landing {
+    padding: 0 16px;
+  }
+  .cover {
+    min-height: 520px;
+  }
+  .cover-copy {
+    padding: 28px 22px;
+  }
+  .cover p {
+    font-size: 17px;
+  }
+  .contents {
+    margin-top: 72px;
+  }
+  .contents-heading {
+    display: block;
+    margin-bottom: 36px;
+  }
+  .contents-heading p {
+    margin-top: 6px;
+  }
+  .shelf-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+}
+
+/* The cover carries search on this page, so the header's copy is not repeated. */
+.site-header:has(~ .landing) .search-trigger {
+  display: none;
+}

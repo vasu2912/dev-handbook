@@ -13,6 +13,11 @@ import type { ReaderControls } from "../lib/reader";
 import { Appearance } from "./Appearance";
 import { Sidebar, flatten } from "./Navigation";
 const Search = lazy(() => import("./Search"));
+const searchEvent = "handbook:open-search";
+/** Opens the header's search dialog from anywhere on the page. */
+export function openSearch() {
+  document.dispatchEvent(new Event(searchEvent));
+}
 function ModalFrame({
   title,
   description,
@@ -57,8 +62,13 @@ export function Header({
         setSearchOpen((open) => !open);
       }
     }
+    const open = () => setSearchOpen(true);
     document.addEventListener("keydown", shortcut);
-    return () => document.removeEventListener("keydown", shortcut);
+    document.addEventListener(searchEvent, open);
+    return () => {
+      document.removeEventListener("keydown", shortcut);
+      document.removeEventListener(searchEvent, open);
+    };
   }, []);
   return (
     <header
