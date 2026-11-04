@@ -13,6 +13,7 @@ Use the matching skill in `.agents/skills` before starting work in this reposito
 - `domain-modeling`: read when establishing terms, `CONTEXT.md`, or ADRs.
 - `writing-for-agents`: read before changing agent documentation or skills.
 - `technical-writing`: read before writing or reviewing technical documentation, RFCs, READMEs, or architecture documents.
+- `handbook-writing`: read before writing, rewriting, or reviewing articles in `src/content/docs`.
 - `wayfinder`: use for product-scale planning that needs a shared map of decision tickets before implementation planning.
 - `implement`: use when implementing an approved specification or ticket set.
 - `code-review`: use when reviewing changes against repository standards and their originating specification.
