@@ -98,8 +98,26 @@ export async function compileContent() {
   }).use(anchor, { level: [2, 3, 4], slugify });
   const renderFence = md.renderer.rules.fence;
   md.renderer.rules.fence = (tokens, index, options, env, self) => {
-    if (tokens[index].info.trim() === "mermaid") {
-      return `<figure class="mermaid-diagram">${renderMermaidSVG(tokens[index].content, { bg: "var(--surface)", fg: "var(--text)", accent: "var(--diagram-accent)", font: "Inter Variable", transparent: true })}</figure>`;
+    // ```mermaid #fig-id Caption text. -> a numbered, captioned figure.
+    const mermaid = /^mermaid(?:\s+#([a-z0-9-]+))?(?:\s+(.+))?$/.exec(
+      tokens[index].info.trim(),
+    );
+    if (mermaid) {
+      const [, id, caption] = mermaid;
+      const svg = renderMermaidSVG(tokens[index].content, {
+        bg: "var(--surface)",
+        fg: "var(--text)",
+        accent: "var(--diagram-accent)",
+        font: "Inter Variable",
+        transparent: true,
+      });
+      if (!id && !caption)
+        return `<figure class="mermaid-diagram">${svg}</figure>`;
+      if (!id || !caption)
+        throw new Error(
+          `A captioned diagram needs both an id and a caption: ${tokens[index].info}`,
+        );
+      return `<figure class="numbered-figure" id="${id}"><div class="mermaid-diagram">${svg}</div><figcaption><span class="figure-label"></span> ${md.renderInline(caption)}</figcaption></figure>`;
     }
     return renderFence(tokens, index, options, env, self);
   };
@@ -121,9 +139,35 @@ export async function compileContent() {
       .filter((source) => source.slug)
       .map(async (source) => {
         const $ = load(md.render(source.source), null, false);
-        $("[data-anatomy]").each((index, element) => {
+        // Every figure kind shares one numbering series, in page order.
+        const figureNumbers = new Map(
+          $("[data-anatomy], [data-figure], .numbered-figure")
+            .toArray()
+            .map((element, index) => [element, index + 1]),
+        );
+        const figureIds = new Map();
+        $(".numbered-figure").each((_, element) => {
+          const id = $(element).attr("id");
+          if (figureIds.has(id))
+            throw new Error(`${source.file}: duplicate figure id: ${id}`);
+          const number = figureNumbers.get(element);
+          figureIds.set(id, number);
+          $(element).find(".figure-label").text(`Figure ${number}.`);
+        });
+        $('a[href^="#fig-"]').each((_, element) => {
+          const id = $(element).attr("href").slice(1);
+          if (!figureIds.has(id))
+            throw new Error(`${source.file}: unknown figure reference: #${id}`);
+          $(element)
+            .addClass("figure-ref")
+            .text(`Figure ${figureIds.get(id)}`);
+        });
+        $("[data-anatomy]").each((_, element) => {
           $(element).replaceWith(
-            anatomyFigure($(element).attr("data-anatomy"), index + 1),
+            anatomyFigure(
+              $(element).attr("data-anatomy"),
+              figureNumbers.get(element),
+            ),
           );
         });
         if ($("[data-figure]").length > 1)
@@ -134,7 +178,12 @@ export async function compileContent() {
           const name = $(element).attr("data-figure");
           if (name !== "token-bucket")
             throw new Error(`${source.file}: unknown figure: ${name}`);
-          $(element).replaceWith(await tokenBucketFigure());
+          $(element).replaceWith(
+            (await tokenBucketFigure()).replace(
+              "<span>Fig 1</span>",
+              `<span>Fig ${figureNumbers.get(element)}</span>`,
+            ),
+          );
         }
         const ids = new Set(
           $("[id]")

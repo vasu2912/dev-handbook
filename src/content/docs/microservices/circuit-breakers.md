@@ -1,42 +1,68 @@
 ---
 title: Circuit breakers
-description: Understand breaker states, detection windows, and Java and Spring Boot implementations with explained application.properties settings.
+description: Stop calling a dependency that is failing, give it room to recover, and configure the breaker in plain Java and Spring Boot.
 ---
 
-A circuit breaker temporarily stops calls to a dependency after observed failures cross a threshold. It protects the caller from repeatedly spending resources on work that is likely to fail and gives the dependency room to recover.
+Payments normally answers in 100 ms. Today it takes five seconds. Your 800 ms timeout keeps any single request from hanging, but at 100 checkout requests per second, about 80 threads are always stuck waiting on a call that will almost certainly fail. Payments, already struggling, keeps receiving the full load.
 
-Suppose Payments normally responds in 100 ms but now takes five seconds. Checkout workers remain occupied while new requests arrive. A breaker can reject later calls promptly, but the calls already running still need timeouts.
+**A circuit breaker stops calling a dependency once its recent failures cross a threshold.** For a while, calls fail immediately without touching the network. That frees the caller's threads and gives the dependency room to recover.
 
-## The state machine
+The catch is that the breaker makes decisions from a small sample of recent calls. Set it too sensitive and it rejects traffic a healthy service could have handled. Set it too loose and it opens after the damage is done. This article covers how a breaker decides, the strategies it can use, a complete Java and Spring Boot setup, and how it fits with timeouts, retries, and bulkheads.
 
-```mermaid
-stateDiagram-v2
-    [*] --> Closed
-    Closed --> Open: Failure or slow-call threshold reached
-    Open --> HalfOpen: Recovery wait passes and a probe is admitted
-    HalfOpen --> Closed: Probes satisfy recovery thresholds
-    HalfOpen --> Open: Probes fail recovery thresholds
+## How a breaker decides
+
+A breaker is a small state machine wrapped around every call to one dependency. [Figure](#fig-breaker-states) shows its three states and the transitions between them.
+
+```mermaid #fig-breaker-states The circuit breaker state machine. Failures open the breaker, a wait moves it to half-open, and the probe results decide whether it closes or opens again.
+flowchart LR
+  C[Closed] -->|"failure or slow-call rate over threshold"| O[Open]
+  O -->|"wait time passes"| H[Half-open]
+  H -->|"probes succeed"| C
+  H -->|"probes fail"| O
 ```
 
-| State     | Calls                                    | Purpose                                      |
-| --------- | ---------------------------------------- | -------------------------------------------- |
-| Closed    | Allowed and measured                     | Observe normal traffic                       |
-| Open      | Rejected without invoking the dependency | Stop spending resources on likely failures   |
-| Half-open | A limited number of probes allowed       | Check recovery without releasing all traffic |
+1. **Closed** is the normal state. Calls go through, and the breaker records each outcome.
+2. When the failure rate or slow-call rate crosses its threshold, the breaker moves to **open**. Every call is rejected immediately, before any network request is made.
+3. After a configured wait, the breaker moves to **half-open** and lets a few probe calls through.
+4. If the probes succeed, it returns to **closed**. If they fail, it goes back to **open** and waits again.
 
-An open breaker rejects a call before making the network request. In Resilience4j, the rejection is `CallNotPermittedException`. With the default transition behavior, a call after the wait triggers the move toward half-open. Automatic transition can be configured separately.
+| State | Calls | Purpose |
+| --- | --- | --- |
+| Closed | Allowed and measured | Observe normal traffic |
+| Open | Rejected without invoking the dependency | Stop spending resources on likely failures |
+| Half-open | A limited number of probes allowed | Check recovery without releasing all traffic |
 
-## Detection strategies and types
+An open breaker fails in microseconds instead of 800 ms. In Resilience4j the rejection is a `CallNotPermittedException`. By default, the first call after the wait triggers the move to half-open; a setting can make that transition happen on a timer instead.
 
-States describe lifecycle. Detection strategies describe how the breaker decides to open.
+**A breaker protects the caller first and the dependency second.** It does nothing for the calls already in flight. Those still need [timeouts](/microservices/timeouts-and-retries/).
 
-- A consecutive-failure strategy trips after an uninterrupted sequence of errors.
-- A count-based window evaluates the last N completed calls.
-- A time-based window evaluates calls recorded during a recent time interval.
+## How a breaker detects failure
 
-Resilience4j supports count-based and time-based windows, with failure-rate and slow-call-rate thresholds. A minimum-call setting avoids drawing conclusions from a tiny sample. Its special operational states include disabled, forced-open, and metrics-only.
+The state machine is the same everywhere. What differs is how the breaker decides it's time to open. Here are three strategies, from simplest to most useful.
 
-An application library can distinguish business errors from provider failures. A proxy or service mesh can apply protection outside the application, but its meaning of circuit breaking may emphasize connection and pending-request limits. Compare actual behavior before treating the settings as equivalent.
+### Naive approach: count consecutive failures
+
+**How it works.** Open after N failures in a row, for example five.
+
+**Where it breaks.** One success resets the count. A dependency failing 80% of requests may never produce five failures in a row, so the breaker never opens. It also ignores slow calls entirely.
+
+### Better approach: failure rate over a count-based window
+
+**How it works.** Keep the outcomes of the last N calls, say 20, and open when the failure rate among them reaches a threshold such as 50%.
+
+**Where it breaks.** At low traffic, the window covers a long stretch of time and reacts slowly. Right after startup, two failures out of three calls would look like a 67% failure rate.
+
+### Strong approach: failure and slow-call rates with a minimum sample
+
+**How it works.** Track two rates over a count-based or time-based window: the share of calls that failed, and the share that succeeded but took longer than a slow-call threshold. Evaluate them only after a minimum number of calls, so a handful of early failures can't trip the breaker. Resilience4j supports all of this.
+
+**Where it breaks.** It still only sees what you classify as failure. If 4xx responses count as failures, a client sending bad requests can open the breaker for everyone. Classify carefully, as the examples below do.
+
+The count-based window is a good default. Choose a **time-based window when traffic is bursty** and you care about "the last 10 seconds" rather than "the last 20 calls". Resilience4j also has special states for operations: disabled, forced-open, and metrics-only, which records outcomes without ever rejecting calls.
+
+### Library or proxy
+
+A breaker can live in your code, as with Resilience4j, or in infrastructure, as with Envoy or a service mesh. A library can tell a business error ("card declined") from a provider failure ("connection reset"). A proxy applies protection without code changes, but Envoy's circuit breaking is mainly about limits on connections and pending requests, which behaves more like a [bulkhead](/microservices/bulkheads/). Check the behavior before treating the two as equivalent.
 
 ## A Java example
 
@@ -188,7 +214,9 @@ public class PaymentStatusClient {
 
 `factory.create("payment-status")` selects the configuration with that exact instance name. Spring's default singleton service reuses the client and breaker across requests. The `CircuitBreaker` import here is Spring Cloud's interface; the factory supplies its Resilience4j implementation. The `run` call explicitly wraps the operation, so this version does not need an AOP annotation.
 
-`retrieve()` turns provider error responses into exceptions. Connection and request-timeout failures become `ResourceAccessException`; provider 5xx responses become `HttpServerErrorException`. The recovery function maps those failures and open-circuit rejection to an unavailable outcome. An MVC endpoint calling this service can expose that outcome as HTTP 503. Other exceptions propagate for the application to handle through its error contract.
+`retrieve()` turns provider error responses into exceptions. Connection and request-timeout failures become `ResourceAccessException`; provider 5xx responses become `HttpServerErrorException`. The recovery function maps those failures and open-circuit rejection to an unavailable outcome.
+
+An MVC endpoint calling this service can expose that outcome as HTTP 503. Other exceptions propagate for the application to handle through its error contract.
 
 ### application.properties
 
@@ -252,13 +280,70 @@ A successful 600 ms response counts as slow. The 800 ms transport timeout remain
 
 The recovery function runs on protected-call failures while closed as well as on open-circuit rejection. It never reports that a payment succeeded. These are illustrative settings and outcomes for understanding the policy, not measurements from a running Spring application.
 
-## Composition and limitations
+## Combining with timeouts, retries, and bulkheads
 
-A breaker does not limit concurrency. Use a [bulkhead](/microservices/bulkheads/) for that. Its state is normally local to an application instance, so one instance may be open while another remains closed.
+A breaker answers "should I call at all?" It doesn't bound how long a call waits, and it doesn't limit how many calls run at once. Production calls usually wrap all four, in the order [Figure](#fig-decorator-order) shows.
 
-Decorator order matters. A breaker outside a retry observes the final logical outcome. A retry outside a breaker exposes each admitted attempt to the breaker. Retrying open-circuit rejections usually wastes time. Keep both within the request deadline.
+```mermaid #fig-decorator-order A common order for resilience wrappers. Each attempt passes through the breaker, a time limit, and a bulkhead before it reaches Payments.
+flowchart LR
+  R[Retry] --> CB[Circuit breaker]
+  CB --> T[Time limit]
+  T --> BH[Bulkhead]
+  BH --> P[Payments]
+```
 
-Fallbacks must preserve meaning. A stale catalog price can be acceptable when labeled. A fabricated successful payment is not. Monitor transitions, rejected calls, latency, and traffic volume together. A low error rate caused by rejecting every request is not recovery.
+Order matters:
+
+- **Retry outside the breaker** exposes every attempt to the breaker, so a burst of retries quickly opens it. Don't retry a `CallNotPermittedException`; the breaker has just told you the answer.
+- **Breaker outside the retry** records only the final outcome of each logical call. It opens more slowly, but each recorded failure means the call really failed.
+- **Time limit inside the retry** so every attempt is bounded, and all attempts together still fit inside the request deadline.
+
+Resilience4j's Spring Boot annotations apply this order by default: Retry outermost, then CircuitBreaker, RateLimiter, TimeLimiter, and Bulkhead innermost. Whichever order you choose, write it down, because it changes what the breaker's metrics mean.
+
+## Common problems
+
+### Breakers disagree across instances
+
+Breaker state usually lives in memory, so it's per instance. With 20 Orders instances, some may be open while others are still closed and sending traffic. That's normally fine, since each instance protects itself. Don't expect a global switch unless you build one.
+
+### The breaker counts the wrong errors
+
+Counting `400 Bad Request` or `404 Not Found` as failures lets one misbehaving client open the breaker for every user. Record transport errors, timeouts, and 5xx responses. Decide deliberately about `429 Too Many Requests`: it means the provider is protecting itself, which is often a reason to back off rather than to open.
+
+### The fallback lies
+
+A labeled, stale catalog price can be an acceptable fallback. A fabricated "payment succeeded" never is. When no honest fallback exists, return a clear error such as `503 Service Unavailable`.
+
+### The dashboard looks healthy during an outage
+
+An open breaker rejects calls before they reach Payments, so Payments' error rate drops to zero. Monitor breaker transitions, rejected calls, latency, and total traffic together. **A low error rate caused by rejecting every request is not recovery.**
+
+## In interviews
+
+### When to bring it up
+
+Bring up a circuit breaker whenever a synchronous call goes to a dependency that can be slow or down, especially a third party such as a payment provider. Mention it right after timeouts and retries.
+
+### How to introduce it
+
+1. **Name the dependency and the risk.** "If the payment provider slows down, checkout threads pile up waiting on it."
+2. **Describe the policy.** "I'd wrap the call in a circuit breaker that opens at a 50% failure or slow-call rate over the last 20 calls."
+3. **Say what users see.** "While it's open, checkout returns a clear 'payments are temporarily unavailable' message instead of hanging."
+4. **Connect it to the rest.** "The breaker sits outside a timeout, and only one layer retries."
+
+:::tip[In an interview]
+Interviewers often ask how a breaker differs from a retry or a bulkhead. Retries try again, bulkheads cap concurrency, and breakers decide whether to call at all.
+:::
+
+## Summary
+
+A circuit breaker fails fast when a dependency is clearly unhealthy, then probes to see when it has recovered.
+
+The trade-off is protection against false alarms: it frees your threads and shields the dependency, but a badly tuned breaker rejects calls that would have worked.
+
+In an interview, bring it up for any slow or unreliable synchronous dependency, and describe the thresholds, what users see while it's open, and how it composes with timeouts and retries.
+
+Don't count client errors as failures. A breaker that opens because callers sent bad requests protects nothing.
 
 ## Sources
 

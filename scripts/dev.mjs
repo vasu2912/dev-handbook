@@ -1,8 +1,15 @@
 import { createServer } from "vite";
 import { createServer as createHttpServer } from "node:http";
-import { readFile } from "node:fs/promises";
-import { compileContent, siteBase } from "./content.mjs";
+import { readFile, stat } from "node:fs/promises";
+import { siteBase } from "./content.mjs";
 import { documentFor } from "./html.mjs";
+// Import the compiler by modification time so edits to it apply without a restart.
+const compilerUrl = new URL("./content.mjs", import.meta.url);
+async function compileContent() {
+  const { mtimeMs } = await stat(compilerUrl);
+  const compiler = await import(`${compilerUrl.href}?v=${mtimeMs}`);
+  return compiler.compileContent();
+}
 let pages = await compileContent();
 const base = siteBase();
 const port = Number(process.env.PORT || 5173);
@@ -15,6 +22,7 @@ vite.watcher.add([
   "src/content/docs",
   "src/navigation.json",
   "scripts/figures",
+  "scripts/content.mjs",
   "src/figures/token-bucket/figure.css",
 ]);
 vite.watcher.on("all", (_event, file) => {
@@ -22,6 +30,7 @@ vite.watcher.on("all", (_event, file) => {
     !file.includes("/content/docs/") &&
     !file.endsWith("/navigation.json") &&
     !file.includes("/scripts/figures/") &&
+    !file.endsWith("/scripts/content.mjs") &&
     !file.endsWith("/token-bucket/figure.css")
   )
     return;

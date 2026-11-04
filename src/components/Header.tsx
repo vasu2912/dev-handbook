@@ -61,7 +61,9 @@ export function Header({
     return () => document.removeEventListener("keydown", shortcut);
   }, []);
   return (
-    <header className="site-header">
+    <header
+      className={isArticle ? "site-header site-header-wide" : "site-header"}
+    >
       <a className="brand" href={page.base}>
         <span className="brand-icon">
           <ReaderIcon />

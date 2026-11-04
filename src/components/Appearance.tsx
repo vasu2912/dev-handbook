@@ -1,32 +1,60 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as Dropdown from "@radix-ui/react-dropdown-menu";
-import { MixerHorizontalIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons";
+import {
+  CheckIcon,
+  MixerHorizontalIcon,
+  SunIcon,
+  MoonIcon,
+} from "@radix-ui/react-icons";
+import {
+  defaultReadingSize,
+  isReadingSize,
+  isTheme,
+  readingSizes,
+  sizeKey,
+  themeKey,
+  type ReadingSize,
+  type Theme,
+} from "../lib/preferences";
+
+function store(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* The selection remains active for this visit. */
+  }
+}
+
 export function Appearance() {
-  function theme(value: "light" | "dark") {
-    document.documentElement.dataset.theme = value;
-    try {
-      localStorage.setItem("handbook-theme", value);
-    } catch {
-      /* The selected theme remains active for this visit. */
-    }
-  }
-  function size(value: string) {
-    document.documentElement.style.setProperty("--reading-size", value);
-    try {
-      localStorage.setItem("handbook-type-size", value);
-    } catch {
-      /* The selected size remains active for this visit. */
-    }
-  }
+  const [theme, setTheme] = useState<Theme | undefined>();
+  const [size, setSize] = useState<ReadingSize>(defaultReadingSize);
+
   useEffect(() => {
+    // index.html already applied both values before paint; mirror them here.
+    const current = document.documentElement.dataset.theme;
+    if (isTheme(current)) setTheme(current);
     try {
-      const value = localStorage.getItem("handbook-type-size");
-      if (value && ["12px", "14px", "16px"].includes(value))
-        document.documentElement.style.setProperty("--reading-size", value);
+      const stored = localStorage.getItem(sizeKey);
+      if (isReadingSize(stored)) setSize(stored);
     } catch {
       /* Use the default reading size. */
     }
   }, []);
+
+  function chooseTheme(value: string) {
+    if (!isTheme(value)) return;
+    document.documentElement.dataset.theme = value;
+    setTheme(value);
+    store(themeKey, value);
+  }
+
+  function chooseSize(value: string) {
+    if (!isReadingSize(value)) return;
+    document.documentElement.style.setProperty("--reading-size", value);
+    setSize(value);
+    store(sizeKey, value);
+  }
+
   return (
     <Dropdown.Root>
       <Dropdown.Trigger
@@ -38,26 +66,39 @@ export function Appearance() {
       <Dropdown.Portal>
         <Dropdown.Content className="preferences" align="end" sideOffset={10}>
           <Dropdown.Label>Appearance</Dropdown.Label>
-          <Dropdown.Item onSelect={() => theme("light")}>
-            <SunIcon /> Light
-          </Dropdown.Item>
-          <Dropdown.Item onSelect={() => theme("dark")}>
-            <MoonIcon /> Dark
-          </Dropdown.Item>
+          <Dropdown.RadioGroup value={theme} onValueChange={chooseTheme}>
+            <Dropdown.RadioItem value="light">
+              <SunIcon /> Light
+              <Dropdown.ItemIndicator className="preference-check">
+                <CheckIcon />
+              </Dropdown.ItemIndicator>
+            </Dropdown.RadioItem>
+            <Dropdown.RadioItem value="dark">
+              <MoonIcon /> Dark
+              <Dropdown.ItemIndicator className="preference-check">
+                <CheckIcon />
+              </Dropdown.ItemIndicator>
+            </Dropdown.RadioItem>
+          </Dropdown.RadioGroup>
           <Dropdown.Separator />
-          <Dropdown.Label>Reading size</Dropdown.Label>
-          {[
-            { label: "Compact", value: "12px" },
-            { label: "Reference", value: "14px" },
-            { label: "Large", value: "16px" },
-          ].map((option) => (
-            <Dropdown.Item
-              key={option.value}
-              onSelect={() => size(option.value)}
-            >
-              {option.label}
-            </Dropdown.Item>
-          ))}
+          <Dropdown.Label>Text size</Dropdown.Label>
+          <Dropdown.RadioGroup value={size} onValueChange={chooseSize}>
+            {readingSizes.map((option) => (
+              <Dropdown.RadioItem key={option.value} value={option.value}>
+                <span
+                  className="size-sample"
+                  style={{ fontSize: option.value }}
+                  aria-hidden="true"
+                >
+                  Aa
+                </span>
+                {option.label}
+                <Dropdown.ItemIndicator className="preference-check">
+                  <CheckIcon />
+                </Dropdown.ItemIndicator>
+              </Dropdown.RadioItem>
+            ))}
+          </Dropdown.RadioGroup>
         </Dropdown.Content>
       </Dropdown.Portal>
     </Dropdown.Root>

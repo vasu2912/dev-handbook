@@ -82,6 +82,27 @@
   line-height: 1.7;
   text-align: left;
 }
+/* Numbered figures: the diagram, then "Figure N." and a caption, as in a book. */
+.prose .numbered-figure {
+  margin-block: 32px;
+}
+.prose .numbered-figure > .mermaid-diagram {
+  margin: 0;
+}
+.prose .numbered-figure figcaption {
+  margin-top: 12px;
+  color: var(--secondary-text);
+  font-size: 14px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.prose .figure-label {
+  font-weight: 650;
+  color: var(--text);
+}
+.prose a.figure-ref {
+  white-space: nowrap;
+}
 .prose :is(.walkthrough, .pool-budget) {
   background: var(--surface);
   border-radius: 12px;
@@ -96,6 +117,9 @@
   }
 }
 @media print {
+  .prose .numbered-figure {
+    break-inside: avoid;
+  }
   .prose :is(.handbook-diagram, .mermaid-diagram) {
     overflow: visible;
     break-inside: avoid;
