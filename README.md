@@ -1,92 +1,162 @@
+<div align="center">
+
 # Dev Handbook
 
-An open learning library built with React, Vite, and TypeScript. Every article is generated as HTML during the build. Readers can view the content without JavaScript, while React adds bookmarks, reading completion, appearance controls, and accessible dialogs. There is no authentication, database, or production server.
+**How backends really work, explained one mechanism at a time.**
 
-## Develop locally
+183 free guides to backend engineering, system design and agentic AI.<br>
+No account, no paywall, no tracking. Read in order, or look one thing up.
 
-Use Node 24 or newer. `.node-version` records the Node major for builds, and `package.json` pins pnpm through `packageManager`.
+[![MIT licence](https://img.shields.io/badge/licence-MIT-171717)](LICENSE)
+[![Guides](https://img.shields.io/badge/guides-183-171717)](src/content/docs)
+[![Built with React and Vite](https://img.shields.io/badge/built%20with-React%2019%20%2B%20Vite-171717)](#how-it-is-built)
+[![Static site](https://img.shields.io/badge/hosting-any%20static%20host-171717)](#deploy-it)
+[![GitHub stars](https://img.shields.io/github/stars/vasu2912/dev-handbook?style=flat&color=171717)](https://github.com/vasu2912/dev-handbook/stargazers)
+
+<br>
+
+<img src=".github/readme/landing.jpg" alt="The Dev Handbook landing page: a switchboard photograph with the title How backends really work, a search box, and the start of the contents." width="880">
+
+</div>
+
+<br>
+
+## Why this exists
+
+Most backend material is either a tutorial that stops at "hello world" or a reference that assumes you already know. Interview prep sits on top of both as a pile of flashcards.
+
+This handbook takes the middle path. Each guide explains a mechanism: what happens, in what order, what it costs, and how it fails. The spine is a single request, `GET /accounts/42`, followed from the browser to the database and back. Every other guide hangs off one of its stops.
+
+## What's inside
+
+| Shelf                                                             | Guides | Covers                                                                                                                                      |
+| ----------------------------------------------------------------- | -----: | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Start here](src/content/docs/guides/how-to-use-this-handbook.md) |      3 | How to use the handbook, a backend study map, and one request from browser to database                                                      |
+| [Backend engineering](src/content/docs/backend/index.md)          |     30 | Architecture, API design, concurrency, security, HTTP, data and storage                                                                     |
+| [Microservices](src/content/docs/microservices/index.md)          |     12 | Boundaries, gateways, circuit breakers, retries, sagas, outbox, Kafka, CQRS                                                                 |
+| [Databases and SQL](src/content/docs/databases/index.md)          |      6 | Schema design, transactions and locking, indexes and query plans, migrations, caching                                                       |
+| [Runtime and CS foundations](src/content/docs/runtime/index.md)   |      6 | Processes and I/O, memory, networking, data structures, algorithm patterns                                                                  |
+| [System design](src/content/docs/system-design/index.md)          |     32 | Caching, load balancing, consistency, consensus, rate limiting, plus [worked designs](src/content/docs/system-design/walkthroughs/index.md) |
+| [Agentic AI](src/content/docs/agentic-ai/index.md)                |     58 | LLM foundations, RAG, agents and tools, MCP, safety, production operation                                                                   |
+| [Java and Spring Boot](src/content/docs/java-spring/index.md)     |     23 | Beans and proxies, JPA and transactions, HTTP clients, async jobs, testing                                                                  |
+| [Engineering practice](src/content/docs/engineering/index.md)     |      9 | Object design, testing boundaries, containers, delivery, observability                                                                      |
+| [Reference](src/content/docs/reference/http-status-codes.md)      |      4 | HTTP status codes, database indexes, a system design glossary, resources                                                                    |
+
+New here? Read [A request from browser to database](src/content/docs/guides/request-lifecycle.md) first. It takes three minutes and gives you the map for everything else. Revising for interviews? Start with the [backend study map](src/content/docs/guides/backend-study-map.md) or the [Agentic AI learning paths](src/content/docs/agentic-ai/learning-paths.md).
+
+## What reading it feels like
+
+<img src=".github/readme/article-dark.jpg" alt="An article page in dark mode: navigation on the left, the guide in the middle with an isometric figure, and the section list on the right." width="100%">
+
+- **Figures you can work.** 131 isometric figures step through what a component does, and the [rate-limiting guide](src/content/docs/system-design/rate-limiting.md) has a live token bucket you can flood with requests.
+- **Fast search.** Press <kbd>⌘</kbd> <kbd>K</kbd> anywhere. Search runs on a static [Pagefind](https://pagefind.app/) index, with no search service behind it.
+- **Progress without an account.** Bookmark guides and mark them read. The landing page shows how far through each shelf you are. Everything stays in your browser's local storage.
+- **Readable everywhere.** Light and dark themes, three text sizes, clean print styles. Every page is real HTML, so the guides read fine with JavaScript turned off.
+
+## Run it locally
+
+You need Node 24 or newer and pnpm. The `packageManager` field in `package.json` pins the pnpm version.
 
 ```sh
+git clone https://github.com/vasu2912/dev-handbook.git
+cd dev-handbook
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:5173`. React and CSS changes use Vite hot reload. Markdown and navigation changes rebuild the content and reload the page. The development server binds to localhost. Set `PORT` to change its port.
+Open `http://localhost:5173`. React and CSS changes hot reload. Markdown and navigation changes rebuild the content and reload the page. Set `PORT` to use another port.
 
-Full-text search uses the generated production index. To try it locally:
+Search uses the production index, so try it on a build:
 
 ```sh
 pnpm build
 pnpm preview
 ```
 
-Run `pnpm check` to test the figures, check TypeScript, build the site, and audit every rendered page, internal link, heading anchor, and local asset. Run `pnpm test` for the tests alone.
+| Command        | What it does                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`     | Starts the development server on localhost                                                              |
+| `pnpm build`   | Compiles content, renders every page to HTML, and builds the search index into `dist/`                  |
+| `pnpm preview` | Serves `dist/` locally                                                                                  |
+| `pnpm test`    | Runs the figure tests                                                                                   |
+| `pnpm check`   | Runs the tests, checks TypeScript, builds, and audits every page, internal link, anchor and local asset |
 
-## Contribute
+## How it is built
 
-Keep changes focused and preserve existing article routes and heading anchors. Before opening a pull request, run:
+Every page is rendered to static HTML at build time. React then hydrates only the reader controls: search, bookmarks, appearance and the interactive figures. There is no server, database, or login.
+
+```text
+src/content/docs/*.md ──► scripts/content.mjs ──► React server render ──► dist/**/index.html
+                          Markdown, Shiki,          src/App.tsx               + Pagefind index
+                          Mermaid to SVG,
+                          figures
+```
+
+```text
+src/
+  content/docs/      the guides, one Markdown file per route
+  navigation.json    reading order and shelves
+  components/        header, landing page, navigation, reading layout, search
+  lib/               page validation (content.ts) and reader storage (reader.ts)
+  figures/           browser code for the interactive figures
+  styles/            layout, typography, diagrams, landing page
+scripts/
+  content.mjs        Markdown pipeline
+  build.mjs          client build, server render, Pagefind
+  dev.mjs            development server
+  check-site.mjs     post-build audit of pages, links, anchors and assets
+  figures/           build-time figure generators and the vendored Anatomy kit
+research/            scope and source notes behind the guides
+diagrams/            diagram sources
+```
+
+Stack: [React 19](https://react.dev/), [Vite](https://vite.dev/), TypeScript, [Radix](https://www.radix-ui.com/primitives) for dialogs and menus, [Pagefind](https://pagefind.app/) for search, [Shiki](https://shiki.style/) for code, and [Beautiful Mermaid](https://www.npmjs.com/package/beautiful-mermaid) for diagrams. Content parsers and diagram renderers never ship to the browser.
+
+## Contributing
+
+Corrections, new guides and better explanations are all welcome. Keep pull requests focused, say why the change helps a reader, and list the checks you ran.
+
+Before you open a pull request, run:
 
 ```sh
 pnpm check
 ```
 
-For changes to paths or deployment behavior, also run `SITE_BASE=/dev-handbook/ pnpm check`. Run checks sequentially because they share generated files in `.cache/` and `dist/`. Include the reason for your change and the checks you ran in the pull request description.
+If you change paths or deployment behaviour, also run `SITE_BASE=/dev-handbook/ pnpm check`. Run checks one at a time, because they share `.cache/` and `dist/`.
 
-Commit source files and `pnpm-lock.yaml`. Build output, dependencies, local logs, and environment files are ignored. Design studies live in `diagrams/branding/` so the production build does not copy them into `dist/`.
+### Writing a guide
 
-## Push to GitHub
+1. Add a Markdown file under `src/content/docs/`. The path is the route: `system-design/caching.md` becomes `/system-design/caching/`.
+2. Give it frontmatter with a `title` and a `description`.
+3. Add it to `src/navigation.json`, or put it in a directory covered by an `autogenerate` entry. The build fails if a guide cannot be reached from the navigation.
+4. Follow the house style in [`.agents/skills/handbook-writing`](.agents/skills/handbook-writing/SKILL.md).
 
-Create an empty GitHub repository without a README or other initial files. After reviewing and committing your local changes, connect that repository and push:
+Keep existing routes and heading anchors stable. Other guides and outside sites link to them.
 
-```sh
-git remote add origin https://github.com/YOUR_USERNAME/dev-handbook.git
-git push -u origin main
-```
+Some older guides use the chapter walkthroughs and connection-budget calculator in `src/styles/learning.css` and `public/js/site.js`. That script loads only on pages that contain them. Each example must stay readable without JavaScript and in print.
 
-Replace `YOUR_USERNAME` and the repository name with your own. GitHub stores the source. Cloudflare Pages builds and deploys it through its Git integration. No GitHub Actions workflow runs automatically on pushes or pull requests.
+Markdown supports tables, fenced code, raw HTML, Mermaid fences, and Starlight-style callouts: `:::tip[Title]`, `:::note`, `:::caution` and `:::danger`. A Mermaid fence whose info string is `mermaid #fig-id Caption text.` becomes a numbered, captioned figure.
 
-## Edit the handbook
+### Interactive figures
 
-The [backend study map](src/content/docs/guides/backend-study-map.md) connects the subject notes for interview revision. The notes explain mechanisms, types, tradeoffs, failure cases, and implementation details. They cover backend foundations, microservices, databases, runtime fundamentals, Java and Spring, and engineering practice. Research scope and source selection are recorded in [the coverage notes](research/backend-study-notes-coverage.md).
+The rate-limiting guide embeds its figure with `<div data-figure="token-bucket"></div>`. `scripts/figures/token-bucket.mjs` draws the SVG at build time. `src/figures/token-bucket/model.ts` owns the credit accounting, and `live.ts` attaches the controls when the figure scrolls near. The figure pauses offscreen and in background tabs, and reduced motion keeps every control without animated traffic. Unknown figure names fail the build.
 
-Articles live in `src/content/docs/`. Keep Markdown frontmatter with a `title` and `description`. File names determine routes. For example, `system-design/index.md` becomes `/system-design/`, and `system-design/caching.md` becomes `/system-design/caching/`.
+The isometric figures use the [Anatomy](scripts/figures/vendor/anatomy/README.md) drawing kit, vendored at the commit recorded in its README. Keep its MIT notice in that directory and in `public/licenses/anatomy.txt` when you update it, and keep the kit out of browser imports.
 
-`src/navigation.json` preserves the reading sequence and nested topics. Add new articles to this navigation, or to a directory covered by an `autogenerate` entry. The build rejects missing destinations and articles that readers cannot reach through navigation.
+## Deploy it
 
-Markdown supports tables, fenced code, raw HTML, and Starlight-style `:::tip[Title]`, `:::note`, `:::caution`, and `:::danger` callouts. Shiki highlights code during the build. Beautiful Mermaid renders Mermaid fences as SVG during the build, so diagrams need no browser JavaScript. Existing SVG assets remain in `public/images/`.
+The output in `dist/` is plain static files. Every route has its own `index.html`, and `404.html` handles missing pages, so deep links work on any static host without SPA rewrites.
 
-`src/App.tsx` selects the page layout. The home, header, navigation, reading layout, and appearance controls live in `src/components/`. `src/components/Search.tsx` connects Pagefind's existing UI to a Radix dialog and loads only when search opens. `src/lib/content.ts` validates page metadata at the rendering boundary. `src/lib/reader.ts` stores bookmarks and completed articles in this browser. Clearing browser storage removes those preferences.
-
-`src/styles/site.css` owns the responsive layout and typography. `src/styles/diagrams.css` defines shared diagram colors. `src/styles/learning.css` and `public/js/site.js` preserve the existing chapter walkthroughs and connection-budget calculator. The chapter script loads only when the page contains those examples. Each example must remain readable without JavaScript and in print.
-
-The rate-limiting article embeds its interactive figure with `<div data-figure="token-bucket"></div>`. `scripts/figures/token-bucket.mjs` generates the SVG and scoped styles with the vendored Anatomy drawing kit. `src/figures/token-bucket/model.ts` owns credit accounting, and `live.ts` attaches the controls when the figure approaches the viewport. The controller pauses simulation time offscreen and in background tabs. Reduced motion keeps request, burst, refill, and reset controls available without animated traffic. Print shows the starting state. Unknown figure names fail the build.
-
-The Anatomy files are pinned to the upstream commit recorded in `scripts/figures/vendor/anatomy/README.md`. Preserve its MIT notice in that directory and `public/licenses/anatomy.txt` when updating the kit. Keep the drawing kit out of browser imports.
-
-The content pipeline lives in `scripts/content.mjs`. `scripts/build.mjs` builds the client, renders pages through React's server renderer at build time, and creates the Pagefind index. `scripts/dev.mjs` uses Vite's middleware and server renderer for local development. Only `dist/` is deployed. `.cache/` contains disposable build state.
-
-The Agentic AI question bank lives in `research/agentic-ai-interview-questions.md`. `scripts/build-agentic-ai-question-map.mjs` generates its coverage map. Diagram sources live in `diagrams/source/agentic-ai/`; articles embed SVG exports from `public/images/agentic-ai/vector/`. The scope and source evidence for the 2026 interview topic expansion are recorded in `research/2026-interview-expansion-coverage.md`.
-
-## Deploy to Cloudflare Pages
-
-Cloudflare Pages is the primary deployment target. Connect the GitHub repository through [Cloudflare's Git integration](https://developers.cloudflare.com/pages/configuration/git-integration/) and use:
+**Cloudflare Pages** is the main target. Connect the repository through [Cloudflare's Git integration](https://developers.cloudflare.com/pages/configuration/git-integration/) with these settings:
 
 - Production branch: `main`
 - Build command: `pnpm check`
 - Output directory: `dist`
 - Node version: 24 or newer
 
-Keep `SITE_BASE` unset for a root deployment. Optionally set `SITE_URL` to your production origin, such as `https://your-site.pages.dev`, to generate canonical URLs, Open Graph URLs, and a sitemap.
+Leave `SITE_BASE` unset for a root deployment. Set `SITE_URL` to your production origin, such as `https://your-site.pages.dev`, to get canonical URLs, Open Graph URLs and a sitemap.
 
-Cloudflare builds and deploys pushes to the production branch. The build command runs tests, checks TypeScript, builds the site, and verifies the generated pages before deployment. GitHub Actions is not required.
-
-All routes have their own `index.html`. `404.html` handles missing pages. The site requires no Pages Functions or Workers. Use the provided `pages.dev` address to avoid buying a domain.
-
-## Optional deployment to GitHub Pages
-
-The included `.github/workflows/pages.yml` runs only when manually triggered. Leave it unused while deploying through Cloudflare. If you choose GitHub Pages later, select **Pages → Build and deployment → GitHub Actions** in repository settings. Open **Actions → Deploy handbook to GitHub Pages → Run workflow** to publish.
-
-The workflow derives the base path from GitHub's Pages configuration, including project subdirectories. To verify a project path locally:
+**GitHub Pages** works through `.github/workflows/pages.yml`, which runs only when you trigger it by hand. In the repository settings, select **Pages → Build and deployment → GitHub Actions**, then open **Actions → Deploy handbook to GitHub Pages → Run workflow**. The workflow reads the base path from GitHub's Pages settings. To test a project path locally:
 
 ```sh
 SITE_BASE=/dev-handbook/ pnpm build
@@ -94,6 +164,16 @@ SITE_BASE=/dev-handbook/ node scripts/check-site.mjs
 SITE_BASE=/dev-handbook/ pnpm preview
 ```
 
-Open `http://localhost:4173/dev-handbook/`. Links, article images, assets, search, and chapter controls respect `SITE_BASE`. The build adds `.nojekyll`. It produces real HTML files for deep links, so refreshing an article does not need an SPA routing workaround.
+Then open `http://localhost:4173/dev-handbook/`.
 
-Hosting can stay free using a provider subdomain and static assets. Adding paid APIs, storage, or a custom domain would introduce separate costs.
+Both hosts are free on their provider subdomains. Nothing in the site calls a paid API.
+
+## Credits
+
+- Isometric figures drawn with the [Anatomy](scripts/figures/vendor/anatomy/README.md) kit, MIT licence.
+- Landing page photograph: [Women working at a Bell System telephone switchboard](<https://commons.wikimedia.org/wiki/File:Photograph_of_Women_Working_at_a_Bell_System_Telephone_Switchboard_(3660047829).jpg>), U.S. National Archives, no known copyright restrictions.
+- Search by [Pagefind](https://pagefind.app/), code highlighting by [Shiki](https://shiki.style/).
+
+## Licence
+
+[MIT](LICENSE) © 2026 Vasu Kandagatla. The licence covers the code and the guides. Third-party material keeps its own licence, as listed in [Credits](#credits).
